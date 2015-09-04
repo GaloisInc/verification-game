@@ -1,0 +1,39 @@
+(* ---------------------------------------------------------- *)
+(* --- Axiomatic 'Galois_axiomatic10'                     --- *)
+(* ---------------------------------------------------------- *)
+theory A_Galois_axiomatic10
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+
+predicate p_galois'crc32_little'I1 (map int int) (map addr addr)
+    (map addr int) (map addr int) (map int int) (map addr addr)
+    (map addr int) (map addr int) int addr int int int addr int addr int
+
+predicate p_galois'crc32_little'I2 (map int int) (map addr addr)
+    (map addr int) (map addr int) (map int int) (map addr addr)
+    (map addr int) (map addr int) int addr int int int addr int addr int
+
+predicate p_galois'crc32_little'I3 (map int int) (map addr addr)
+    (map addr int) (map addr int) (map int int) (map addr addr)
+    (map addr int) (map addr int) int addr int int int addr int addr int
+
+predicate p_galois'crc32_little'I4 (map int int) (map addr addr)
+    (map addr int) (map addr int) (map int int) (map addr addr)
+    (map addr int) (map addr int) int addr int int int addr int addr int
+
+predicate p_galois'crc32_little'Q (map int int) (map addr addr)
+    (map addr int) (map addr int) (map int int) (map addr addr)
+    (map addr int) (map addr int) int int addr int
+
+predicate p_galois'crc32_little'P (map int int) (map addr addr)
+    (map addr int) (map addr int) int addr int
+
+end
+

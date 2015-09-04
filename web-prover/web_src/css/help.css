@@ -1,0 +1,23 @@
+table.datatable {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table.datatable tr:nth-child(even) td {
+  background-color: lightblue;
+}
+table.datatable td {
+  padding: 4px;
+}
+
+table.datatable th {
+  padding: 4px;
+}
+
+table.datatable td:nth-child(1) {
+  font-family: monospace;
+}
+
+table.datatable td:nth-child(2) {
+  text-align: center;
+}

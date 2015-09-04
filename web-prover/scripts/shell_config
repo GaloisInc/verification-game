@@ -1,0 +1,24 @@
+UNAME=$(uname)
+
+FRAMA_C=frama-c
+CTAGS=ctags
+MKTEMP=mktemp
+CPP=gcc
+CPP_FLAGS=-E
+AWK=awk
+XARGS=xargs
+
+case "$UNAME" in
+"Darwin")
+SHA1SUM=shasum
+;;
+
+"Linux")
+SHA1SUM=sha1sum
+;;
+
+*)
+echo "Unknown uname, check shell_config!"
+exit 1
+;;
+esac

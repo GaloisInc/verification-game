@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+scripts/make-level example-src/zlib-source.c $*

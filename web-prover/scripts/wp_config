@@ -1,0 +1,6 @@
+WP_OPTS="-wp \
+        -wp-model Typed+cast+int \
+        -wp-include wp_alloc \
+        -wp-why-lib alloc.why \
+        -wp-driver alloc.driver"
+

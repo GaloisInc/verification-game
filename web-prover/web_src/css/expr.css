@@ -1,0 +1,241 @@
+.right-arrow {
+  width: 100%;
+  border-collapse: collapse;
+}
+.right-arrow td {
+  padding: 0;
+}
+.right-arrow-body { width: 90%; min-width: 1em; }
+.right-arrow-body hr { border: 1px solid black; }
+.right-arrow-head {}
+
+.shift_amount {
+  text-align: center;
+}
+
+
+.valid_heap {
+  text-align: center;
+  border-top: 1px dashed #999;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.valid_addr {
+  vertical-align: center;
+  text-align: center;
+}
+
+.valid_size {
+  text-align: center;
+  vertical-align: center;
+  border-left: 1px dashed #999;
+}
+
+.update_expr {
+  border-collapse: collapse;
+}
+
+.update_heading_1 {
+  text-align: center;
+  font-size: 1ex;
+  padding-left: 1em;
+}
+
+.update_heading_2 {
+  text-align: center;
+  font-size: 1ex;
+  padding-right: 1em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.update_value {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.update_heap {
+  text-align: center;
+  border-top: 1px dashed #999;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+.select_expr {
+  border-collapse: collapse;
+}
+
+.lbracket {
+  border-top: 2px solid rgba(0,0,0,0.5);
+  border-left: 2px solid rgba(0,0,0,0.5);
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+}
+
+.rbracket {
+  border-top: 2px solid rgba(0,0,0,0.5);
+  border-right: 2px solid rgba(0,0,0,0.5);
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+}
+
+.select_heading, .valid_header, .app_heading {
+  text-align: center;
+  font-size: smaller;
+  padding: 1em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.app_arg {
+  border-left: 1px dashed #999;
+}
+
+.select_value {
+  text-align: center;
+}
+
+.select_heap {
+  text-align: center;
+  border-top: 1px dashed #999;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.paramdef {
+  box-shadow: inset 2px 2px 2px 2px rgba(0,0,0,0.4);
+  background-color: lightblue;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+.expr {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.1);
+}
+
+/* This sweet orange transparent background exists to override the
+ * .expr .expr style which is necessary to allow the glorious gray
+ * gradient to shine through from the parent expr below
+ */
+.expr .grabbed>.expr {
+  background-color: rgba(255,144,30,0.8);
+}
+
+.grabbed>.qvar_icon {
+  border: 2px solid rgba(255,144,30,0.8);
+}
+
+.flatexpr {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+}
+
+.meta_expr {
+  font-style: italic;
+  margin: 5px;
+}
+
+.literal {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.grabbed .literal {
+  box-shadow: 0px 0px 1px 2px rgba(200,150,90,0.8) !important;
+}
+
+div.expr {
+  white-space: nowrap
+}
+
+.unaryexpr {
+  padding-left: 8px;
+}
+
+.small-expr {
+  display: inline-block;
+  cursor: pointer;
+  margin: 8px;
+  background-color: rgba(255,255,255,0.3);
+  border: 1px solid white;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.small-var {
+  width:  1ex;
+  height: 1ex;
+  display: inline-block;
+  margin: 1px;
+}
+
+.small-var-icon {
+  width:  16px;
+  height: 16px;
+  display: inline-block;
+  margin: 1px;
+}
+
+.small-dvar {
+  display: inline-block;
+  margin: 1px;
+  width:  1ex;
+  height: 1ex;
+  border: 1px solid black;
+}
+
+.qvar {
+  width:  30px;
+  height: 30px;
+  display: inline-block;
+  background-image: url("/static/img/prime_icons.png");
+  background-size: 336px;
+}
+.small-qvar {
+  width:  16px;
+  height: 16px;
+  display: inline-block;
+  background-image: url("/static/img/prime_icons.png");
+  background-size: 179px;
+}
+
+.qvar_icon {
+  width:  32px;
+  height: 32px;
+  display: inline-block;
+  background-size: 32px;
+}
+
+
+
+
+
+.qvar_template {
+  min-width:  3em;
+  height: 14px;
+  border: dashed black 1px;
+  display: inline-block;
+  font-size: x-small;
+  color: #666;
+  text-align: center;
+}
+
+.dvar {
+  width: 8px;
+  height: 8px;
+  border: solid black 11px;
+  display: inline-block;
+  margin: 8px;
+}
+
+
+
+

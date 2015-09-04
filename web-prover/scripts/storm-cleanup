@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Deletes the STORM generated things, but leaves the Frama-C parts in places.
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $(basename $0) PATH_TO_LEVEL" >&2
+  exit 1;
+fi
+
+DIR=$1
+
+rm $DIR/*.hs
+rm -rf $DIR/safety
+rm -rf $DIR/post_*
+
+
+
+
+
+

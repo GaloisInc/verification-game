@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+source scripts/shell_config
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $(basename $0) DIR" >&2
+  exit 1
+fi
+
+DIR=$1
+
+echo \#Task,Function,TaskGroup,Area,Status
+find $DIR -name 'task_*' | \
+  $AWK -F"/" -v OFS=',' \
+      '{ print $(NF),$(NF-2),$(NF-1),$(NF-3),$(NF-4) }'
+
+

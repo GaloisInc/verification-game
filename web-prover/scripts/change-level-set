@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+  echo Usage: $(basename $0) DIR >&2
+  exit 1
+fi
+
+rm cur-level-set || true
+ln -s $1 cur-level-set
+
+

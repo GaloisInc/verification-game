@@ -1,0 +1,323 @@
+#+TITLE: Web prototype API
+#+STARTUP: showall
+
+* Current versions
+
+- stable api version: v1.0
+- development api version: v1.1
+
+* Overview
+
+This api is versioned: Galois will endevour to keep at least the
+current 'stable' api and the current 'development' api around.  For
+simplicity, the version covers the entirity of the service: it is
+expected, however, that most types and operations will be the same
+between API versions.
+
+This document tends towards the pedantic; sorry.
+
+* Conventions
+
+The URI for all operations include the version number, so
+: /v1.0/browse/
+is the URI for the root 'browse' page.  The latest 'stable' version
+will be located at the root, so
+: /browse
+accesses the stable version of browse.
+
+In the following, all URIs are relative to the api version, so 
+: browse/
+is understood to be
+: /v1.0/browse 
+for version 1.0 of the API.
+
+One notable exception is this document: the latest version is always
+: /api.html
+
+* Terminology and concepts
+
+Below is some of the terminology used in this document.  This is
+intended mainly as a reference and should probably be otherwise
+skimmed at most.
+
+Note that we try to avoid the term *level* as it is too overloaded to
+be useful.  Task, Task Group, and Goal (to a lesser extent) are
+invented terms for this project, while the remainder are more-or-less
+standard.
+
+- <<<Expression>>> :: A term in the logic.  An expression has a type.
+     For example, =x + y=, =x > y=, and =valid_rw a b c= are all
+     expression.
+
+- <<<Predicate>>> :: An expression of boolean type.  An
+     <<<assertion>>> is a predicate which is related to some program
+     point: <<<pre-condition>>>s, <<<post-condition>>>s, and <<<loop invariant>>>s 
+     are all assertions.  For example, =x > y= is an
+     predicate (and possibly an assertion), but =x + y= is not
+     because it does not have boolean type.
+
+     We generally use the terms predicate and assertion
+     interchangeably.
+
+     Aside: you may see assertions written elsewhere in
+     so-called Hoare-triples:
+     : { x > 1 } foo { x > 2 }
+     which says that =foo= has a pre-condition of =x > 1= and a
+     post-condition of =x > 2=.  Some authors also use this syntax
+     to mean that it the triple is true, that is, there exists a proof
+     that from states matching the pre-condition, execution of =foo=
+     will result in states matching the post-condition.
+               
+- <<<Schematic variable>>> :: A variable which is to be filled in by
+     gameplay.  For example, =foo_I= is a schematic variable.  We
+     shall stick to the convention of =foo_I= for an invariant in
+     the function =foo=, =foo_P= for the pre-condition of =foo=,
+     and =foo_Q= for the post-condition of =foo=.
+
+     Note that a schematic variable typically needs to be applied to a
+     number of expressions before it becomes an assertion.  For
+     example, =foo_I x y (w + z)= is an assertion.  We call such
+     expressions <<<fully applied>>>.
+
+- <<<Assignment>>> :: An expression defining each schematic variable under
+                consideration.  For example, 
+ : foo_P a b == a > b 
+ : foo_Q a == a = 1
+                is an assignment to the schematic variables =foo_P= and =foo_Q=.
+
+- <<<Goal>>> :: The smallest level of gameplay.  A goal consists of 
+    - a predicate termed the <<<conclusion>>>;
+    - a set of predicates termed <<<assumptions>>>;
+    - a set of <<<definitions>>> assigning expressions to variables; and
+    - a set of <<<free variables>>> which are disjoint from the definitions.
+
+    If a variable appears in an expression, it is one -- and only one
+          -- of: a definition, a free variable, or a schematic
+          variable. 
+
+    The conclusion of a goal, and any assumption, MAY be a
+          schematic variable.
+
+    The goal is the smallest unit of proof, and belongs to a
+          task.  A goal may be true or false under a
+          particular assignment.  The truth or falsehood of a
+          goal under an assignment is checked by a theorem prover
+          via the server.
+
+    Note that a schematic variable in a goal is different to both
+          definitions and free variables.  Loosely speaking, a
+          definition is short-hand for an expression, a schematic
+          variable is one we get to choose, while a goal must be
+          true for any value of a free variable.
+
+    Aside: Where we need to be precise, we will write a goal using the following syntax
+ : forall x, y. { z = x + y }[ x > 0; y > 0 ] ==> z > 0
+    where =x, y= are the free variables, =z= is a definition with
+    value =x + y=, =x > 0= and =y > 0= are assumptions, and =z > 0=
+    is the conclusion.
+
+
+- <<<Task>>> :: A set of goals.  The goals in a task may be considered
+          to be the constraints on an assignment: a <<<satisfying>>>
+          assignment is one which makes all goals in a task
+          true.  Thus, a successful game session is one which finds a
+          satisfying assignment for a particular task.
+
+          A task is associated with a task group.
+
+          Currently a task has a single non-schematic conclusion.
+          That is, each goal in the task but one will have a 
+          conclusion which is a fully applied schematic.  There
+          will also be a goal which has a single assumption which is
+          the schematic pre-condition, although this may change.
+
+          The intent here is that the information in the
+          non-schematic conclusion will filter back through the
+          goals in the task until it reaches the goal with the
+          pre-condition assumption.  At this point, the player will
+          have constructed a complete assignment and the task can
+          be considered finished, assuming the assignment is
+          satisfying.
+
+- <<<Task Group>>> :: A set of tasks.  Each task group has an associated
+                function and post-condition.  Given a satisfying
+                assignment for each task, the server can construct
+                a satisfying assignment for the task group, and
+                the task group is termed <<<proved>>>. 
+
+                In particular, this means that the server can
+                construct a pre-condition for the task group's
+                post-condition, which can then be used in later game
+                play.
+
+                Each function has a distinguished task group,
+                the <<<safety task group>>>.  Proving this task group
+                means that the function is safe to call.  The
+                over-arching verification goal is to prove this task
+                group for all functions in the program.  
+
+                The post-condition of the safety task group is the
+                predicate =true=.  
+
+- Function :: A collection of task groups.  Each function is
+              associated with a C function.
+
+* API v1.0
+
+** Types
+
+Along with the primitive JSON types (=bool=, =int=, =string=, =array=,
+=object= ({})) we have the following opaque types: <<<GroupId>>>,
+<<<TaskId>>>, <<<SchematicId>>>, <<<SolutionId>>>, and <<<GoalId>>>
+which should not be interpreted outside of the server.
+
+In the following, we write ={ 'field' : Type }= to describe the JSON
+object where the member 'field' is an object of type 'Type'.  We write
+=[ Type, Type ]= for a fixed size array.
+
+*** <<<TypeT>>>
+
+A pretty-printed representation of an expression's type.
+
+|-------+--------+-------|
+| Field | Type   | Notes |
+|-------+--------+-------|
+| text  | string |       |
+|-------+--------+-------|
+
+*** <<<ExprStruct>>>
+
+This is a set of types, differentiated by the 'type' field.  For
+example, the following are both valid:
+
+: { 'type' : 'lit', 'text' : '1' }
+: { 'type' : 'app', 'id' : 'valid_rw', 'params' : ... }
+
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'type'  | Field     | Type          | Notes                                                          |
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'lit'   | text      | string        | A literal                                                      |
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'qvar'  | id        | int           | A free variable                                                |
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'dvar'  | id        | int           | A definition variable                                          |
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'infix' | id        | string        | The operator                                                   |
+|         | prec      | int           | The precedence of the operator                                 |
+|         | left      | Expr          | The left-hand side of the operation                            |
+|         | right     | Expr          | The right-hand side of the operation                           |
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'app'   | id        | string        | The function being applied                                     |
+|         | params    | array of Expr | The arguments to the function                                  |
+|---------+-----------+---------------+----------------------------------------------------------------|
+| 'hole'  | id        | SchematicId   | The id of the schematic variable                               |
+|         | inputType | string        | One of 'iNormal', 'iPre', 'iPost'                              |
+|         | params    | array of Expr | Arguments to the schematic variable                            |
+|         | defn      | Expr          | (can be null) The current definition of the schematic variable |
+|---------+-----------+---------------+----------------------------------------------------------------|
+
+*** <<<Expr>>>
+
+This type represents an expression.
+
+|--------+--------------+-----------------------------------------------------|
+| Field  | Type         | Notes                                               |
+|--------+--------------+-----------------------------------------------------|
+| struct | ExprStruct   | The body of the expression                          |
+| qvars  | array of int | The free variables occuring in the expression       |
+| dvars  | array of int | The definition variables occuring in the expression |
+|--------+--------------+-----------------------------------------------------|
+
+*** <<<FunSolution>>>
+
+This represents a single solution for a particular post-condition 
+task group.
+
+|----------+------------+------------------------------------------|
+| Field    | Type       | Notes                                    |
+|----------+------------+------------------------------------------|
+| id       | SolutionId |                                          |
+| selected | bool       | Whether this solution has been selected. |
+| pre      | Expr       | The pre-condition for this solution      |
+| post     | Expr       | The post-condition for this solution     |
+|----------+------------+------------------------------------------|
+
+*** <<<CallInfo>>>
+
+|-----------+----------------------+---------------------------------------------------------------------------------------|
+| Field     | Type                 | Notes                                                                                 |
+|-----------+----------------------+---------------------------------------------------------------------------------------|
+| id        | SchematicId          | Used for both the pre- and post-condition for the function.  See 'hole' in ExprStruct |
+| function  | string               |                                                                                       |
+| preType   | array of TypeT       | The type of the arugments to the pre-condition                                        |
+| postType  | array of TypeT       | The type of the arugments to the pre-condition                                        |
+| solutions | array of FunSolution | The solutions available for this function                                             |
+|-----------+----------------------+---------------------------------------------------------------------------------------|
+
+*** <<<GoalT>>>
+
+This type contains information about a goal.
+
+|-------------+-------------------------------------------------+-------------------------------------------|
+| Field       | Type                                            | Notes                                     |
+|-------------+-------------------------------------------------+-------------------------------------------|
+| vars        | array of { 'id' : SchematicId, 'type' : TypeT } | The free variables in the goal            |
+| defs        | array of { 'id' : SchematicId, 'value' : Expr } | The definitions in the goal               |
+| asmps       | array of Expr                                   | The assumptions in the goal               |
+| asmpsBoring | array of Expr                                   | The uninteresting assumptions in the goal |
+| conc        | Expr                                            | The conclusion of the goal                |
+|-------------+-------------------------------------------------+-------------------------------------------|
+
+*** <<<TaskInfo>>>
+
+This type contains information about a task.
+
+|--------+-------------------------------------------------------------------------+--------------------------------------------|
+| Field  | Type                                                                    | Notes                                      |
+|--------+-------------------------------------------------------------------------+--------------------------------------------|
+| name   | { 'function' : string, 'group' : GroupId, 'name' : TaskId }             |                                            |
+| inputs | array of { 'id' : SchematicId, 'params' : array of Type, 'def' : Expr } | 'def' may be null                          |
+| calls  | array of CallInfo                                                       | The function calls that occur in this task |
+| goals  | array of { 'id' : GoalId, 'solved' : bool, goal : GoalT }               |                                            |
+|--------+-------------------------------------------------------------------------+--------------------------------------------|
+  
+*** <<<GroupInfo>>>
+
+This type contains information about a task group.
+
+|-----------------+-------------------------------------+------------------------------------------------------------------------|
+| Field           | Type                                | Notes                                                                  |
+|-----------------+-------------------------------------+------------------------------------------------------------------------|
+| group           | GroupId                             |                                                                        |
+| groupPreParams  | array of TypeT                      | The type of the arguments to the pre-condition for this task group     |
+| groupPostParams | array of TypeT                      | The type of the arguments to the post-condition for this task group    |
+| groupPost       | Expr                                | The post-condition for the task group                                  |
+| groupTasks      | array of [ TaskId, array of Expr  ] | The tasks for this task group, along with any submitted pre-conditions |
+|-----------------+-------------------------------------+------------------------------------------------------------------------|
+
+** Summary
+
+This is the list of operations supported by the server. Parameters in URIs will be indicated using a colons (:), so 
+: browse/:fun
+can be used to access information about =my_c_function= using
+: browse/my_c_function
+
+Arguments not encoded in the URL are form-encoded POST arguments.
+Note that all the =play/= operations require the =play/start=
+operation before they are can be used.
+
+|------------------------------+----------------------------------------------------+-----------------------------------------------+------------------------------------------------------------------------------------------------------|
+| URL                          | Arguments                                          | Return type                                   | Summary                                                                                              |
+|------------------------------+----------------------------------------------------+-----------------------------------------------+------------------------------------------------------------------------------------------------------|
+| browse/                      | None                                               | array of string                               | Returns the available functions                                                                      |
+| browse/:fun                  | 'fun' : string                                     | array of GroupInfo                            | Returns information about each task group                                                            |
+| posts/forget/:fun/:group     | 'fun' : string, 'group' : GroupId                  | array of GroupInfo                            | Removes the given task group and returns information about each remaining task group                 |
+| play/start/:fun/:group/:name | 'fun' : string, 'group' : GroupId, 'name' : TaskId | TaskInfo                                      | Starts a new game session, returning information used to play that task                              |
+| play/sendInput               | 'id' : SchematicId, 'value' : string               | { 'expr' : Expr, 'update' : array of GoalId } | Instantiates a schematic variable, returning the set of goals which are no longer true               |
+| play/dragInput               | 'srcid' : GoalId, 'destid' : SchematicId           | { 'expr' : string }                           | Returns a candidate instantiation for the given schematic variable as a string (doesn't instantiate) |
+| play/finished                | None                                               | { 'finished' : bool, 'useful' : bool }        | Submits the found task solution                                                                      |
+| play/reload                  | None                                               | TaskInfo                                      | Retrieves the task play information.                                                                 |
+| play/newPost                 | 'fun' : string, 'post' : string                    | { 'result' : GroupId }                        | Submits a new post-condition for the given function.                                                 |
+|------------------------------+----------------------------------------------------+-----------------------------------------------+------------------------------------------------------------------------------------------------------|
+
+** Errors

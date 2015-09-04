@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source scripts/shell_config
+
+DIR=$($MKTEMP -d storm-gcc-check.XXX)
+
+echo $(gcc -Wall -c ./cur-level-set/source.c -o $DIR/tmp.o 2>&1 || true)
+
+rm -r $DIR
+

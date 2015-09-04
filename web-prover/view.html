@@ -1,0 +1,106 @@
+<html>
+<head>
+<script src="web_src/lib/jquery.js"></script>
+<script src="out.js"></script>
+<script>
+function renderSlns(tasks) {
+  var dom = $('<td/>').css('background-color','white')
+
+  if (tasks.length === 0) return dom
+
+  var taskL = $('<div/>').hide()
+
+  dom.text('solutions')
+     .css('cursor', 'pointer')
+     .css('background-color', 'white')
+     .click(function() { taskL.toggle() })
+
+  jQuery.each(tasks,function(ix,task) {
+    var lst = $('<div/>')
+              .css('padding-left', '1em')
+
+    function note(x) { return $('<div/>')
+                              .text(x)
+                              .css('margin-right', '2em')
+                              .css('display', 'inline-block') }
+
+    lst.append( $('<div/>')
+                .css('background-color', 'rgba(0,0,0,0.5)')
+                .css('color', 'white')
+                .append ([ note(task.label)
+                          , note(task.category)
+                          , note(task.tags.join()) ]))
+
+    lst.css('background-color', task.auto ? '#ccc' : 'orange')
+
+    var s = $('<ul/>')
+    jQuery.each(task.slns, function(ix,sln) {
+      s.append($('<li/>').append($('<pre/>').html(sln)))
+    })
+    lst.append(s)
+    taskL.append(lst)
+  })
+
+  dom.append(taskL)
+  return dom
+}
+
+function renderFun(f) {
+  var bg = (f.percent === 100) ? '#9f9' :
+           (f.percent > 50)    ? '#ccf' :
+           (f.percent > 0)     ? '#eee' :
+                                 'white'
+
+  var t = $('<tr/>')
+          .css('background-color', bg)
+
+  t.append( [ $('<td/>').text(f.name)
+                        .css('padding-right', '5em')
+            , $('<td/>').text(f.percent + '%')
+                        .css('text-align', 'right')
+                        .css('padding-right', '2em')
+            , $('<td/>').text(f.autoSolve)
+                        .css('text-align', 'center')
+            , $('<td/>').text('+')
+                        .css('text-align', 'center')
+            , $('<td/>').text(f.otherSolve)
+                        .css('text-align', 'center')
+                        .css('font-weight', f.otherSolve > 0 ? 'bold'
+                                                            : 'normal')
+            , $('<td/>').text('of')
+            , $('<td/>').text(f.todo)
+                        .css('text-align', 'center')
+                        .css('padding-right', '2em')
+            , renderSlns(f.solutions)
+
+            ] )
+
+  t.find('td').css('border-top', '1px solid black')
+
+  return t
+}
+
+$(document).ready(function () {
+  var t = $('<table/>')
+          .css('border-collapse', 'collapse')
+  t.append($('<tr/>')
+           .append([ $('<th/>').text('Function')
+                   , $('<th/>').text('Progress')
+                   , $('<th/>').text('Auto solved')
+                   , $('<th/>')
+                   , $('<th/>').text('Player solved')
+                   , $('<th/>')
+                   , $('<th/>').text('Total tasks')
+                   , $('<th/>')
+                   ]))
+
+  jQuery.each(data, function(ix,val) {
+    t.append(renderFun(val))
+  })
+
+  $('body').append(t)
+})
+</script>
+</head>
+<body><body/>
+</html>

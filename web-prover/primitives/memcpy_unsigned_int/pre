@@ -1,0 +1,10 @@
+t1 >= 1  /\
+u1 >= 0  /\
+(* no constraint on v1 *)
+w1 >= 0  /\
+t1 <> v1 /\    (* ensures separation; in our case we always copy in a
+                freshly malloc-ed location *)
+u1 + div (x1 + 3) 4 <= a[t1] /\
+w1 + div (x1 + 3) 4 <= a[v1]
+
+

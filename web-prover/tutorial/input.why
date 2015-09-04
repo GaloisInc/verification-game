@@ -1,0 +1,121 @@
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'tutorial            --- *)
+(* ---------------------------------------------------------- *)
+theory VCtutorial_post
+
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic15.A_Galois_axiomatic15
+
+
+goal WP "expl:Pre-condition for transitivity":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (p_galois_tutorial_I i j k)
+
+goal WP "expl:Concrete post-condition for transitivity":
+  forall i j k : int.
+  (j <= k) ->
+  (p_galois_tutorial_I i j k) ->
+  (i <= k)
+
+
+goal WP "expl:Learn to drag":
+  forall i j : int.
+  (p_galois_tutorial_P i j) ->
+  (i <= j)
+
+goal WP "expl:Learn to use concrete assumptions":
+  forall i j k l : int.
+  (p_galois_tutorial_P i j) ->
+  (k <= l) ->
+  (k <= l)
+
+goal WP "expl:Learn to ignore":
+  forall i j : int.
+  (p_galois_tutorial_P i j) ->
+  (i <= j) ->
+  (j <= i) ->
+  (i <= j)
+
+
+
+goal WP "expl:Pre-condition for delayed assumption use":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (0 <= k) ->
+  (p_galois_tutorial_I1 i j k)
+
+goal WP "expl:Concrete conclusion for delayed assumption use":
+  forall a b c i j k : int.
+  (p_galois_tutorial_I1 i j k) ->
+  (0 <= k)
+
+
+
+goal WP "expl:Concrete conclusion for wobble":
+  forall i j k : int.
+  (p_galois_tutorial_I2 i j k) ->
+  (0 <= k) ->
+  (i <= j)
+
+goal WP "expl:Loop invariant for wobble":
+  forall i j k : int.
+  (p_galois_tutorial_I2 i j (k+1)) ->
+  (p_galois_tutorial_I2 (i+1) j k)
+
+goal WP "expl:Pre-condition for wobble":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (p_galois_tutorial_I2 i j 0)
+
+
+goal WP "expl:Concrete conclusion for bounded growth":
+  forall i j k : int.
+  (p_galois_tutorial_I3 i j k) ->
+  (i <= j) ->
+  (i <= k)
+
+goal WP "expl:Loop invariant for wobble":
+  forall i j k : int.
+  (p_galois_tutorial_I3 i     j k) ->
+  (p_galois_tutorial_I3 (i+1) j k)
+
+goal WP "expl:Pre-condition for wobble":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (p_galois_tutorial_I3 0 i j)
+
+goal WP "expl:No drag possible":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (k <= i)                  ->
+  (k <= j)
+
+goal WP "expl:No drag possible":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (0 <= i)                  ->
+  (i <= 255)                ->
+  (to_sint8 (to_uint8 i))
+
+goal WP "expl:Multiple freebie possibilities":
+  forall i j k : int.
+  (p_galois_tutorial_P i j) ->
+  (0 <= k) ->
+  (p_galois_tutorial_I4 i j k)
+
+goal WP "expl:Concrete conclusion for delayed assumption use":
+  forall a b c i j k : int.
+  (p_galois_tutorial_I4 i j k) ->
+  (0 <= k) ->
+  (0 <= k)
+
+end

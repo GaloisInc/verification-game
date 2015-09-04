@@ -1,0 +1,484 @@
+<html>
+<head>
+<style>
+</style>
+<script src="/static/lib/jquery.js"></script>
+<script src="/static/lib/jquery-ui.js"></script>
+<script src="/static/js/world.js"></script>
+<script>
+
+var img_array =
+  [ "big_eyes_creature"
+  , "black_creature"
+  , "black_power_creature"
+  , "black_spikes_creature"
+  , "blue_creature"
+  , "blue_toy"
+  , "brown_creature"
+  , "cheeks_creature"
+  , "china_creature"
+  , "domokun_creature"
+  , "dragon_creature"
+  , "ears_creature"
+  , "fire_creature"
+  , "fire_toy"
+  , "fiveeyes_creature"
+  , "glasses_creature"
+  , "green_creature"
+  , "green_red_eyes_creature"
+  , "green_toy"
+  , "lady_yellow_creature"
+  , "lilastoy"
+  , "mask_toy"
+  , "ninja_toy"
+  , "nose_creature"
+  , "orange_creature"
+  , "orange_toy"
+  , "pink_creature"
+  , "pink_toy"
+  , "pirate_creature"
+  , "red_creature"
+  , "red_eyes_creature"
+  , "red_toy"
+  , "scar_creature"
+  , "six_hands_creature"
+  , "smile_creature"
+  , "swamp_creature"
+  , "tentacles_creature"
+  , "tie_creature"
+  , "tooth_toy"
+  , "white_creature"
+  , "yellow_toy"
+  ];
+
+
+
+
+function drawExample() {
+
+  var worldMap = newWorld();
+  var here = $('body');
+  var x;
+  var y;
+  var z;
+
+  for (x = 0; x < 10; ++x)
+    for (y = 0; y < 8; ++y) {
+      worldMap.newBlock('Grass_Block', x, y, 0);
+    }
+
+  for (x = 0; x < 10; ++x) {
+    worldMap.newBlock('Dirt_Block', x, 5, -1);
+    worldMap.newBlock('Water_Block', x, 5, 0);
+  }
+
+  for (x = 1; x < 8; ++x) {
+    for (z = 1; z <= x; ++z) {
+      worldMap.newBlock(z % 2 === 0 ? 'Stone_Block' : 'Wood_Block', x, 4, z);
+    }
+  }
+
+  worldMap.draw(here);
+  var w1 = worldMap.moveOut(1,4,1, 8,4,8, false);
+  w1.each(function(x,y,z,b) { b.item.css('opacity', 0.2); });
+
+  worldMap.copyWorld(w1,0,0,0);
+  w1.each(function(x,y,z,b) { b.item.css('opacity', 1); });
+
+
+  var curBlock = null;
+  here.mousemove(function(ev) {
+    var b = worldMap.blockFrom2d(ev.pageX, ev.pageY);
+    if (b === curBlock) return;
+    if (curBlock !== null) curBlock.item.css('opacity', 1);
+    curBlock = b;
+    if (curBlock !== null) curBlock.item.css('opacity', 0.5);
+  });
+
+  return;
+
+  jQuery.post( '/browse/getTask'
+             , { function: 'rows'
+               , group: 'safety'
+               , name: 'task0_2'
+               }
+             , function(res) {
+                  var y = 3;
+                  var worldMap = newWorld();
+                  var info = { worldMap: worldMap };
+                  var g = res.goals[0].goal;
+
+                  jQuery.each(g.asmps, function(ix,e) {
+                    drawTopExpr(info, e, 1, y, 1);
+                    y += 2;
+                  });
+
+                  drawTopExpr(info, g.conc, 1, y, 1)
+                  drawWorld($('body'), worldMap);
+               });
+
+}
+
+function isInfix(e) {
+  var s = e.struct;
+  if (s.tag !== 'app') return false;
+  if (s.params.length !== 2) return false;
+
+  switch(s.fun) {
+    case '<':
+    case '>':
+    case '<=':
+    case '>=':
+    case '+':
+    case '*':
+    case '-': return true;
+  }
+
+  return false;
+}
+
+function drawTopExpr(info, e, x, y, z) {
+  var i;
+  var dim = drawExpr(info, e.expr, x + 1, y, z + 2);
+  for (i = x + 1; i < dim.x; ++i)
+    for (j = y; j < dim.y; ++j)
+      newBlock(info.worldMap, 'Grass_Block', i, j, z+1);
+}
+
+
+function drawExpr(info, e, x, y, z) {
+  var s = e.struct;
+
+  switch (s.tag) {
+    case 'lit':
+      var str;
+      switch(s.text) {
+        case 'true':  str                = '&#10201;'; break;
+        case 'false': str                = '&#10200;'; break;
+        case '-32768': str               = '-2<sup><small>15</small></sup>'; break;
+        case '32768': str                = '2<sup><small>15</small></sup>'; break;
+        case '65536': str                = '2<sup><small>16</small></sup>'; break;
+        case '-2147483648': str          = '-2<sup><small>31</small></sup>'; break;
+        case '2147483648': str           = '2<sup><small>31</small></sup>'; break;
+        case '4294967296': str           = '2<sup><small>32</small></sup>'; break;
+        case '-9223372036854775808': str = '-2<sup><small>63</small></sup>'; break;
+        case '9223372036854775808': str  = '2<sup><small>63</small></sup>'; break;
+        case '18446744073709551616': str = '2<sup><small>64</small></sup>'; break;
+        default: str = s.text; break;
+      }
+
+      newItem(info.worldMap, shinyTextBox(str), x, y, z);
+      return { x: x + 1, y: y + 1, z: z+1 };
+
+    case 'qvar':
+      if (s.varId < img_array.length) {
+        newItem(info.worldMap, monsterBlock(img_array[s.varId]), x, y, z);
+      } else {
+        newItem(info.worldMap, textBlock('qvar ' + s.text), x, y, z);
+      }
+      return { x: x + 1, y: y + 1, z: z+1 };
+
+    case 'dvar':
+      newItem(info.worldMap, textBlock('dvar ' + s.dvarId.toString()), x, y, z);
+      return { x: x + 1, y: y + 1, z: z+1 };
+
+    case 'app':
+      if (isInfix(e)) return drawInfix();
+
+      switch(s.fun) {
+        case 'to_uint8':  return drawCast('U', 8);
+        case 'to_uint16': return drawCast('U', 16);
+        case 'to_uint32': return drawOneArgFun(); // drawCast('U', 32);
+        case 'to_uint64': return drawCast('U', 64);
+
+        case 'to_sint8':  return drawCast('S',8);
+        case 'to_sint16': return drawCast('S',16);
+        case 'to_sint32': return drawCast('S',32);
+        case 'to_sint64': return drawCast('S',64);
+      }
+
+      var newX = x;
+      var maxY = y + 1;
+      var maxZ = z;
+      jQuery.each(s.params, function(ix,param) {
+        var dim = drawExpr(info, param, newX, y, z + 1);
+        newX = dim.x;
+        maxY = Math.max(dim.y,maxY);
+        maxZ = Math.max(dim.z,maxZ);
+      });
+      var w = newX - x;
+      for (i = 0; i < w; ++i) {
+        var useThis = 'Dirt_Block';
+
+        newBlock(info.worldMap, useThis, x + i, y, z);
+        if (w === 0) newX++;
+      }
+      newItem(info.worldMap, sideTextBlock(s.id, w), x, y, z);
+      return { x: newX, y: maxY, z: maxZ };
+
+    case 'paramdef':
+      console.log('paramdef?');
+      return { x: x, y: y, z: z };
+
+    case 'hole':
+      console.log('hole');
+      return { x: x, y: y, z: z };
+
+    default:
+      console.log('unknown');
+      console.log(e);
+      return { x: x, y: y, z: z };
+  }
+
+  function drawOneArgFun() {
+    var tmpWorld = newWorld();
+    var dim = drawExpr({ worldMap: tmpWorld }, s.params[0], 0, 0, 0);
+    var startX = x - Math.floor(dim.x/2);
+    moveWorld(tmpWorld, startX, y + 2, z);
+    copyFirstWorldInSecond(tmpWorld, info.worldMap);
+    newItem(info.worldMap, planetCuteBlock('Door_Tall_Open'), x, y, z);
+    newBlock(info.worldMap, 'Dirt_Block', x, y + 1, z-1);
+    return { x: startX + dim.x, y: dim.y + y + 2, z: z + dim.z }
+  }
+
+
+  function drawCast(sign, sz) {
+    var lo = '';
+    var hi = '';
+
+    switch(sign) {
+    case 'S':
+      lo = '-2<sup><small>' + (sz-1) + '</small></sup> &#8804;'
+      hi =  '< 2<sup><small>' + (sz-1) + '</small></sup>'
+      break;
+    case 'U':
+      lo = '0 &#8804;'
+      hi = '< 2<sup><small>' + sz + '</small></sup>'
+      break;
+    }
+
+
+    var dim = drawExpr(info, s.params[0], x, y, z);
+    var i;
+    var blockNum = Math.ceil((dim.z - z + 1)/2);
+    var newZ = z - 1;
+
+    var endX = dim.x === x + 1 ? dim.x : dim.x - 1;
+
+    for (i = 0; i < blockNum; ++i) {
+      newBlock(info.worldMap, 'Wall_Block_Tall', x,     dim.y, newZ);
+      newBlock(info.worldMap, 'Wall_Block_Tall', endX, dim.y, newZ);
+      newZ += 2;
+    }
+    newBlock(info.worldMap, 'Wall_Block',       x,     dim.y, newZ);
+    newItem(info.worldMap, sideHtmlBlock(lo,1), x, dim.y, newZ);
+    newBlock(info.worldMap, 'Wall_Block', endX, dim.y, newZ);
+    newItem(info.worldMap, sideHtmlBlock(hi,1), endX, dim.y, newZ);
+
+/*
+    for (i = x + 1; i < dim.x; ++i)
+      newBlock(info.worldMap, 'Roof_South', i, y, newZ + 1);
+
+    newBlock(info.worldMap, 'Roof_South_West', x, y, newZ + 1);
+    newBlock(info.worldMap, 'Roof_South_East', dim.x, y, newZ + 1);
+*/
+    // newItem(info.worldMap, sideTextBlock('cast', dim.x - x -1), x + 1, dim.y, newZ);
+
+    for (i = x + 1; i < endX; ++i)
+      newBlock(info.worldMap, 'Stone_Block', i, dim.y, z - 1);
+
+    return { x: endX + 1, y: dim.y - 1, z: z + 2*blockNum+2 };
+
+  }
+
+  function drawInfix() {
+    var i;
+    var j;
+    var left  = s.params[0];
+    var right = s.params[1];
+    var leftParens = isInfix(left);
+    var rightParens = isInfix(right);
+
+
+    var dim1 = drawExpr(info, left, x, y, leftParens ? z + 1 : z);
+    var x1 = dim1.x;
+    if (leftParens)
+      for (i = x; i < x1; ++i)
+        for (j = y; j < dim1.y; ++j)
+          if (getWorldBlockAt(info.worldMap, i, j, z) === null)
+            newBlock(info.worldMap, 'Stone_Block', i, j, z);
+
+    switch(s.fun) {
+      case '+': newItem(info.worldMap, mathBlock('plus'), x1, y, z); break;
+      case '*': newItem(info.worldMap, mathBlock('times'), x1, y, z); break;
+      case '<=': newItem(info.worldMap, mathBlock('leq'), x1, y, z); break;
+      case '<': newItem(info.worldMap, mathBlock('lt'), x1, y, z); break;
+
+      default: newItem (info.worldMap, textBlock(s.id), x1, y, z);
+    }
+
+
+    var dim2 = drawExpr(info, right, x1 + 1, y, rightParens ? z + 1 : z);
+    var x2 = dim2.x;
+    if (rightParens)
+      for (i = x1 + 1; i < x2; ++i)
+        for (j = y; j < dim2.y; ++j)
+          newBlock(info.worldMap, 'Stone_Block', i, j, z);
+    return { x: x2, y: Math.max(dim1.y,dim2.y), z: Math.max(dim1.z,dim2.z) };
+  }
+
+}
+
+
+// -----------------------------------------------------------------------------
+// Loading of basic componentes
+
+function planetCuteBlock(name) {
+  return { item: $('<img/>')
+                 .attr('src', '/static/img/PlanetCute_PNG/' + name + '.png')
+         , name: name
+         , updX: 0
+         , updY: 0
+         };
+}
+
+
+function mathBlock(name) {
+  return { item: $('<img/>')
+                 .attr('src', '/static/img/math/' + name + '.png')
+         , name: name
+         , updX: 0
+         , updY: 0
+         };
+}
+
+function monsterBlock(name) {
+  return { item: $('<img/>')
+                 .attr('src', '/static/img/creatures/' + name + '_128x128.png')
+         , updX: -25
+         , updY: 30
+         };
+ }
+
+function textBlock(text) {
+  var pic = $('<img/>')
+            .attr('src', '/static/img/PlanetCute_PNG/SpeechBubble.png')
+            .css('position', 'relative')
+            .css('top', '0')
+            .css('left', '0');
+
+  return { item: $('<div/>')
+                 .append(pic)
+                 .append($('<div/>')
+                         .text(text)
+                         .css('position', 'absolute')
+                         .css('top', '80')
+                         .css('left', '10')
+                         .css('width', '90')
+                         .css('height', '70')
+                         .css('font-size', '16')
+                         .css('overflow-y', 'auto'))
+         , updX: 0
+         , updY: 0
+         };
+ }
+
+
+function sideHtmlBlock(text,n) {
+  if (n === undefined) n = 1;
+  var margin = 5;
+
+  return { item: $('<div/>')
+                 .html(text)
+                 .css('background-color', '#cc9')
+                 .css('border', '1px solid black')
+                 .css('width', 100 * n - 2 * margin)
+                 .css('height', '22')
+                 .css('font-size', '16')
+                 .css('text-align', 'center')
+                 .css('overflow-x', 'auto')
+                 .css('padding-top', '7px')
+                 .css('opacity', '0.5')
+         , updX: margin
+         , updY: 135
+         };
+}
+
+
+
+function sideTextBlock(text,n) {
+  if (n === undefined) n = 1;
+  var margin = 5;
+
+  return { item: $('<div/>')
+                 .text(text)
+                 .css('background-color', '#cc9')
+                 .css('border', '1px solid black')
+                 .css('width', 100 * n - 2 * margin)
+                 .css('height', '22')
+                 .css('font-size', '16')
+                 .css('text-align', 'center')
+                 .css('overflow-x', 'auto')
+                 .css('padding-top', '7px')
+                 .css('opacity', '0.5')
+         , updX: margin
+         , updY: 135
+         };
+}
+
+function shinyTextBox(text) {
+  var pic = $('<img/>')
+            .attr('src', '/static/img/PlanetCute_PNG/Selector.png')
+            .css('position', 'relative')
+            .css('top', '0')
+            .css('left', '0');
+
+  return { item: $('<div/>')
+                 .append(pic)
+                 .append($('<div/>')
+                         .html(text)
+                         .css('position', 'absolute')
+                         .css('top', '110')
+                         .css('color', 'purple')
+                         .css('left', '2')
+                         .css('width', '90')
+                         .css('height', '70')
+                         .css('text-align', 'center')
+                         .css('font-size', '26')
+                         .css('overflow-y', 'auto'))
+         , updX: 0
+         , updY: 0
+         };
+ }
+
+
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// Block maps keep track of which blocks are where, to help compute shadows.
+
+/*
+function addItem(worldDB,item) {
+  worldDB.items.push(item);
+}
+
+function newItem(worldMap,me,x,y,z) {
+  setupPos(me,x,y,z);
+  addItem(worldMap, me);
+  return me;
+}
+*/
+
+
+$(document).ready(function () {
+  var body = $('body').css('background-color', 'black');
+  drawExample();
+
+});
+
+</script>
+</head>
+<body>
+
+</body>

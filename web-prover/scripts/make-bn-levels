@@ -1,0 +1,103 @@
+#!/bin/bash
+set -e
+
+source scripts/shell_config
+
+CPUS=8
+
+cat <<FUNS | $XARGS -n1 -P$CPUS scripts/make-openssl-level
+   BN_add
+   BN_add_word
+   bn_add_words
+   BN_bin2bn
+   BN_bn2bin
+   BN_bn2mpi
+   BN_clear
+   BN_clear_bit
+   BN_clear_free
+   BN_cmp
+   bn_cmp_part_words
+   bn_cmp_words
+   BN_copy
+   BN_CTX_end
+   BN_CTX_free
+   BN_CTX_get
+   BN_CTX_init
+   BN_CTX_new
+   BN_CTX_start
+   bn_div_words
+   BN_dup
+   bn_dup_expand
+   bn_expand2
+   bn_expand_internal
+   BN_free
+   BN_get_params
+   BN_get_word
+   BN_init
+   BN_is_bit_set
+   BN_lshift
+   BN_lshift1
+   BN_mask_bits
+   BN_mod_word
+   BN_mpi2bn
+   BN_new
+   BN_num_bits
+   BN_num_bits_word
+   BN_POOL_finish
+   BN_POOL_get
+   BN_POOL_init
+   BN_POOL_release
+   BN_POOL_reset
+   BN_rshift
+   BN_rshift1
+   BN_set_bit
+   BN_set_negative
+   BN_set_params
+   BN_set_word
+   BN_STACK_finish
+   BN_STACK_init
+   BN_STACK_pop
+   BN_STACK_push
+   BN_STACK_reset
+   BN_sub
+   bn_sub_words
+   BN_swap
+   BN_uadd
+   BN_ucmp
+   BN_usub
+   BN_value_one
+   get_rfc2409_prime_1024
+   get_rfc2409_prime_768
+   get_rfc3526_prime_1536
+   get_rfc3526_prime_2048
+   get_rfc3526_prime_3072
+   get_rfc3526_prime_4096
+   get_rfc3526_prime_6144
+   get_rfc3526_prime_8192
+FUNS
+
+
+# BN_sub_word is here to avoid recursion.
+
+PRIMS="CRYPTO_malloc_BN_CTX \
+       CRYPTO_malloc_unsigned_int \
+       CRYPTO_malloc_BN_POOL_ITEM \
+       CRYPTO_malloc_BIGNUM \
+       CRYPTO_malloc_unsigned_long \
+       CRYPTO_free \
+       OPENSSL_cleanse_BIGNUM \
+       OPENSSL_cleanse_unsigned_long \
+       ERR_put_error \
+       BN_sub_word \
+       memcpy_unsigned_int \
+       memset_BIGNUM \
+       memset_unsigned_long"
+
+rm -f bn_generate_prims.log
+for i in $PRIMS
+do
+  echo $(echo -n $i | $SHA1SUM) $i
+  scripts/make-openssl-level $i --prim=$i >> bn_generate_prims.log
+done
+
+

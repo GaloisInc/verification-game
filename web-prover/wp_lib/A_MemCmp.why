@@ -1,0 +1,25 @@
+(* ---------------------------------------------------------- *)
+(* --- Axiomatic 'MemCmp'                                 --- *)
+(* ---------------------------------------------------------- *)
+theory A_MemCmp
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+
+function l_memcmp (map int int) (map addr int) addr addr int : int
+
+axiom Q_memcmp_zero:
+  forall n_0 : int. forall malloc_0 : map int int.
+    forall mchar_0 : map addr int. forall s1_0 s2_0 : addr.
+    (0 = ((l_memcmp malloc_0 mchar_0 s1_0 s2_0 n_0))) <->
+    (forall i_0 : int. (i_0 < n_0) -> (0 <= i_0) ->
+     (mchar_0[(shift s1_0 i_0)] = mchar_0[(shift s2_0 i_0)]))
+
+end
+

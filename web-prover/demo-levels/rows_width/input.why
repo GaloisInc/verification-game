@@ -1,0 +1,263 @@
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'rows_width'         --- *)
+(* ---------------------------------------------------------- *)
+theory VCrows_width_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Post-condition (generated) in 'rows_width'":
+  forall col_0 n_1 n_0 row_0 w_1 w_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall p_1 p_0 : addr.
+  (n_0 <= row_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint32 col_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 row_0)) ->
+  ((is_uint32 w_1)) ->
+  ((is_uint32 w_0)) ->
+  ((p_galois'rows_width'P malloc_1 mptr_1 mchar_1 mint_1 p_1 n_1 w_1)) ->
+  ((p_galois'rows_width'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 p_1 n_1 w_1 row_0 col_0 p_0 n_0 w_0)) ->
+  ((p_galois'rows_width'Q malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 p_1 n_1 w_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCrows_width_loop_inv_galois_decorator_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall col_1 col_0 n_2 n_1 n_0 row_1 row_0 w_2 w_1 w_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall p_2 p_1 p_0 : addr.
+  let x_0 = 1 + row_1 in
+  (row_0 < n_0) ->
+  (w_1 <= col_1) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint32 col_1)) ->
+  ((is_uint32 col_0)) ->
+  ((is_uint32 n_2)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 row_1)) ->
+  ((is_uint32 row_0)) ->
+  ((is_uint32 w_2)) ->
+  ((is_uint32 w_1)) ->
+  ((is_uint32 w_0)) ->
+  ((is_uint32 x_0)) ->
+  ((p_galois'rows_width'P malloc_2 mptr_2 mchar_2 mint_2 p_2 n_2 w_2)) ->
+  ((p_galois'rows_width'I1 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 p_2 n_2 w_2 row_1 col_1 p_1 n_1 w_1)) ->
+  ((p_galois'rows_width'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 p_2 n_2 w_2 row_0 col_0 p_0 n_0 w_0)) ->
+  ((p_galois'rows_width'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 p_2 n_2 w_2 x_0 col_1 p_1 n_1 w_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCrows_width_loop_inv_galois_decorator_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall col_0 n_0 w_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall p_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 col_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 w_0)) ->
+  ((p_galois'rows_width'P malloc_0 mptr_0 mchar_0 mint_0 p_0 n_0 w_0)) ->
+  ((p_galois'rows_width'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_0 mptr_0
+     mchar_0 mint_0 p_0 n_0 w_0 0 col_0 p_0 n_0 w_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCrows_width_loop_inv_galois_decorator_2_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall col_1 col_0 n_2 n_1 n_0 row_1 row_0 w_2 w_1 w_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall p_2 p_1 p_0 : addr.
+  let x_0 = 1 + col_1 in
+  let x_1 = row_1 * w_1 in
+  (col_1 < w_1) ->
+  (row_0 < n_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint32 col_1)) ->
+  ((is_uint32 col_0)) ->
+  ((is_uint32 n_2)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 row_1)) ->
+  ((is_uint32 row_0)) ->
+  ((is_uint32 w_2)) ->
+  ((is_uint32 w_1)) ->
+  ((is_uint32 w_0)) ->
+  ((is_uint32 x_0)) ->
+  ((p_galois'rows_width'P malloc_1 mptr_1 mchar_2 mint_1 p_2 n_2 w_2)) ->
+  ((valid_rw malloc_2 ((shift p_1 ((to_uint32 (col_1 + ((to_uint32 x_1)))))))
+     1)) ->
+  ((p_galois'rows_width'I1 malloc_2 mptr_2 mchar_1 mint_2 malloc_1 mptr_1
+     mchar_2 mint_1 p_2 n_2 w_2 row_1 col_1 p_1 n_1 w_1)) ->
+  ((p_galois'rows_width'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_2 mint_1 p_2 n_2 w_2 row_0 col_0 p_0 n_0 w_0)) ->
+  ((p_galois'rows_width'I1 malloc_2 mptr_2
+     mchar_1[((shift p_1 (col_1 + x_1))) <- 0] mint_2 malloc_1 mptr_1 mchar_2
+     mint_1 p_2 n_2 w_2 row_1 x_0 p_1 n_1 w_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCrows_width_loop_inv_galois_decorator_2_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall col_0 n_1 n_0 row_0 w_1 w_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall p_1 p_0 : addr.
+  (row_0 < n_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint32 col_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 row_0)) ->
+  ((is_uint32 w_1)) ->
+  ((is_uint32 w_0)) ->
+  ((p_galois'rows_width'P malloc_1 mptr_1 mchar_1 mint_1 p_1 n_1 w_1)) ->
+  ((p_galois'rows_width'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 p_1 n_1 w_1 row_0 col_0 p_0 n_0 w_0)) ->
+  ((p_galois'rows_width'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 p_1 n_1 w_1 row_0 0 p_0 n_0 w_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file example-src/nest.c, line 31) --- *)
+(* ---------------------------------------------------------- *)
+theory VCrows_width_assert_rte_mem_access
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Assertion 'rte,mem_access' (file example-src/nest.c, line 31)":
+  forall col_1 col_0 n_2 n_1 n_0 row_1 row_0 w_2 w_1 w_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall p_2 p_1 p_0 : addr.
+  (col_1 < w_1) ->
+  (row_0 < n_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint32 col_1)) ->
+  ((is_uint32 col_0)) ->
+  ((is_uint32 n_2)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 row_1)) ->
+  ((is_uint32 row_0)) ->
+  ((is_uint32 w_2)) ->
+  ((is_uint32 w_1)) ->
+  ((is_uint32 w_0)) ->
+  ((p_galois'rows_width'P malloc_1 mptr_2 mchar_2 mint_2 p_2 n_2 w_2)) ->
+  ((p_galois'rows_width'I1 malloc_2 mptr_1 mchar_1 mint_1 malloc_1 mptr_2
+     mchar_2 mint_2 p_2 n_2 w_2 row_1 col_1 p_1 n_1 w_1)) ->
+  ((p_galois'rows_width'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_2
+     mchar_2 mint_2 p_2 n_2 w_2 row_0 col_0 p_0 n_0 w_0)) ->
+  ((valid_rw malloc_2
+     ((shift p_1 ((to_uint32 (col_1 + ((to_uint32 (row_1 * w_1)))))))) 1))
+
+end
+

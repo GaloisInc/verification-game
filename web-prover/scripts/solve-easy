@@ -1,0 +1,50 @@
+#!/bin/bash
+
+TUTORIAL_HASH=485de2715cdab959c106d87a674a2d24a80a2d26
+
+# gotta run this before we set -e
+RERUN=1
+
+set -e
+shopt -s nullglob
+
+STAMP_DIR=solve_easy
+
+for DIR in queues/unsolved/*/*/*/task_*; do
+# for DIR in queues/solved/*/*/*/task_*; do
+  TASK=$(basename $DIR)
+  DIR=$(dirname $DIR)
+  GROUP=$(basename $DIR)
+  DIR=$(dirname $DIR)
+  FUN=$(basename $DIR)
+
+  STAMP=$STAMP_DIR/$FUN/$GROUP
+  STAMP_FILE=$STAMP/$TASK
+
+  echo -n $FUN / $GROUP / $TASK :
+
+  mkdir -p $STAMP
+
+  if [ $FUN == $TUTORIAL_HASH ]
+  then
+    touch $STAMP_FILE
+  fi
+
+
+  if [ -e $STAMP_FILE ]
+  then
+    echo " Skip"
+  else
+    bin/SolveEasy \
+      --fun-hash=$FUN \
+      --group=$GROUP \
+      --task=$TASK && echo " Solved" && RERUN=0 \
+                      || echo " Not solved" && true # don't let set-e catch us!
+
+    touch $STAMP_FILE
+  fi
+
+done
+
+echo Solve easy returning: $RERUN
+exit $RERUN

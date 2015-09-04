@@ -1,0 +1,17 @@
+[kernel] preprocessing with "gcc -C -E -I. -I/home/diatchki/tools/strom-frama-c/share/frama-c/libc -nostdinc example-src/simple_project.c"
+[rte] annotating function a_function_call
+[rte] annotating function a_loop
+[rte] annotating function more_than_safety
+[rte] annotating function simple_access
+[rte] annotating function two_tasks
+[wp] Running WP plugin...
+[wp] Collecting axiomatic usage
+[wp] warning: Missing RTE guards
+example-src/simple_project.c:4:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+[wp] 4 goals scheduled
+[wp] [Alt-Ergo] Goal typed_cast_a_loop_assert_rte_mem_access : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_a_loop_loop_inv_galois_decorator_established : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_a_loop_post : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_a_loop_loop_inv_galois_decorator_preserved : Unknown
+[wp] Proved goals:    0 / 4
+     Alt-Ergo:        0  (unknown: 4)

@@ -1,0 +1,38 @@
+#!/bin/bash
+set -e
+
+source scripts/shell_config
+
+
+if [ $# -ne 1 ]; then
+  echo Usage: $0 FILE >&2
+  exit 1
+fi
+
+FILE=$1
+
+# First we run CPP on the file to aviod confusing `ctags`
+TEMP_DIR=$($MKTEMP -d /tmp/storm_ctags_cpp_XXX)
+TEMP_FILE=$TEMP_DIR/source.c
+$CPP $CPP_FLAGS $FILE > $TEMP_FILE
+FUNS=$($CTAGS -x --c-kinds=f $TEMP_FILE | $AWK '{print $1}')
+rm -r $TEMP_DIR
+
+TOTAL=0
+for fun in $FUNS; do
+  TOTAL=$(($TOTAL + 1))
+done
+
+COUNT=1
+
+for fun in $FUNS; do
+  echo [$COUNT/$TOTAL $(($COUNT*100/$TOTAL))%] $fun
+  LEVEL_DIR=levels/$(echo -n $fun | $SHA1SUM | $AWK '{print $1}')
+  if [ ! -e $LEVEL_DIR/tasks.hs ]; then
+    scripts/make-level $1 $fun > /dev/null
+  else
+    echo "skipping $fun ($LEVEL_DIR)"
+  fi
+  COUNT=$(($COUNT + 1))
+done
+

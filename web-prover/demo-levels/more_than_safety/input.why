@@ -1,0 +1,186 @@
+(* ---------------------------------------------------------- *)
+(* --- a_loop_pre: Pre-condition (generated) in 'more_than_safety' at call 'a_loop' (file example-src/simple_project.c, line 15) --- *)
+(* ---------------------------------------------------------- *)
+theory VCmore_than_safety_call_a_loop_pre
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:a_loop_pre: Pre-condition (generated) in 'more_than_safety' at call 'a_loop' (file example-src/simple_project.c, line 15)":
+  forall size_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1P malloc_0 mptr_0 mchar_0 mint_0 buf_0
+     size_0)) ->
+  ((p_galois'more_than_safety'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'more_than_safety'   --- *)
+(* ---------------------------------------------------------- *)
+theory VCmore_than_safety_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Post-condition (generated) in 'more_than_safety'":
+  forall size_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  let x_0 = size_0 - 1 in
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1P malloc_0 mptr_0 mchar_0 mint_0 buf_0
+     size_0)) ->
+  ((p_galois'more_than_safety'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'Q malloc_1 mptr_1 mchar_1 mint_1 malloc_0 mptr_0 mchar_0
+     mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1Q malloc_1 mptr_1 mchar_1 mint_1
+     malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((valid_rw malloc_1 ((shift buf_0 ((to_uint32 x_0)))) 1)) ->
+  ((p_galois'more_than_safety'Q malloc_1 mptr_1 mchar_1
+     mint_1[((shift buf_0 x_0)) <- 0] malloc_0 mptr_0 mchar_0 mint_0 buf_0
+     size_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'galois_decorator' (generated)           --- *)
+(* ---------------------------------------------------------- *)
+theory VCmore_than_safety_assert_galois_decorator
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Assertion 'galois_decorator' (generated)":
+  forall size_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'more_than_safety'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1P malloc_0 mptr_0 mchar_0 mint_0 buf_0
+     size_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file example-src/simple_project.c, line 16) --- *)
+(* ---------------------------------------------------------- *)
+theory VCmore_than_safety_assert_rte_mem_access
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Assertion 'rte,mem_access' (file example-src/simple_project.c, line 16)":
+  forall size_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1P malloc_0 mptr_0 mchar_0 mint_0 buf_0
+     size_0)) ->
+  ((p_galois'more_than_safety'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'Q malloc_1 mptr_1 mchar_1 mint_1 malloc_0 mptr_0 mchar_0
+     mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1Q malloc_1 mptr_1 mchar_1 mint_1
+     malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((valid_rw malloc_1 ((shift buf_0 ((to_uint32 (size_0 - 1))))) 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'galois_decorator' (generated)           --- *)
+(* ---------------------------------------------------------- *)
+theory VCmore_than_safety_assert_galois_decorator_2
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+use import A_Galois_axiomatic3.A_Galois_axiomatic3
+
+goal WP "expl:Assertion 'galois_decorator' (generated)":
+  forall size_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1P malloc_0 mptr_0 mchar_0 mint_0 buf_0
+     size_0)) ->
+  ((p_galois'more_than_safety'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'Q malloc_1 mptr_1 mchar_1 mint_1 malloc_0 mptr_0 mchar_0
+     mint_0 buf_0 size_0)) ->
+  ((p_galois'more_than_safety'a_loop'C1Q malloc_1 mptr_1 mchar_1 mint_1
+     malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0))
+
+end
+

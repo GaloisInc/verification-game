@@ -1,0 +1,29 @@
+[kernel] preprocessing with "gcc -C -E -I. -I/home/diatchki/tools/strom-frama-c/share/frama-c/libc -nostdinc example-src/nest.c"
+[rte] annotating function bin_search
+[rte] annotating function bin_search_call
+[rte] annotating function conditional_write
+[rte] annotating function more
+[rte] annotating function more20
+[rte] annotating function more_call
+[rte] annotating function more_call2
+[rte] annotating function nested
+[rte] annotating function nested_call
+[rte] annotating function next_word
+[rte] annotating function rows
+[rte] annotating function rows_width
+[rte] annotating function stack_array_access
+[rte] annotating function stack_array_access_call
+[wp] Running WP plugin...
+[wp] Collecting axiomatic usage
+[wp] warning: Missing RTE guards
+example-src/nest.c:19:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+example-src/nest.c:18:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+[wp] 6 goals scheduled
+[wp] [Alt-Ergo] Goal typed_cast_rows_loop_inv_galois_decorator_established : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_rows_loop_inv_galois_decorator_preserved : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_rows_post : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_rows_loop_inv_galois_decorator_2_preserved : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_rows_assert_rte_mem_access : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_rows_loop_inv_galois_decorator_2_established : Unknown
+[wp] Proved goals:    0 / 6
+     Alt-Ergo:        0  (unknown: 6)

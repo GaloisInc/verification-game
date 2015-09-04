@@ -1,0 +1,99 @@
+(* ---------------------------------------------------------- *)
+(* --- Axiomatic 'StrLen'                                 --- *)
+(* ---------------------------------------------------------- *)
+theory A_StrLen
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+
+function l_strlen addr : int
+
+use import A_MemCmp.A_MemCmp
+
+axiom Q_memcmp_strlen_shift_right:
+  forall k_0 n_0 : int. forall malloc_0 : map int int.
+    forall mchar_0 : map addr int. forall s1_0 s2_0 : addr.
+    let x_0 = (l_strlen s2_0) in let x_1 = (l_strlen s1_0) in (0 <= k_0) ->
+    (x_0 < n_0) ->
+    (0 = ((l_memcmp malloc_0 mchar_0 ((shift s1_0 k_0)) s2_0 n_0))) ->
+    ((0 <= x_1) /\ (x_1 <= (k_0 + x_0)))
+
+axiom Q_memcmp_strlen_shift_left:
+  forall k_0 n_0 : int. forall malloc_0 : map int int.
+    forall mchar_0 : map addr int. forall s1_0 s2_0 : addr.
+    let x_0 = (l_strlen s1_0) in let x_1 = (l_strlen s2_0) in (0 <= k_0) ->
+    (x_0 < n_0) ->
+    (0 = ((l_memcmp malloc_0 mchar_0 s1_0 ((shift s2_0 k_0)) n_0))) ->
+    ((0 <= x_1) /\ (x_1 <= (k_0 + x_0)))
+
+axiom Q_memcmp_strlen_right:
+  forall n_0 : int. forall malloc_0 : map int int.
+    forall mchar_0 : map addr int. forall s1_0 s2_0 : addr.
+    let x_0 = (l_strlen s2_0) in (x_0 < n_0) ->
+    (0 = ((l_memcmp malloc_0 mchar_0 s1_0 s2_0 n_0))) ->
+    (((l_strlen s1_0)) = x_0)
+
+axiom Q_memcmp_strlen_left:
+  forall n_0 : int. forall malloc_0 : map int int.
+    forall mchar_0 : map addr int. forall s1_0 s2_0 : addr.
+    let x_0 = (l_strlen s1_0) in (x_0 < n_0) ->
+    (0 = ((l_memcmp malloc_0 mchar_0 s1_0 s2_0 n_0))) ->
+    (x_0 = ((l_strlen s2_0)))
+
+axiom Q_strlen_create_shift:
+  forall i_0 k_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    let x_0 = (l_strlen ((shift s_0 k_0))) in (0 <= k_0) -> (k_0 <= i_0) ->
+    (0 = mchar_0[(shift s_0 i_0)]) -> ((0 <= x_0) /\ ((k_0 + x_0) <= i_0))
+
+axiom Q_strlen_create:
+  forall i_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    let x_0 = (l_strlen s_0) in (0 <= i_0) ->
+    (0 = mchar_0[(shift s_0 i_0)]) -> ((0 <= x_0) /\ (x_0 <= i_0))
+
+axiom Q_strlen_shift:
+  forall i_0 : int. forall s_0 : addr. let x_0 = (l_strlen s_0) in
+    (0 <= i_0) -> (i_0 <= x_0) ->
+    (x_0 = (i_0 + ((l_strlen ((shift s_0 i_0))))))
+
+axiom Q_strlen_sup:
+  forall i_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    let x_0 = (l_strlen s_0) in (0 <= i_0) ->
+    (0 = mchar_0[(shift s_0 i_0)]) -> ((0 <= x_0) /\ (x_0 <= i_0))
+
+axiom Q_strlen_zero:
+  forall i_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    let x_0 = (l_strlen s_0) in (0 <= i_0) -> (i_0 <= x_0) ->
+    (0 = mchar_0[(shift s_0 i_0)]) -> (i_0 = x_0)
+
+axiom Q_strlen_not_zero:
+  forall i_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    let x_0 = (l_strlen s_0) in (0 <= i_0) -> (i_0 <= x_0) ->
+    (0 <> mchar_0[(shift s_0 i_0)]) -> (i_0 < x_0)
+
+axiom Q_strlen_at_null:
+  forall mchar_0 : map addr int. forall s_0 : addr.
+    let x_0 = (l_strlen s_0) in (0 <= x_0) -> (0 = mchar_0[(shift s_0 x_0)])
+
+axiom Q_strlen_before_null:
+  forall i_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    (0 <= i_0) -> (i_0 < ((l_strlen s_0))) -> (0 <> mchar_0[(shift s_0 i_0)])
+
+axiom Q_strlen_neg:
+  forall mchar_0 : map addr int. forall s_0 : addr.
+    (forall i_0 : int. (0 <= i_0) -> (0 <> mchar_0[(shift s_0 i_0)])) ->
+    (((l_strlen s_0)) < 0)
+
+axiom Q_strlen_pos_or_null:
+  forall i_0 : int. forall mchar_0 : map addr int. forall s_0 : addr.
+    (0 <= i_0) -> (0 = mchar_0[(shift s_0 i_0)]) ->
+    (forall j_0 : int. (j_0 < i_0) -> (0 <= j_0) ->
+     (0 <> mchar_0[(shift s_0 j_0)])) -> (i_0 = ((l_strlen s_0)))
+
+end
+

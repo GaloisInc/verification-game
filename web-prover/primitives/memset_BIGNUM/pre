@@ -1,0 +1,5 @@
+t1 >= 1  /\          (* object is writeable *)
+u1 >= 0  /\          (* its offset is valie *)
+u1 + 5 <= a[t1] /\   (* we'll be accessing 5 fields, 1 word each *)
+w1 = 24              (* 24 bytes, the size of BIGNUM *)
+

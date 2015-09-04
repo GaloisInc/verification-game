@@ -1,0 +1,135 @@
+(* ---------------------------------------------------------- *)
+(* --- a_loop_pre: Pre-condition (generated) in 'a_function_call' at call 'a_loop' (file example-src/simple_project.c, line 10) --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_function_call_call_a_loop_pre
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic2.A_Galois_axiomatic2
+use import Globals.Globals
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:a_loop_pre: Pre-condition (generated) in 'a_function_call' at call 'a_loop' (file example-src/simple_project.c, line 10)":
+  let a_0 = (shift ((global l_arr_1159)) 0) in
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  let m_0 = malloc_0[l_arr_1159 <- 3] in
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((p_galois'a_function_call'P malloc_0 mptr_0 mchar_0 mint_0)) ->
+  ((p_galois'a_function_call'a_loop'C1P m_0 mptr_0 mchar_0 mint_0 a_0 3)) ->
+  ((p_galois'a_loop'P m_0 mptr_0 mchar_0 mint_0 a_0 3))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'a_function_call'    --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_function_call_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic2.A_Galois_axiomatic2
+use import Globals.Globals
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Post-condition (generated) in 'a_function_call'":
+  let a_0 = (shift ((global l_arr_1159)) 0) in
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  let m_0 = malloc_1[l_arr_1159 <- 3] in
+  ((framed mptr_0)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_0)) ->
+  ((p_galois'a_function_call'P malloc_1 mptr_0 mchar_0 mint_0)) ->
+  ((p_galois'a_loop'P m_0 mptr_0 mchar_0 mint_0 a_0 3)) ->
+  ((p_galois'a_function_call'a_loop'C1P m_0 mptr_0 mchar_0 mint_0 a_0 3)) ->
+  ((p_galois'a_loop'Q malloc_0 mptr_1 mchar_1 mint_1 m_0 mptr_0 mchar_0
+     mint_0 a_0 3)) ->
+  ((p_galois'a_function_call'a_loop'C1Q malloc_0 mptr_1 mchar_1 mint_1 m_0
+     mptr_0 mchar_0 mint_0 a_0 3)) ->
+  ((p_galois'a_function_call'Q malloc_0[l_arr_1159 <- 0] mptr_1 mchar_1
+     mint_1 malloc_1 mptr_0 mchar_0 mint_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'galois_decorator' (generated)           --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_function_call_assert_galois_decorator
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic2.A_Galois_axiomatic2
+use import Globals.Globals
+
+goal WP "expl:Assertion 'galois_decorator' (generated)":
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((p_galois'a_function_call'P malloc_0 mptr_0 mchar_0 mint_0)) ->
+  ((p_galois'a_function_call'a_loop'C1P malloc_0[l_arr_1159 <- 3] mptr_0
+     mchar_0 mint_0 ((shift ((global l_arr_1159)) 0)) 3))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'galois_decorator' (generated)           --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_function_call_assert_galois_decorator_2
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic2.A_Galois_axiomatic2
+use import Globals.Globals
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Assertion 'galois_decorator' (generated)":
+  let a_0 = (shift ((global l_arr_1159)) 0) in
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  let m_0 = malloc_1[l_arr_1159 <- 3] in
+  ((framed mptr_0)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_0)) ->
+  ((p_galois'a_function_call'P malloc_1 mptr_0 mchar_0 mint_0)) ->
+  ((p_galois'a_loop'P m_0 mptr_0 mchar_0 mint_0 a_0 3)) ->
+  ((p_galois'a_function_call'a_loop'C1P m_0 mptr_0 mchar_0 mint_0 a_0 3)) ->
+  ((p_galois'a_loop'Q malloc_0 mptr_1 mchar_1 mint_1 m_0 mptr_0 mchar_0
+     mint_0 a_0 3)) ->
+  ((p_galois'a_function_call'a_loop'C1Q malloc_0 mptr_1 mchar_1 mint_1 m_0
+     mptr_0 mchar_0 mint_0 a_0 3))
+
+end
+

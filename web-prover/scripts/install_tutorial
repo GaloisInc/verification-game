@@ -1,0 +1,22 @@
+#!/bin/bash
+
+HASH=485de2715cdab959c106d87a674a2d24a80a2d26
+
+cp -r tutorial levels/$HASH
+./build/bin/ProtoLevel --no-triv-check --no-simp-asmp tutorial
+
+# Others
+
+./scripts/make-level example-src/predicate_tutorials.c tutorial_heap
+./scripts/make-level example-src/predicate_tutorials.c tutorial_if
+./scripts/make-level example-src/predicate_tutorials.c tutorial_if_loop
+./scripts/make-level example-src/predicate_tutorials.c tutorial_if_loop2
+
+./scripts/make-level example-src/nest.c rows
+./scripts/make-level example-src/nest.c noop
+./scripts/make-level example-src/nest.c funcall_in_loop
+./scripts/make-level example-src/nest.c call_funcall_in_loop
+./scripts/make-level example-src/nest.c double_loop
+./scripts/make-level example-src/nest.c double_call
+
+

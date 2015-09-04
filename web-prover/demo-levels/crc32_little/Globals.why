@@ -1,0 +1,25 @@
+(* ---------------------------------------------------------- *)
+(* --- Global Variables                                   --- *)
+(* ---------------------------------------------------------- *)
+theory Globals
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+
+function g_crc_table_6697 : int = 6698
+
+use import Memory.Memory
+
+axiom Q_G_crc_table_6697_linked:
+  forall alloc_0 : map int int. ((linked alloc_0)) ->
+    (8192 = alloc_0[g_crc_table_6697])
+
+axiom Q_G_crc_table_6697_region: 0 = ((region g_crc_table_6697))
+
+end
+

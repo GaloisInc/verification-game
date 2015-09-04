@@ -1,0 +1,81 @@
+#!/bin/bash
+set -e
+
+source scripts/shell_config     # Shell tools
+source scripts/wp_config        # WP_OPTS
+
+
+
+if [ $# -lt 2 ]; then
+  echo Usage $(basename $0) SOURCE_FILE FUNCTION PROTO_LEVEL_PARAMS? >&2
+  exit 1
+fi
+
+SOURCE=$1
+shift
+FUN=$1
+shift
+LEVEL_DIR=levels/$(echo -n $FUN | $SHA1SUM | $AWK '{print $1}')
+
+echo $LEVEL_DIR
+
+DIR=$($MKTEMP -d storm-goals.XXX)
+
+FRAMACSHARE=$($FRAMA_C -print-share-path)
+
+# This is how we used to call `assertify`
+#  -assertify -assertify-complete-assertions -then \
+# -decorator-no-strip-behaviors \
+
+$FRAMA_C \
+  -cpp-extra-args="-I${FRAMACSHARE}/libc -nostdinc" \
+  $SOURCE \
+  -machdep x86_64 \
+  -decorator \
+      -decorator-call-proxies \
+      -decorator-emit-types $DIR/types.hs \
+      -decorator-punctuate "_" \
+  -then \
+  -rte \
+  -rte-no-all -rte-mem \
+  -warn-signed-overflow \
+  $WP_OPTS \
+  -wp-prover=why3:Alt-Ergo \
+  -wp-out $DIR \
+  -wp-fct $FUN \
+  | tee $DIR/frama-c-output
+
+WHY_FILES=
+
+mkdir -p $LEVEL_DIR
+
+echo $FUN > $LEVEL_DIR/real_name.txt
+
+for x in $(find $DIR -name '*.why')
+do
+  cp $x $LEVEL_DIR
+done
+
+find $LEVEL_DIR -name '*Why3_ide.why' -exec mv {} $LEVEL_DIR/input.why \;
+cp $DIR/frama-c-output $LEVEL_DIR
+cp $DIR/types.hs $LEVEL_DIR
+rm -rf $DIR
+
+
+
+PROTO_LEVEL=build/bin/ProtoLevel
+
+if [ $# -eq 0 ]
+then
+  OPTS=--no-simp-asmps
+else
+  OPTS=$*
+fi
+
+$PROTO_LEVEL $OPTS $FUN
+
+
+
+
+
+

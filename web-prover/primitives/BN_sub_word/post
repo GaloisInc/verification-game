@@ -1,0 +1,48 @@
+a = f  /\
+b = g  /\
+c = h  /\
+d = i  /\
+havoc e j (Mk_addr (b[Mk_addr z1 a2]) (c[Mk_addr z1 a2])) (* where `d` points *)
+          (d[Mk_addr z1 (a2 + 2)])                        (* for dmax *)
+/\
+l  = c2 /\
+m  = d2 /\
+n  = e2 /\
+o  = f2 /\
+p  = g2 /\
+q  = h2 /\
+r  = i2 /\
+s  = j2 /\
+t  = k2 /\
+u  = l2 /\
+v  = m2 /\
+w  = n2 /\
+x  = o2 /\
+y  = p2 /\
+z  = q2 /\
+a1 = r2 /\
+b1 = s2 /\
+c1 = t2 /\
+d1 = u2 /\
+e1 = v2 /\
+f1 = w2 /\
+g1 = x2 /\
+h1 = y2 /\
+i1 = z2 /\
+j1 = a3 /\
+k1 = b3 /\
+l1 = c3 /\
+m1 = d3 /\
+n1 = e3 /\
+o1 = f3 /\
+p1 = g3 /\
+q1 = h3 /\
+r1 = i3 /\
+s1 = j3 /\
+t1 = k3 /\
+u1 = l3 /\
+v1 = m3 /\
+w1 = n3 /\
+x1 = o3 /\
+y1 = p3
+

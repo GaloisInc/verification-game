@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scripts/make-level example-src/openssl-1.0.1i-merged.i $*
+

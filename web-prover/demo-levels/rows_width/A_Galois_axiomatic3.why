@@ -1,0 +1,31 @@
+(* ---------------------------------------------------------- *)
+(* --- Axiomatic 'Galois_axiomatic3'                      --- *)
+(* ---------------------------------------------------------- *)
+theory A_Galois_axiomatic3
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+
+predicate p_galois'rows_width'I1 (map int int) (map addr addr) (map addr int)
+    (map addr int) (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int int int int addr int int
+
+predicate p_galois'rows_width'I2 (map int int) (map addr addr) (map addr int)
+    (map addr int) (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int int int int addr int int
+
+predicate p_galois'rows_width'Q (map int int) (map addr addr) (map addr int)
+    (map addr int) (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int int
+
+predicate p_galois'rows_width'P (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int int
+
+end
+

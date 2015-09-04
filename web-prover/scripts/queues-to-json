@@ -1,0 +1,88 @@
+#!/bin/bash
+
+shopt -s nullglob
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $(basename $0) [nest|flat] DIR" >&2
+  exit 1
+fi
+
+NESTED=$1
+DIR=$2
+
+if [ $NESTED == "flat" ]; then
+FST=1
+
+# Flat
+for QUEUE in $(ls $DIR); do
+for AREA  in $(ls $DIR/$QUEUE); do
+for FUN   in $(ls $DIR/$QUEUE/$AREA); do
+for GROUP in $(ls $DIR/$QUEUE/$AREA/$FUN); do
+for TASK  in $(ls $DIR/$QUEUE/$AREA/$FUN/$GROUP); do
+if [ $FST -eq 1 ]; then echo -n "[ "; FST=0; else echo -n ", "; fi
+echo { \"queue\":     \"$QUEUE\" \
+     , \"area\":      \"$AREA\"  \
+     , \"function\":  \"$FUN\"   \
+     , \"group\":     \"$GROUP\" \
+     , \"task\":      \"$TASK\"  \
+     }
+done
+done
+done
+done
+done
+echo "]"
+
+else
+
+# Nested
+FST_Q=1
+for QUEUE in $(ls $DIR); do
+  if [ $FST_Q -eq 1 ]; then echo -n "{ "; FST_Q=0; else echo -n ", "; fi
+  echo \"$QUEUE\":
+
+FST_A=1
+for AREA in $(ls $DIR/$QUEUE); do
+  echo -n -e '\t'
+  if [ $FST_A -eq 1 ]; then echo -n "{ "; FST_A=0; else echo -n ", "; fi
+  echo \"$AREA\":
+
+FST_F=1
+for FUN in $(ls $DIR/$QUEUE/$AREA); do
+  echo -n -e '\t\t'
+  if [ $FST_F -eq 1 ]; then echo -n "{ "; FST_F=0; else echo -n ", "; fi
+  echo \"$FUN\":
+
+FST_G=1
+for GROUP in $(ls $DIR/$QUEUE/$AREA/$FUN); do
+  echo -n -e '\t\t\t'
+  if [ $FST_G -eq 1 ]; then echo -n "{ "; FST_G=0; else echo -n ", "; fi
+  echo \"$GROUP\":
+
+FST_T=1
+for TASK in $(ls $DIR/$QUEUE/$AREA/$FUN/$GROUP); do
+  echo -n -e '\t\t\t\t'
+  if [ $FST_T -eq 1 ]; then echo -n "[ "; FST_T=0; else echo -n ", "; fi
+  echo \"$TASK\"
+done
+echo -e "\t\t\t\t]"  # tasks
+
+done
+echo -e "\t\t\t}"  # group
+
+done
+echo -e "\t\t}"  # function
+
+done
+echo -e "\t}"  # area
+
+done
+echo "}"  # queue
+
+fi
+
+
+
+
+
+

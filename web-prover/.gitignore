@@ -1,0 +1,16 @@
+/build
+/dist
+/cabal.sandbox.config
+/levels
+/level-sets
+/shared
+/src/levels
+/shared
+/solve_easy
+/old
+/TAGS
+/queues
+/web_src/realnames.json
+/web_src/callgraph.json
+/web_src/metadata.json
+/storm-goals.*

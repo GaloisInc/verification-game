@@ -1,0 +1,37 @@
+#!/bin/bash
+
+DIR=tag-groups
+
+FST_FIELD=1
+for TAG in $(./scripts/list-tags)
+do
+  if [ $FST_FIELD -eq 1 ]
+    then echo "{ \"$TAG\":"; FST_FIELD=0;
+    else echo ", \"$TAG\":"
+  fi
+  FST=1
+  for TASK_DIR in $(find shared/ -name $TAG)
+  do
+    TRIM=$(dirname $(dirname $TASK_DIR))
+    TASK=$(basename $TRIM)
+    TRIM=$(dirname $(dirname $TRIM))
+    GROUP=$(basename $TRIM)
+    TRIM=$(dirname $TRIM)
+    FUN=$(basename $TRIM)
+    if [ $FST -eq 1 ]
+    then
+      FST=0
+      echo -n "  ["
+    else
+      echo -n "  ,"
+    fi
+
+    echo " { \"function\": \"$FUN\""
+    echo "    , \"group\":    \"$GROUP\""
+    echo "    , \"name\":     \"$TASK\""
+    echo "    }"
+  done
+  echo "  ]"
+done
+
+echo "}"

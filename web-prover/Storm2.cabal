@@ -1,0 +1,316 @@
+name:                storm2
+version:             0.1
+synopsis:            A new hope.
+license:             BSD3
+license-file:        ../LICENSE
+author:              Storm Team
+maintainer:          diatchki@galois.com
+copyright:           2012-2015, Galois Inc.
+category:            Storm
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  ghc-prof-options: -auto-all
+  HS-source-dirs: src
+  default-language: Haskell2010
+  Exposed-modules:
+    BossLevel,
+    CORS,
+    CTypes,
+    Cache,
+    CSE,
+    Dirs,
+    Errors,
+    Goal,
+    JsonStorm,
+    NumberLiterals,
+    Outer,
+    Path,
+    Play
+    Predicates,
+    ProveBasics,
+    Prove,
+    ProveBits,
+    Rule,
+    SecureEncoding,
+    Serial,
+    ServerDocs,
+    Session,
+    SiteState,
+    SolutionMap,
+    StorageBackend,
+    TaskGroup,
+    TaskSnapshot,
+    Theory,
+    Utils,
+    Utils.AsList
+
+  Build-depends:
+    base >= 4.7 && < 4.9,
+    binary,
+    pretty-show,
+    cipher-aes,
+    crypto-cipher-types,
+    bytestring,
+    text >= 1.1.1.3,
+    pretty,
+    containers,
+    filepath,
+    directory,
+    transformers,
+    process >=1.2.3.0,
+    time,
+    why3 >= 0.7,
+    aeson,
+    zlib,
+    attoparsec,
+    GraphSCC,
+    SHA,
+    array,
+    vector,
+    lens >= 4.1,
+    comonad,
+    monadLib,
+    unordered-containers,
+    blaze-html >= 0.7.1.0,
+    hashable,
+    case-insensitive,
+    snap-core >= 0.9.6.4,
+    network-uri,
+    base64-bytestring,
+    simple-get-opt,
+
+    -- http-client,
+    -- aws,
+    -- conduit,
+    -- http-conduit,
+
+    deepseq,
+    deepseq-generics,
+
+    bytestring-lexing >= 0.4.3.2,
+    simple-smt >= 0.6
+
+
+
+Executable ProtoStorm
+  HS-source-dirs: exes
+  Main-is: Server.hs
+  GHC-options: -O2 -Wall -threaded -rtsopts -auto-all
+  Default-Language: Haskell2010
+  build-depends:
+    storm2 == 0.1,
+    aeson,
+    config-value == 0.4.*,
+    lens,
+    attoparsec,
+    base,
+    bytestring,
+    network-uri,
+    snap-core,
+    snap-server >= 0.9.4.6,
+    text,
+    transformers,
+    gitrev
+
+
+Executable ProtoLevel
+
+  HS-source-dirs: exes
+  Main-is: ProtoLevel.hs
+  Default-Language: Haskell2010
+  GHC-options: -O2 -Wall -threaded
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    bytestring,
+    binary,
+    containers,
+    directory,
+    filepath,
+    monadLib,
+    pretty-show,
+    simple-get-opt,
+    text,
+    why3
+
+
+Executable DumpStats
+
+  HS-source-dirs: exes
+  Main-is: DumpStats.hs
+  Default-Language: Haskell2010
+  GHC-options: -O2 -Wall -threaded
+  Build-depends:
+    storm2 == 0.1,
+    aeson,
+    base,
+    bytestring
+
+Executable ComputeTaskLists
+
+  HS-source-dirs: exes
+  Main-is: ComputeTasksLists.hs
+  Default-Language: Haskell2010
+  GHC-options: -O2 -Wall -threaded
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    bytestring,
+    containers,
+    deepseq,
+    monadLib,
+    simple-get-opt,
+    text,
+    unix
+
+
+Executable ParsePrePost
+
+  HS-source-dirs: exes
+  Main-is: ParsePrePost.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    bytestring,
+    containers,
+    text,
+    why3
+
+
+Executable SetPrePost
+
+  HS-source-dirs: exes
+  Main-is: SetPrePost.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    text,
+    bytestring,
+    filepath
+
+
+Executable UnusualSymbols
+
+  HS-source-dirs: exes
+  Main-is: UnusualSymbols.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    containers,
+    lens,
+    text
+
+
+Executable SolveEasy
+
+  HS-source-dirs: exes
+  Main-is: SolveEasy.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    containers,
+    simple-get-opt,
+    text,
+    lens,
+    vector
+
+
+Executable ComputeCallGraph
+
+  HS-source-dirs: exes
+  Main-is: ComputeCallGraph.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    containers,
+    pretty
+
+
+Executable MakeBossLevel
+
+  HS-source-dirs: exes
+  Main-is: MakeBossLevel.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    containers,
+    directory,
+    lens,
+    monadLib,
+    simple-get-opt,
+    text,
+    why3
+
+
+Executable ViewStormFile
+
+  HS-source-dirs: exes
+  Main-is: ViewStormFile.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    lens,
+    bytestring,
+    pretty-show,
+    why3,
+    pretty,
+    containers,
+    text
+
+Executable GenLevelDemo
+  HS-source-dirs: exes
+  Main-is: GenLevelDemo.hs
+  Default-Language: Haskell2010
+  GHC-options: -Wall
+  Build-depends:
+    storm2 == 0.1,
+    base,
+    snap-core,
+    snap-server,
+    bytestring,
+    directory,
+    SHA,
+    process,
+    filepath,
+    text,
+    network-uri,
+    time,
+    transformers,
+    aeson
+
+
+
+Executable Bot
+  hs-source-dirs:       exes
+  main-is:              Bot.hs
+  default-language:     Haskell2010
+  ghc-options:          -Wall -threaded
+  build-depends:        base, HTTP, network-uri, random, transformers,
+                        lens, text, bytestring, aeson, lens-aeson,
+                        storm2 == 0.1, async
+
+
+Executable MakeReport
+  hs-source-dirs:       exes
+  main-is:              MakeReport.hs
+  default-language:     Haskell2010
+  ghc-options:          -Wall
+  build-depends:        base, text, bytestring, aeson, storm2 == 0.1, directory,
+                        filepath, containers
+

@@ -1,0 +1,25 @@
+(* ---------------------------------------------------------- *)
+(* --- Global Variables                                   --- *)
+(* ---------------------------------------------------------- *)
+theory Globals
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+
+function l_arr_1159 : int = 1160
+
+use import Memory.Memory
+
+axiom Q_L_arr_1159_linked:
+  forall alloc_0 : map int int. ((linked alloc_0)) ->
+    (12 = alloc_0[l_arr_1159])
+
+axiom Q_L_arr_1159_region: 2 = ((region l_arr_1159))
+
+end
+

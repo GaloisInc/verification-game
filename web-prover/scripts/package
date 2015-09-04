@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+
+if [ $# -lt 2 ]; then
+  echo "Usage: $(basename $0) PACKAGE FILE_OR_DIR*" >&2
+  exit 1
+fi
+
+PACK=$1
+shift
+
+echo $PACK
+
+if [ -e $PACK ]; then rm -r $PACK; fi
+
+mkdir                  $PACK
+cp -r $*               $PACK
+tar -czvf $PACK.tar.gz $PACK
+rm -r                  $PACK
+
+
+
+
+

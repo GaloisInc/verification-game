@@ -1,0 +1,1 @@
+function region_p ( a : addr ) : int = region( a.base )

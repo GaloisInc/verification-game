@@ -1,0 +1,1076 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Web prototype API</title>
+<!-- 2014-04-22 Tue 02:16 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Simon Winwood" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Web prototype API</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Current versions</a></li>
+<li><a href="#sec-2">2. Overview</a></li>
+<li><a href="#sec-3">3. Conventions</a></li>
+<li><a href="#sec-4">4. Terminology and concepts</a></li>
+<li><a href="#sec-5">5. API v1.0</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Types</a>
+<ul>
+<li><a href="#sec-5-1-1">5.1.1. TypeT</a></li>
+<li><a href="#sec-5-1-2">5.1.2. ExprStruct</a></li>
+<li><a href="#sec-5-1-3">5.1.3. Expr</a></li>
+<li><a href="#sec-5-1-4">5.1.4. FunSolution</a></li>
+<li><a href="#sec-5-1-5">5.1.5. CallInfo</a></li>
+<li><a href="#sec-5-1-6">5.1.6. GoalT</a></li>
+<li><a href="#sec-5-1-7">5.1.7. TaskInfo</a></li>
+<li><a href="#sec-5-1-8">5.1.8. GroupInfo</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-2">5.2. Summary</a></li>
+<li><a href="#sec-5-3">5.3. Errors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Current versions</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>stable api version: v1.0
+</li>
+<li>development api version: v1.1
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Overview</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This api is versioned: Galois will endevour to keep at least the
+current 'stable' api and the current 'development' api around.  For
+simplicity, the version covers the entirity of the service: it is
+expected, however, that most types and operations will be the same
+between API versions.
+</p>
+
+<p>
+This document tends towards the pedantic; sorry.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Conventions</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The URI for all operations include the version number, so
+</p>
+<pre class="example">
+/v1.0/browse/
+</pre>
+<p>
+is the URI for the root 'browse' page.  The latest 'stable' version
+will be located at the root, so
+</p>
+<pre class="example">
+/browse
+</pre>
+<p>
+accesses the stable version of browse.
+</p>
+
+<p>
+In the following, all URIs are relative to the api version, so 
+</p>
+<pre class="example">
+browse/
+</pre>
+<p>
+is understood to be
+</p>
+<pre class="example">
+/v1.0/browse 
+</pre>
+<p>
+for version 1.0 of the API.
+</p>
+
+<p>
+One notable exception is this document: the latest version is always
+</p>
+<pre class="example">
+/api.html
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Terminology and concepts</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Below is some of the terminology used in this document.  This is
+intended mainly as a reference and should probably be otherwise
+skimmed at most.
+</p>
+
+<p>
+Note that we try to avoid the term <b>level</b> as it is too overloaded to
+be useful.  <a href="#Task">Task</a>, <a href="#Task-Group">Task Group</a>, and <a href="#Goal">Goal</a> (to a lesser extent) are
+invented terms for this project, while the remainder are more-or-less
+standard.
+</p>
+
+<dl class="org-dl">
+<dt><a id="Expression">Expression</a></dt><dd>A term in the logic.  An <a href="#Expression">expression</a> has a type.
+For example, <code>x + y</code>, <code>x &gt; y</code>, and <code>valid_rw a b c</code> are all
+<a href="#Expression">expression</a>.
+</dd>
+
+<dt><a id="Predicate">Predicate</a></dt><dd>An <a href="#Expression">expression</a> of boolean type.  An
+<a id="assertion">assertion</a> is a <a href="#Predicate">predicate</a> which is related to some program
+point: <a id="pre-condition">pre-condition</a>s, <a id="post-condition">post-condition</a>s, and <a id="loop-invariant">loop invariant</a>s 
+are all assertions.  For example, <code>x &gt; y</code> is an
+<a href="#Predicate">predicate</a> (and possibly an <a href="#assertion">assertion</a>), but <code>x + y</code> is not
+because it does not have boolean type.
+
+<p>
+We generally use the terms <a href="#Predicate">predicate</a> and <a href="#assertion">assertion</a>
+interchangeably.
+</p>
+
+<p>
+Aside: you may see assertions written elsewhere in
+so-called Hoare-triples:
+</p>
+<pre class="example">
+{ x &gt; 1 } foo { x &gt; 2 }
+</pre>
+<p>
+which says that <code>foo</code> has a <a href="#pre-condition">pre-condition</a> of <code>x &gt; 1</code> and a
+<a href="#post-condition">post-condition</a> of <code>x &gt; 2</code>.  Some authors also use this syntax
+to mean that it the triple is true, that is, there exists a proof
+that from states matching the <a href="#pre-condition">pre-condition</a>, execution of <code>foo</code>
+will result in states matching the <a href="#post-condition">post-condition</a>.
+</p>
+</dd>
+
+<dt><a id="Schematic-variable">Schematic variable</a></dt><dd>A variable which is to be filled in by
+gameplay.  For example, <code>foo_I</code> is a <a href="#Schematic-variable">schematic variable</a>.  We
+shall stick to the convention of <code>foo_I</code> for an invariant in
+the function <code>foo</code>, <code>foo_P</code> for the <a href="#pre-condition">pre-condition</a> of <code>foo</code>,
+and <code>foo_Q</code> for the <a href="#post-condition">post-condition</a> of <code>foo</code>.
+
+<p>
+Note that a <a href="#Schematic-variable">schematic variable</a> typically needs to be applied to a
+number of expressions before it becomes an <a href="#assertion">assertion</a>.  For
+example, <code>foo_I x y (w + z)</code> is an <a href="#assertion">assertion</a>.  We call such
+expressions <a id="fully-applied">fully applied</a>.
+</p>
+</dd>
+
+<dt><a id="Assignment">Assignment</a></dt><dd>An <a href="#Expression">expression</a> defining each <a href="#Schematic-variable">schematic variable</a> under
+consideration.  For example, 
+<pre class="example">
+foo_P a b == a &gt; b 
+foo_Q a == a = 1
+</pre>
+<p>
+is an <a href="#Assignment">assignment</a> to the schematic variables <code>foo_P</code> and <code>foo_Q</code>.
+</p>
+</dd>
+
+<dt><a id="Goal">Goal</a></dt><dd>The smallest level of gameplay.  A <a href="#Goal">goal</a> consists of 
+<ul class="org-ul">
+<li>a <a href="#Predicate">predicate</a> termed the <a id="conclusion">conclusion</a>;
+</li>
+<li>a set of predicates termed <a id="assumptions">assumptions</a>;
+</li>
+<li>a set of <a id="definitions">definitions</a> assigning expressions to variables; and
+</li>
+<li>a set of <a id="free-variables">free variables</a> which are disjoint from the <a href="#definitions">definitions</a>.
+</li>
+</ul>
+<p>
+If a variable appears in an <a href="#Expression">expression</a>, it is one &#x2013; and only one
+      &#x2013; of: a definition, a free variable, or a <a href="#Schematic-variable">schematic
+      variable</a>. 
+</p>
+
+<p>
+The <a href="#conclusion">conclusion</a> of a <a href="#Goal">goal</a>, and any assumption, MAY be a
+      <a href="#Schematic-variable">schematic variable</a>.
+</p>
+
+<p>
+The <a href="#Goal">goal</a> is the smallest unit of proof, and belongs to a
+      <a href="#Task">task</a>.  A <a href="#Goal">goal</a> may be true or false under a
+      particular <a href="#Assignment">assignment</a>.  The truth or falsehood of a
+      <a href="#Goal">goal</a> under an <a href="#Assignment">assignment</a> is checked by a theorem prover
+      via the server.
+</p>
+
+<p>
+Note that a <a href="#Schematic-variable">schematic variable</a> in a <a href="#Goal">goal</a> is different to both
+      <a href="#definitions">definitions</a> and <a href="#free-variables">free variables</a>.  Loosely speaking, a
+      definition is short-hand for an <a href="#Expression">expression</a>, a <a href="#Schematic-variable">schematic
+      variable</a> is one we get to choose, while a <a href="#Goal">goal</a> must be
+      true for any value of a free variable.
+</p>
+
+<p>
+Aside: Where we need to be precise, we will write a <a href="#Goal">goal</a> using the following syntax
+</p>
+<pre class="example">
+forall x, y. { z = x + y }[ x &gt; 0; y &gt; 0 ] ==&gt; z &gt; 0
+</pre>
+<p>
+where <code>x, y</code> are the <a href="#free-variables">free variables</a>, <code>z</code> is a definition with
+value <code>x + y</code>, <code>x &gt; 0</code> and <code>y &gt; 0</code> are <a href="#assumptions">assumptions</a>, and <code>z &gt; 0</code>
+is the <a href="#conclusion">conclusion</a>.
+</p>
+</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt><a id="Task">Task</a></dt><dd>A set of goals.  The goals in a <a href="#Task">task</a> may be considered
+to be the constraints on an <a href="#Assignment">assignment</a>: a <a id="satisfying">satisfying</a>
+<a href="#Assignment">assignment</a> is one which makes all goals in a <a href="#Task">task</a>
+true.  Thus, a successful game session is one which finds a
+<a href="#satisfying">satisfying</a> <a href="#Assignment">assignment</a> for a particular <a href="#Task">task</a>.
+
+<p>
+A <a href="#Task">task</a> is associated with a <a href="#Task-Group">task group</a>.
+</p>
+
+<p>
+Currently a <a href="#Task">task</a> has a single non-schematic <a href="#conclusion">conclusion</a>.
+That is, each <a href="#Goal">goal</a> in the <a href="#Task">task</a> but one will have a 
+<a href="#conclusion">conclusion</a> which is a <a href="#fully-applied">fully applied</a> schematic.  There
+will also be a <a href="#Goal">goal</a> which has a single assumption which is
+the schematic <a href="#pre-condition">pre-condition</a>, although this may change.
+</p>
+
+<p>
+The intent here is that the information in the
+non-schematic <a href="#conclusion">conclusion</a> will filter back through the
+goals in the <a href="#Task">task</a> until it reaches the <a href="#Goal">goal</a> with the
+<a href="#pre-condition">pre-condition</a> assumption.  At this point, the player will
+have constructed a complete <a href="#Assignment">assignment</a> and the <a href="#Task">task</a> can
+be considered finished, assuming the <a href="#Assignment">assignment</a> is
+<a href="#satisfying">satisfying</a>.
+</p>
+</dd>
+
+<dt><a id="Task-Group">Task Group</a></dt><dd>A set of tasks.  Each <a href="#Task-Group">task group</a> has an associated
+function and <a href="#post-condition">post-condition</a>.  Given a <a href="#satisfying">satisfying</a>
+<a href="#Assignment">assignment</a> for each <a href="#Task">task</a>, the server can construct
+a <a href="#satisfying">satisfying</a> <a href="#Assignment">assignment</a> for the <a href="#Task-Group">task group</a>, and
+the <a href="#Task-Group">task group</a> is termed <a id="proved">proved</a>. 
+
+<p>
+In particular, this means that the server can
+construct a <a href="#pre-condition">pre-condition</a> for the <a href="#Task-Group">task group</a>'s
+<a href="#post-condition">post-condition</a>, which can then be used in later game
+play.
+</p>
+
+<p>
+Each function has a distinguished <a href="#Task-Group">task group</a>,
+the <a id="safety-task-group">safety task group</a>.  Proving this <a href="#Task-Group">task group</a>
+means that the function is safe to call.  The
+over-arching verification <a href="#Goal">goal</a> is to prove this <a href="#Task-Group">task
+group</a> for all functions in the program.  
+</p>
+
+<p>
+The <a href="#post-condition">post-condition</a> of the <a href="#safety-task-group">safety task group</a> is the
+<a href="#Predicate">predicate</a> <code>true</code>.  
+</p>
+</dd>
+
+<dt>Function</dt><dd>A collection of <a href="#Task">task</a> groups.  Each function is
+associated with a C function.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> API v1.0</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Types</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Along with the primitive JSON types (<code>bool</code>, <code>int</code>, <code>string</code>, <code>array</code>,
+<code>object</code> ({})) we have the following opaque types: <a id="GroupId">GroupId</a>,
+<a id="TaskId">TaskId</a>, <a id="SchematicId">SchematicId</a>, <a id="SolutionId">SolutionId</a>, and <a id="GoalId">GoalId</a>
+which should not be interpreted outside of the server.
+</p>
+
+<p>
+In the following, we write <code>{ 'field' : Type }</code> to describe the JSON
+object where the member 'field' is an object of type 'Type'.  We write
+<code>[ Type, Type ]</code> for a fixed size array.
+</p>
+</div>
+
+<div id="outline-container-sec-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> <a id="TypeT">TypeT</a></h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+A pretty-printed representation of an <a href="#Expression">expression</a>'s type.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">text</td>
+<td class="left">string</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-2" class="outline-4">
+<h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> <a id="ExprStruct">ExprStruct</a></h4>
+<div class="outline-text-4" id="text-5-1-2">
+<p>
+This is a set of types, differentiated by the 'type' field.  For
+example, the following are both valid:
+</p>
+
+<pre class="example">
+{ 'type' : 'lit', 'text' : '1' }
+{ 'type' : 'app', 'id' : 'valid_rw', 'params' : ... }
+</pre>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">'type'</th>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">'lit'</td>
+<td class="left">text</td>
+<td class="left">string</td>
+<td class="left">A literal</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">'qvar'</td>
+<td class="left">id</td>
+<td class="left">int</td>
+<td class="left">A free variable</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">'dvar'</td>
+<td class="left">id</td>
+<td class="left">int</td>
+<td class="left">A definition variable</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">'infix'</td>
+<td class="left">id</td>
+<td class="left">string</td>
+<td class="left">The operator</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">prec</td>
+<td class="left">int</td>
+<td class="left">The precedence of the operator</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">left</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">The left-hand side of the operation</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">right</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">The right-hand side of the operation</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">'app'</td>
+<td class="left">id</td>
+<td class="left">string</td>
+<td class="left">The function being applied</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">params</td>
+<td class="left">array of <a href="#Expr">Expr</a></td>
+<td class="left">The arguments to the function</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">'hole'</td>
+<td class="left">id</td>
+<td class="left"><a href="#SchematicId">SchematicId</a></td>
+<td class="left">The id of the <a href="#Schematic-variable">schematic variable</a></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">inputType</td>
+<td class="left">string</td>
+<td class="left">One of 'iNormal', 'iPre', 'iPost'</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">params</td>
+<td class="left">array of <a href="#Expr">Expr</a></td>
+<td class="left">Arguments to the <a href="#Schematic-variable">schematic variable</a></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">defn</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">(can be null) The current definition of the <a href="#Schematic-variable">schematic variable</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-3" class="outline-4">
+<h4 id="sec-5-1-3"><span class="section-number-4">5.1.3</span> <a id="Expr">Expr</a></h4>
+<div class="outline-text-4" id="text-5-1-3">
+<p>
+This type represents an <a href="#Expression">expression</a>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">struct</td>
+<td class="left"><a href="#ExprStruct">ExprStruct</a></td>
+<td class="left">The body of the <a href="#Expression">expression</a></td>
+</tr>
+
+<tr>
+<td class="left">qvars</td>
+<td class="left">array of int</td>
+<td class="left">The <a href="#free-variables">free variables</a> occuring in the <a href="#Expression">expression</a></td>
+</tr>
+
+<tr>
+<td class="left">dvars</td>
+<td class="left">array of int</td>
+<td class="left">The definition variables occuring in the <a href="#Expression">expression</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-4" class="outline-4">
+<h4 id="sec-5-1-4"><span class="section-number-4">5.1.4</span> <a id="FunSolution">FunSolution</a></h4>
+<div class="outline-text-4" id="text-5-1-4">
+<p>
+This represents a single solution for a particular <a href="#post-condition">post-condition</a> 
+<a href="#Task-Group">task group</a>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">id</td>
+<td class="left"><a href="#SolutionId">SolutionId</a></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">selected</td>
+<td class="left">bool</td>
+<td class="left">Whether this solution has been selected.</td>
+</tr>
+
+<tr>
+<td class="left">pre</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">The <a href="#pre-condition">pre-condition</a> for this solution</td>
+</tr>
+
+<tr>
+<td class="left">post</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">The <a href="#post-condition">post-condition</a> for this solution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-5" class="outline-4">
+<h4 id="sec-5-1-5"><span class="section-number-4">5.1.5</span> <a id="CallInfo">CallInfo</a></h4>
+<div class="outline-text-4" id="text-5-1-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">id</td>
+<td class="left"><a href="#SchematicId">SchematicId</a></td>
+<td class="left">Used for both the pre- and <a href="#post-condition">post-condition</a> for the function.  See 'hole' in <a href="#ExprStruct">ExprStruct</a></td>
+</tr>
+
+<tr>
+<td class="left">function</td>
+<td class="left">string</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">preType</td>
+<td class="left">array of <a href="#TypeT">TypeT</a></td>
+<td class="left">The type of the arugments to the <a href="#pre-condition">pre-condition</a></td>
+</tr>
+
+<tr>
+<td class="left">postType</td>
+<td class="left">array of <a href="#TypeT">TypeT</a></td>
+<td class="left">The type of the arugments to the <a href="#pre-condition">pre-condition</a></td>
+</tr>
+
+<tr>
+<td class="left">solutions</td>
+<td class="left">array of <a href="#FunSolution">FunSolution</a></td>
+<td class="left">The solutions available for this function</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-6" class="outline-4">
+<h4 id="sec-5-1-6"><span class="section-number-4">5.1.6</span> <a id="GoalT">GoalT</a></h4>
+<div class="outline-text-4" id="text-5-1-6">
+<p>
+This type contains information about a <a href="#Goal">goal</a>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">vars</td>
+<td class="left">array of { 'id' : <a href="#SchematicId">SchematicId</a>, 'type' : <a href="#TypeT">TypeT</a> }</td>
+<td class="left">The <a href="#free-variables">free variables</a> in the <a href="#Goal">goal</a></td>
+</tr>
+
+<tr>
+<td class="left">defs</td>
+<td class="left">array of { 'id' : <a href="#SchematicId">SchematicId</a>, 'value' : <a href="#Expr">Expr</a> }</td>
+<td class="left">The <a href="#definitions">definitions</a> in the <a href="#Goal">goal</a></td>
+</tr>
+
+<tr>
+<td class="left">asmps</td>
+<td class="left">array of <a href="#Expr">Expr</a></td>
+<td class="left">The <a href="#assumptions">assumptions</a> in the <a href="#Goal">goal</a></td>
+</tr>
+
+<tr>
+<td class="left">asmpsBoring</td>
+<td class="left">array of <a href="#Expr">Expr</a></td>
+<td class="left">The uninteresting <a href="#assumptions">assumptions</a> in the <a href="#Goal">goal</a></td>
+</tr>
+
+<tr>
+<td class="left">conc</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">The <a href="#conclusion">conclusion</a> of the <a href="#Goal">goal</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-7" class="outline-4">
+<h4 id="sec-5-1-7"><span class="section-number-4">5.1.7</span> <a id="TaskInfo">TaskInfo</a></h4>
+<div class="outline-text-4" id="text-5-1-7">
+<p>
+This type contains information about a <a href="#Task">task</a>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">name</td>
+<td class="left">{ 'function' : string, 'group' : <a href="#GroupId">GroupId</a>, 'name' : <a href="#TaskId">TaskId</a> }</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">inputs</td>
+<td class="left">array of { 'id' : <a href="#SchematicId">SchematicId</a>, 'params' : array of Type, 'def' : <a href="#Expr">Expr</a> }</td>
+<td class="left">'def' may be null</td>
+</tr>
+
+<tr>
+<td class="left">calls</td>
+<td class="left">array of <a href="#CallInfo">CallInfo</a></td>
+<td class="left">The function calls that occur in this <a href="#Task">task</a></td>
+</tr>
+
+<tr>
+<td class="left">goals</td>
+<td class="left">array of { 'id' : <a href="#GoalId">GoalId</a>, 'solved' : bool, <a href="#Goal">goal</a> : <a href="#GoalT">GoalT</a> }</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-8" class="outline-4">
+<h4 id="sec-5-1-8"><span class="section-number-4">5.1.8</span> <a id="GroupInfo">GroupInfo</a></h4>
+<div class="outline-text-4" id="text-5-1-8">
+<p>
+This type contains information about a <a href="#Task-Group">task group</a>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Field</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">group</td>
+<td class="left"><a href="#GroupId">GroupId</a></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">groupPreParams</td>
+<td class="left">array of <a href="#TypeT">TypeT</a></td>
+<td class="left">The type of the arguments to the <a href="#pre-condition">pre-condition</a> for this <a href="#Task-Group">task group</a></td>
+</tr>
+
+<tr>
+<td class="left">groupPostParams</td>
+<td class="left">array of <a href="#TypeT">TypeT</a></td>
+<td class="left">The type of the arguments to the <a href="#post-condition">post-condition</a> for this <a href="#Task-Group">task group</a></td>
+</tr>
+
+<tr>
+<td class="left">groupPost</td>
+<td class="left"><a href="#Expr">Expr</a></td>
+<td class="left">The <a href="#post-condition">post-condition</a> for the <a href="#Task-Group">task group</a></td>
+</tr>
+
+<tr>
+<td class="left">groupTasks</td>
+<td class="left">array of [ <a href="#TaskId">TaskId</a>, array of <a href="#Expr">Expr</a>  ]</td>
+<td class="left">The tasks for this <a href="#Task-Group">task group</a>, along with any submitted pre-conditions</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Summary</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+This is the list of operations supported by the server. Parameters in URIs will be indicated using a colons (:), so 
+</p>
+<pre class="example">
+browse/:fun
+</pre>
+<p>
+can be used to access information about <code>my_c_function</code> using
+</p>
+<pre class="example">
+browse/my_c_function
+</pre>
+
+<p>
+Arguments not encoded in the URL are form-encoded POST arguments.
+Note that all the <code>play/</code> operations require the <code>play/start</code>
+operation before they are can be used.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">URL</th>
+<th scope="col" class="left">Arguments</th>
+<th scope="col" class="left">Return type</th>
+<th scope="col" class="left">Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">browse/</td>
+<td class="left">None</td>
+<td class="left">array of string</td>
+<td class="left">Returns the available functions</td>
+</tr>
+
+<tr>
+<td class="left">browse/:fun</td>
+<td class="left">'fun' : string</td>
+<td class="left">array of <a href="#GroupInfo">GroupInfo</a></td>
+<td class="left">Returns information about each <a href="#Task-Group">task group</a></td>
+</tr>
+
+<tr>
+<td class="left">posts/forget/:fun/:group</td>
+<td class="left">'fun' : string, 'group' : <a href="#GroupId">GroupId</a></td>
+<td class="left">array of <a href="#GroupInfo">GroupInfo</a></td>
+<td class="left">Removes the given <a href="#Task-Group">task group</a> and returns information about each remaining <a href="#Task-Group">task group</a></td>
+</tr>
+
+<tr>
+<td class="left">play/start/:fun/:group/:name</td>
+<td class="left">'fun' : string, 'group' : <a href="#GroupId">GroupId</a>, 'name' : <a href="#TaskId">TaskId</a></td>
+<td class="left"><a href="#TaskInfo">TaskInfo</a></td>
+<td class="left">Starts a new game session, returning information used to play that <a href="#Task">task</a></td>
+</tr>
+
+<tr>
+<td class="left">play/sendInput</td>
+<td class="left">'id' : <a href="#SchematicId">SchematicId</a>, 'value' : string</td>
+<td class="left">{ '<a href="#Expr">expr</a>' : <a href="#Expr">Expr</a>, 'update' : array of <a href="#GoalId">GoalId</a> }</td>
+<td class="left">Instantiates a <a href="#Schematic-variable">schematic variable</a>, returning the set of goals which are no longer true</td>
+</tr>
+
+<tr>
+<td class="left">play/dragInput</td>
+<td class="left">'srcid' : <a href="#GoalId">GoalId</a>, 'destid' : <a href="#SchematicId">SchematicId</a></td>
+<td class="left">{ '<a href="#Expr">expr</a>' : string }</td>
+<td class="left">Returns a candidate instantiation for the given <a href="#Schematic-variable">schematic variable</a> as a string (doesn't instantiate)</td>
+</tr>
+
+<tr>
+<td class="left">play/finished</td>
+<td class="left">None</td>
+<td class="left">{ 'finished' : bool, 'useful' : bool }</td>
+<td class="left">Submits the found <a href="#Task">task</a> solution</td>
+</tr>
+
+<tr>
+<td class="left">play/reload</td>
+<td class="left">None</td>
+<td class="left"><a href="#TaskInfo">TaskInfo</a></td>
+<td class="left">Retrieves the <a href="#Task">task</a> play information.</td>
+</tr>
+
+<tr>
+<td class="left">play/newPost</td>
+<td class="left">'fun' : string, 'post' : string</td>
+<td class="left">{ 'result' : <a href="#GroupId">GroupId</a> }</td>
+<td class="left">Submits a new <a href="#post-condition">post-condition</a> for the given function.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Errors</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Simon Winwood</p>
+<p class="date">Created: 2014-04-22 Tue 02:16</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.50.2 (<a href="http://orgmode.org">Org</a> mode 8.2.5h)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

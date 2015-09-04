@@ -1,0 +1,56 @@
+a = f  /\
+d = i  /\
+((c2 = 0) ->  (* only assert what happens when memset 0, which is all we need*)
+  ( b = g[Mk_addr a2 b2 <- 0] /\
+    c = h[Mk_addr a2 b2 <- 0] /\
+    e = j[Mk_addr a2 (b2 + 1) <- 0]
+         [Mk_addr a2 (b2 + 2) <- 0]
+         [Mk_addr a2 (b2 + 3) <- 0]
+  )
+  )
+/\
+k  = a2 /\     (* return first argument *)
+l  = b2 /\
+(* assigns nothing *)
+(* XXX: this assumes that original pointer is separated from all global longs *)
+m  = e2 /\
+n  = f2 /\
+o  = g2 /\
+p  = h2 /\
+q  = i2 /\
+r  = j2 /\
+s  = k2 /\
+t  = l2 /\
+u  = m2 /\
+v  = n2 /\
+w  = o2 /\
+x  = p2 /\
+y  = q2 /\
+z  = r2 /\
+a1 = s2 /\
+b1 = t2 /\
+c1 = u2 /\
+d1 = v2 /\
+e1 = w2 /\
+f1 = x2 /\
+g1 = y2 /\
+h1 = z2 /\
+i1 = a3 /\
+j1 = b3 /\
+k1 = c3 /\
+l1 = d3 /\
+m1 = e3 /\
+n1 = f3 /\
+o1 = g3 /\
+p1 = h3 /\
+q1 = i3 /\
+r1 = j3 /\
+s1 = k3 /\
+t1 = l3 /\
+u1 = m3 /\
+v1 = n3 /\
+w1 = o3 /\
+x1 = p3 /\
+y1 = q3 /\
+z1 = r3
+

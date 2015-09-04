@@ -1,0 +1,33 @@
+<html>
+<head>
+
+
+<link rel="stylesheet" href="/static/css/common.css">
+<script src="/static/lib/snap.svg.js"></script>
+<script src="/static/lib/jquery.js"></script>
+<script src="/static/lib/jquery-ui.js"></script>
+<link rel="stylesheet" href="/static/lib/jquery-ui.css">
+<script src="/static/lib/d3.js"></script>
+<script src="/static/lib/jsPlumb.js"></script>
+<script src="/static/js/browse.js"></script>
+<script src="/static/js/expr.js"></script>
+<script src="/static/js/task1.js"></script>
+<link rel="stylesheet" href="/static/css/task.css">
+<link rel="stylesheet" href="/static/css/expr.css">
+<link rel="stylesheet" href="/static/css/browse.css">
+
+<script>
+$(document).ready(function () {
+ var taskname = { function: 'crc32_little'
+                , group: 'safety'
+                , name: 'task0_0_2' };
+ startTask(taskname, $('body'), true);
+
+  $(window).resize(function()  { jsPlumb.repaintEverything(); });
+
+
+});
+</script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,212 @@
+body { }
+
+.gallery {
+  margin: 1em;
+}
+
+.painting {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 2px;
+  margin-left: 1em;
+  text-align: center;
+}
+
+
+.solutions {
+  position: absolute;
+  background: #369;
+  padding: 1em;
+  box-shadow: 2px 2px 10px 4px #666;
+  display: inline-block;
+  border-radius: 4px;
+  opacity: 1;
+  z-index: 10;
+}
+
+
+.solutions hr {
+  border: 1px solid #036;
+}
+
+
+.not_done.bad {
+  background: red;
+}
+
+.not_done.locked {
+  background: rgba(0,0,0,0.8);
+  box-shadow: 0px 0px 50px 20px rgba(0,0,0,0.8);
+}
+
+.not_done {
+  background: rgba(64,64,64,0.6);
+  color: orange;
+}
+
+.done {
+  background: rgba(64,64,64,0.6);
+  color: #6f6;
+}
+
+
+
+.tree_node {
+
+background: -moz-linear-gradient(-45deg,  rgba(145,145,145,0.65) 0%, rgba(139,139,139,0.65) 10%, rgba(88,88,88,0.63) 89%, rgba(81,81,81,0.63) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(145,145,145,0.65)), color-stop(10%,rgba(139,139,139,0.65)), color-stop(89%,rgba(88,88,88,0.63)), color-stop(100%,rgba(81,81,81,0.63))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(145,145,145,0.65) 0%,rgba(139,139,139,0.65) 10%,rgba(88,88,88,0.63) 89%,rgba(81,81,81,0.63) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(145,145,145,0.65) 0%,rgba(139,139,139,0.65) 10%,rgba(88,88,88,0.63) 89%,rgba(81,81,81,0.63) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(145,145,145,0.65) 0%,rgba(139,139,139,0.65) 10%,rgba(88,88,88,0.63) 89%,rgba(81,81,81,0.63) 100%); /* IE10+ */
+background: linear-gradient(135deg,  rgba(145,145,145,0.65) 0%,rgba(139,139,139,0.65) 10%,rgba(88,88,88,0.63) 89%,rgba(81,81,81,0.63) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6919191', endColorstr='#a1515151',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+ 
+  text-align: center;
+  padding: 5px;
+  margin: 1em;
+  display: inline-block;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.4);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.locks {
+  margin: 1em;
+  text-align: center;
+}
+
+
+.leaf_piece {
+  display: inline-block;
+}
+
+
+.piece_cell {
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+  border: 3px solid black;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.piece_cell:hover {
+  background-color: rgba(0,0,0,0);
+  box-shadow: 0px 0px 20px 20px rgba(255,200,90,0.5);
+}
+
+.piece_cell.hovering {
+  background-color: blue;
+  opacity: 0.3;
+}
+
+.leaf_piece.hovering {
+  border: 1px solid black;
+}
+
+
+.function {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 1em;
+  padding: 2px;
+}
+
+.group_btn {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 2px;
+  overflow: visible;
+}
+
+.group_solution {
+  background-color: white;
+  display: block;
+  position: relative;
+  left: 2em;
+  border: 1px solid #999;
+  background-color: #eee;
+  padding: 1em;
+}
+
+.hor_list {
+  margin-left: 1px;
+  margin-right: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.solution_button {
+  width:  5px;
+  height: 5px;
+  overflow: visible;
+  border: 1px solid black;
+  display: inline-block;
+  background-color: #9f9;
+  margin: 1px;
+}
+
+.solution_expr {
+  background-color: #eee;
+  border: 1px solid #999;
+  position: relative;
+  display: inline-block;
+  left: 2em;
+}
+
+.fun_dep_button {
+  min-width:  5px;
+  min-height: 5px;
+  border: 1px solid black;
+  display: inline-block;
+  background-color: #666;
+  color: white;
+  margin: 1px;
+  font-size: small;
+}
+
+.task_group {
+  background-color: #fff;
+  padding: 1em;
+  border: 1px solid black;
+}
+
+.task_group_node {
+  display: inline-block;
+  margin: 1em;
+}
+
+.safety_group {
+  border: 3px solid black;
+}
+
+.task_group_menu {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  height: 2em;
+}
+
+.task_button {
+  min-width: 1em;
+  min-height: 1em;
+  display: inline-block;
+  text-align: center;
+  margin: 1px;
+  border: 1px solid black;
+}
+
+.task_solved {
+  background-color: #9c9;
+}
+
+.task_unsolved {
+  background-color: #c99;
+}
+
+
+.ui-tooltip {
+        background-color: white;
+}

@@ -1,0 +1,26 @@
+.text_button {
+  background-color: orange;
+  color: black;
+  display: inline-block;
+  width: 5em;
+  text-align: center;
+  margin-right: 1em;
+  border: 1px solid black;
+  box-shadow: 2px 2px 10px #999;
+  margin-bottom: 1px;
+  margin-right: 10px;
+
+}
+
+.text_button:hover {
+  box-shadow: 2px 2px 10px #666;
+  cursor: pointer;
+}
+
+.text_button:active {
+  box-shadow: 1px 1px 5px #666;
+}
+
+
+
+

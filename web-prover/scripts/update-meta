@@ -1,0 +1,26 @@
+#!/bin/bash
+
+STAMP=WORKING
+
+if [ -e $STAMP ]
+then
+  exit 0
+fi
+
+touch $STAMP
+
+shopt -s nullglob
+
+DIR=cur-level-set
+
+rm -rf queues
+build/bin/ComputeCallGraph         > $DIR/callgraph.json
+build/bin/MakeBossLevel
+build/bin/ComputeTaskLists -x tutorial
+mkdir -p queues
+scripts/queues-to-json nest queues > $DIR/metadata.json
+scripts/real-names-json            > $DIR/realnames.json
+scripts/make-tag-groups            > $DIR/tag-groups.json
+
+rm $STAMP
+

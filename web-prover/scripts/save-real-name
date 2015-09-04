@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+source scripts/shell_config
+
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $(basename $0) FUN" >&2
+  echo "  Given a function name, save it to the relevant hashed dir" >&2
+  exit 1
+fi
+
+FUN=$1
+LEVEL_DIR=levels/$(echo -n $FUN | $SHA1SUM | $AWK '{print $1}')
+
+echo $FUN > $LEVEL_DIR/real_name.txt
+

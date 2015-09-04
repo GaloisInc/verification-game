@@ -1,0 +1,11 @@
+t1     >= 1           /\        (* BIGNUM pointer is writeable *)
+v1     >= 0           /\        (* It has a valid offset *)
+v1 + 5 <= a[t1]       /\        (* It is pointing to a BIGNUM (5 fields) *)
+b[t1]  >= 1           /\        (* the `d` field is writeaqble *)
+c[t1]  >= 0           /\        (* and it has a valid offset *)
+c[t1] + e[Mk_addr t1 (v1 + 2)] <= a[b[t1]]
+                                (* and it points to `dmax` many things *)
+
+(* XXX: Maybe we should require that `d` does not point to other ints,
+globas in particular
+*)

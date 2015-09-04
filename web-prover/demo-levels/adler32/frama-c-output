@@ -1,0 +1,258 @@
+[kernel] preprocessing with "gcc -C -E -I. -I/home/diatchki/tools/strom-frama-c/share/frama-c/libc -nostdinc ../../proof/zlib/.galois/source.c"
+[rte] annotating function __cmsg_nxthdr__extinline
+[rte] annotating function __cmsg_nxthdr__extinline_0
+[rte] annotating function __cmsg_nxthdr__extinline_1
+[rte] annotating function _tr_align
+[rte] annotating function _tr_flush_bits
+[rte] annotating function _tr_flush_block
+[rte] annotating function _tr_init
+[rte] annotating function _tr_stored_block
+[rte] annotating function _tr_tally
+[rte] annotating function adler32
+[rte] annotating function adler32_combine
+[rte] annotating function adler32_combine64
+[rte] annotating function adler32_combine_
+[rte] annotating function bi_flush
+[rte] annotating function bi_reverse
+[rte] annotating function bi_windup
+[rte] annotating function build_bl_tree
+[rte] annotating function build_tree
+[rte] annotating function compress
+[rte] annotating function compress2
+[rte] annotating function compressBound
+[rte] annotating function compress_block
+[rte] annotating function copy_block
+[rte] annotating function crc32
+[rte] annotating function crc32_big
+[rte] annotating function crc32_combine
+[rte] annotating function crc32_combine64
+[rte] annotating function crc32_combine_
+[rte] annotating function crc32_little
+[rte] annotating function deflate
+../../proof/zlib/.galois/source.c:6208:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(configuration_table[s->level].func)
+[rte] annotating function deflateBound
+[rte] annotating function deflateCopy
+../../proof/zlib/.galois/source.c:6404:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(dest->zalloc)
+../../proof/zlib/.galois/source.c:6413:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(dest->zalloc)
+../../proof/zlib/.galois/source.c:6415:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(dest->zalloc)
+../../proof/zlib/.galois/source.c:6417:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(dest->zalloc)
+../../proof/zlib/.galois/source.c:6419:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(dest->zalloc)
+[rte] annotating function deflateEnd
+../../proof/zlib/.galois/source.c:6372:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+../../proof/zlib/.galois/source.c:6374:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+../../proof/zlib/.galois/source.c:6376:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+../../proof/zlib/.galois/source.c:6378:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+../../proof/zlib/.galois/source.c:6380:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+[rte] annotating function deflateInit2_
+../../proof/zlib/.galois/source.c:5223:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+../../proof/zlib/.galois/source.c:5240:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+../../proof/zlib/.galois/source.c:5242:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+../../proof/zlib/.galois/source.c:5244:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+../../proof/zlib/.galois/source.c:5248:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+[rte] annotating function deflateInit_
+[rte] annotating function deflateParams
+[rte] annotating function deflatePending
+[rte] annotating function deflatePrime
+[rte] annotating function deflateReset
+[rte] annotating function deflateResetKeep
+[rte] annotating function deflateSetDictionary
+[rte] annotating function deflateSetHeader
+[rte] annotating function deflateTune
+[rte] annotating function deflate_fast
+[rte] annotating function deflate_huff
+[rte] annotating function deflate_rle
+[rte] annotating function deflate_slow
+[rte] annotating function deflate_stored
+[rte] annotating function detect_data_type
+[rte] annotating function error
+[rte] annotating function file_compress
+[rte] annotating function file_uncompress
+[rte] annotating function fill_window
+[rte] annotating function fixedtables
+[rte] annotating function fixedtables_0
+[rte] annotating function flush_pending
+[rte] annotating function gen_bitlen
+[rte] annotating function gen_codes
+[rte] annotating function get_crc_table
+[rte] annotating function gf2_matrix_square
+[rte] annotating function gf2_matrix_times
+[rte] annotating function gz_avail
+[rte] annotating function gz_comp
+[rte] annotating function gz_compress
+[rte] annotating function gz_decomp
+[rte] annotating function gz_error
+[rte] annotating function gz_fetch
+[rte] annotating function gz_init
+[rte] annotating function gz_load
+[rte] annotating function gz_look
+[rte] annotating function gz_open
+[rte] annotating function gz_reset
+[rte] annotating function gz_skip
+[rte] annotating function gz_uncompress
+[rte] annotating function gz_zero
+[rte] annotating function gzbuffer
+[rte] annotating function gzclearerr
+[rte] annotating function gzclose
+[rte] annotating function gzclose_r
+[rte] annotating function gzclose_w
+[rte] annotating function gzdirect
+[rte] annotating function gzdopen
+[rte] annotating function gzeof
+[rte] annotating function gzerror
+[rte] annotating function gzflush
+[rte] annotating function gzgetc
+[rte] annotating function gzgetc_
+[rte] annotating function gzgets
+[rte] annotating function gzoffset
+[rte] annotating function gzoffset64
+[rte] annotating function gzopen
+[rte] annotating function gzopen64
+[rte] annotating function gzprintf
+[rte] annotating function gzputc
+[rte] annotating function gzputs
+[rte] annotating function gzread
+[rte] annotating function gzrewind
+[rte] annotating function gzseek
+[rte] annotating function gzseek64
+[rte] annotating function gzsetparams
+[rte] annotating function gztell
+[rte] annotating function gztell64
+[rte] annotating function gzungetc
+[rte] annotating function gzvprintf
+[rte] annotating function gzwrite
+[rte] annotating function inflate
+[rte] annotating function inflateBack
+../../proof/zlib/.galois/source.c:8928:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:8988:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9025:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9040:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *out
+../../proof/zlib/.galois/source.c:9067:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9125:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9189:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9233:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9282:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9325:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9443:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9478:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9519:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *out
+../../proof/zlib/.galois/source.c:9555:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9592:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9626:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9673:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *in
+../../proof/zlib/.galois/source.c:9720:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *out
+../../proof/zlib/.galois/source.c:9762:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *out
+[rte] annotating function inflateBackEnd
+../../proof/zlib/.galois/source.c:9796:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+[rte] annotating function inflateBackInit_
+../../proof/zlib/.galois/source.c:7726:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+[rte] annotating function inflateCopy
+../../proof/zlib/.galois/source.c:13248:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(source->zalloc)
+../../proof/zlib/.galois/source.c:13257:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(source->zalloc)
+../../proof/zlib/.galois/source.c:13261:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(source->zfree)
+[rte] annotating function inflateEnd
+../../proof/zlib/.galois/source.c:12992:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+../../proof/zlib/.galois/source.c:12994:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+[rte] annotating function inflateGetDictionary
+[rte] annotating function inflateGetHeader
+[rte] annotating function inflateInit2_
+../../proof/zlib/.galois/source.c:10345:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+../../proof/zlib/.galois/source.c:10356:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+[rte] annotating function inflateInit_
+[rte] annotating function inflateMark
+[rte] annotating function inflatePrime
+[rte] annotating function inflateReset
+[rte] annotating function inflateReset2
+../../proof/zlib/.galois/source.c:10303:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zfree)
+[rte] annotating function inflateResetKeep
+[rte] annotating function inflateSetDictionary
+[rte] annotating function inflateSync
+[rte] annotating function inflateSyncPoint
+[rte] annotating function inflateUndermine
+[rte] annotating function inflate_fast
+[rte] annotating function inflate_table
+[rte] annotating function init_block
+[rte] annotating function lm_init
+[rte] annotating function longest_match
+[rte] annotating function main
+[rte] annotating function pqdownheap
+[rte] annotating function putShortMSB
+[rte] annotating function read_buf
+[rte] annotating function scan_tree
+[rte] annotating function send_all_trees
+[rte] annotating function send_tree
+[rte] annotating function syncsearch
+[rte] annotating function tr_static_init
+[rte] annotating function uncompress
+[rte] annotating function updatewindow
+../../proof/zlib/.galois/source.c:11521:[rte] warning: no predicate available yet to check validity of function pointer dereferencing *(strm->zalloc)
+[rte] annotating function zError
+[rte] annotating function zcalloc
+[rte] annotating function zcfree
+[rte] annotating function zlibCompileFlags
+[rte] annotating function zlibVersion
+[wp] Running WP plugin...
+[wp] Collecting axiomatic usage
+[wp] warning: No definition for 'memchr' interpreted as reads nothing
+[wp] warning: No definition for 'strlen' interpreted as reads nothing
+[wp] warning: No definition for 'memset' interpreted as reads nothing
+[wp] warning: No definition for 'strchr' interpreted as reads nothing
+[wp] warning: No definition for 'strcmp' interpreted as reads nothing
+[wp] warning: No definition for 'strncmp' interpreted as reads nothing
+[wp] warning: No definition for 'wcscmp' interpreted as reads nothing
+[wp] warning: No definition for 'wcslen' interpreted as reads nothing
+[wp] warning: No definition for 'wcsncmp' interpreted as reads nothing
+[wp] warning: Missing RTE guards
+../../proof/zlib/.galois/source.c:2273:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+../../proof/zlib/.galois/source.c:2301:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+../../proof/zlib/.galois/source.c:2378:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+../../proof/zlib/.galois/source.c:2342:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+../../proof/zlib/.galois/source.c:2298:[wp] warning: Missing assigns clause (assigns 'everything' instead)
+[wp] 46 goals scheduled
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_established : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_preserved : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access : Unknown (1s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_post : Unknown (Qed:14ms) (1s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_2 : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_2_established : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_3 : Unknown (8s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_2_preserved : Timeout (Qed:4ms) (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_3_preserved : Timeout (Qed:3ms) (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_3_established : Timeout (Qed:1ms) (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_4 : Unknown (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_5 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_6 : Timeout
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_7 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_8 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_9 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_10 : Timeout (Qed:1ms) (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_11 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_12 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_13 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_14 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_15 : Timeout
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_16 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_4_established : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_17 : Timeout
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_18 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_4_preserved : Timeout (Qed:3ms) (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_19 : Unknown (8s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_20 : Unknown (Qed:1ms) (9s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_21 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_22 : Timeout (11s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_23 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_24 : Timeout (11s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_25 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_26 : Timeout (Qed:1ms) (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_27 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_28 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_29 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_30 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_31 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_5_preserved : Unknown (Qed:1ms) (1s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_loop_inv_galois_decorator_5_established : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_35 : Unknown (1s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_32 : Timeout (10s)
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_33 : Timeout
+[wp] [Alt-Ergo] Goal typed_cast_adler32_assert_rte_mem_access_34 : Timeout (10s)
+[wp] Proved goals:    0 / 46
+     Alt-Ergo:        0  (interruped: 32) (unknown: 14)

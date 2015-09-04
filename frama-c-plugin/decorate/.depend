@@ -1,0 +1,5 @@
+type_info.cmo : type_info.cmi
+type_info.cmx : type_info.cmi
+decorate.cmo : type_info.cmi
+decorate.cmx : type_info.cmx
+type_info.cmi :

@@ -1,0 +1,4 @@
+library Malloc: memory
+altergo.file += "alloc.mlw" ;
+logic integer REGION( addr ) = "region_p" ;
+

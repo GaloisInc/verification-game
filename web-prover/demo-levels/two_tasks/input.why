@@ -1,0 +1,88 @@
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'two_tasks'          --- *)
+(* ---------------------------------------------------------- *)
+theory VCtwo_tasks_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Post-condition (generated) in 'two_tasks'":
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall x_0 y_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((valid_rw malloc_0 x_0 1)) ->
+  ((valid_rw malloc_0 y_0 1)) ->
+  ((p_galois'two_tasks'P malloc_0 mptr_0 mchar_0 mint_0 x_0 y_0)) ->
+  ((p_galois'two_tasks'Q malloc_0 mptr_0 mchar_0 mint_0[x_0 <- 1][y_0 <- 2]
+     malloc_0 mptr_0 mchar_0 mint_0 x_0 y_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file example-src/simple_project.c, line 21) --- *)
+(* ---------------------------------------------------------- *)
+theory VCtwo_tasks_assert_rte_mem_access
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file example-src/simple_project.c, line 21)":
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall x_0 y_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((p_galois'two_tasks'P malloc_0 mptr_0 mchar_0 mint_0 x_0 y_0)) ->
+  ((valid_rw malloc_0 x_0 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file example-src/simple_project.c, line 22) --- *)
+(* ---------------------------------------------------------- *)
+theory VCtwo_tasks_assert_rte_mem_access_2
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file example-src/simple_project.c, line 22)":
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall x_0 y_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((valid_rw malloc_0 x_0 1)) ->
+  ((p_galois'two_tasks'P malloc_0 mptr_0 mchar_0 mint_0 x_0 y_0)) ->
+  ((valid_rw malloc_0 y_0 1))
+
+end
+

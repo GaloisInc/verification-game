@@ -1,0 +1,97 @@
+#!/usr/bin/env sh
+
+# Grab remote levels
+
+set -e
+set -x
+
+SERVERS=(storm@mp-staging:storm-proto/.)
+        # storm@mp-server:storm-proto/.)
+LOCALMIRROR=shared
+VERBOSE=--verbose
+LOCKFILE=remote-sync-lockfile
+
+BINDIR=bin
+SCRIPTDIR=scripts
+OUTPUTDIR=output
+
+if [ -e $LOCKFILE ]
+then
+  exit 0
+fi
+
+trap "rm $LOCKFILE" EXIT
+touch $LOCKFILE
+
+
+
+# Copy solutions and post-conditions down from remote servers
+for SERVER in $SERVERS
+do
+  rsync                 \
+    --include "*/"        \
+    --include "sln-*.hs"  \
+    --exclude "*"       \
+    --recursive         \
+    --ignore-existing   \
+    $VERBOSE            \
+    $SERVER/shared/ $LOCALMIRROR/
+
+# This order ensures that we don't have solutions without the
+# relevant post condition
+
+  rsync                 \
+    --include "*/"      \
+    --include "fun_sln-*.hs"  \
+    --include "post.hs" \
+    --exclude "*"       \
+    --recursive         \
+    $VERBOSE            \
+    $SERVER/shared/ $LOCALMIRROR/
+done
+
+# PROCESSING
+
+RERUN=0
+while [ $RERUN -eq 0 ]
+do
+  $BINDIR/MakeBossLevel
+  rm -rf queues
+  $BINDIR/ComputeTaskLists -x tutorial
+
+  set +e
+  $SCRIPTDIR/solve-easy
+  RERUN=$?
+  set -e
+done
+
+
+mkdir -p $OUTPUTDIR
+$SCRIPTDIR/queues-to-json nest queues > $OUTPUTDIR/metadata.json
+
+# SYNC BACK UP
+
+for SERVER in $SERVERS
+do
+  rsync                 \
+    --include "*/"      \
+    --include "post.hs" \
+    --include "fun_sln-*.hs"  \
+    --exclude "*"       \
+    --ignore-existing   \
+    --recursive         \
+    $VERBOSE            \
+    $LOCALMIRROR/ $SERVER/shared/
+
+  rsync                 \
+    --include "*/"      \
+    --include "boss.bin" \
+    --include "HEAD"    \
+    --exclude "*"       \
+    --recursive         \
+    --verbose           \
+    $VERBOSE            \
+    $LOCALMIRROR/ $SERVER/shared/
+done
+
+# Update METADATA *after* syncing with remote servers

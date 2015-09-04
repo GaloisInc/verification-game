@@ -1,0 +1,39 @@
+#!/bin/bash
+set -e
+
+source scripts/shell_config    # Shell commands
+source scripts/wp_config       # WP_OPTS
+
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $(basename $0) FILE FUN" >&2
+  exit 1
+fi
+
+FILE=$1
+FUN=$2
+
+
+FRAMACSHARE=$($FRAMA_C -print-share-path)
+
+DIR=$($MKTEMP -d storm-acsl.XXX)
+OUT_FILE=$DIR/acslextractor/*/A_Galois_axiomatic_${FUN}.why
+
+$FRAMA_C \
+  -cpp-extra-args="-I${FRAMACSHARE}/libc -nostdinc" \
+  -machdep x86_64           \
+  -acslextractor $FILE      \
+  -acslextractor-funs $FUN  \
+  -then                     \
+  $WP_OPTS                  \
+  -wp-proof why3:alt-ergo   \
+  -wp-gen                   \
+  -wp-out $DIR              \
+  > $DIR/frama-c-output
+
+build/bin/ParsePrePost $OUT_FILE $FUN
+
+rm -rf $DIR
+
+
+

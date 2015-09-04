@@ -1,0 +1,27 @@
+(* ---------------------------------------------------------- *)
+(* --- Axiomatic 'Galois_axiomatic1'                      --- *)
+(* ---------------------------------------------------------- *)
+theory A_Galois_axiomatic1
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+
+predicate p_galois'a_loop'I1 (map int int) (map addr addr) (map addr int)
+    (map addr int) (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int int addr int
+
+predicate p_galois'a_loop'Q (map int int) (map addr addr) (map addr int)
+    (map addr int) (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int
+
+predicate p_galois'a_loop'P (map int int) (map addr addr) (map addr int)
+    (map addr int) addr int
+
+end
+

@@ -1,0 +1,146 @@
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'a_loop'             --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_loop_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Post-condition (generated) in 'a_loop'":
+  forall i_0 size_1 size_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_1 buf_0 : addr.
+  (size_0 <= i_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint32 i_0)) ->
+  ((is_uint32 size_1)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'a_loop'P malloc_1 mptr_1 mchar_1 mint_1 buf_1 size_1)) ->
+  ((p_galois'a_loop'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1 mchar_1
+     mint_1 buf_1 size_1 i_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'Q malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1 mchar_1
+     mint_1 buf_1 size_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_loop_loop_inv_galois_decorator_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall i_0 size_1 size_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_1 buf_0 : addr.
+  let x_0 = 1 + i_0 in
+  let a_0 = (shift buf_0 i_0) in
+  (i_0 < size_0) ->
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 i_0)) ->
+  ((is_uint32 size_1)) ->
+  ((is_uint32 size_0)) ->
+  ((is_uint32 x_0)) ->
+  ((valid_rw malloc_1 a_0 1)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_0 mchar_0 mint_1 buf_1 size_1)) ->
+  ((p_galois'a_loop'I1 malloc_1 mptr_1 mchar_1 mint_0 malloc_0 mptr_0 mchar_0
+     mint_1 buf_1 size_1 i_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'I1 malloc_1 mptr_1 mchar_1 mint_0[a_0 <- 0] malloc_0
+     mptr_0 mchar_0 mint_1 buf_1 size_1 x_0 buf_0 size_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_loop_loop_inv_galois_decorator_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall size_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_0 mchar_0 mint_0 buf_0 size_0)) ->
+  ((p_galois'a_loop'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_0 mptr_0 mchar_0
+     mint_0 buf_0 size_0 0 buf_0 size_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file example-src/simple_project.c, line 4) --- *)
+(* ---------------------------------------------------------- *)
+theory VCa_loop_assert_rte_mem_access
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Assertion 'rte,mem_access' (file example-src/simple_project.c, line 4)":
+  forall i_0 size_1 size_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_1 buf_0 : addr.
+  (i_0 < size_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint32 i_0)) ->
+  ((is_uint32 size_1)) ->
+  ((is_uint32 size_0)) ->
+  ((p_galois'a_loop'P malloc_0 mptr_1 mchar_1 mint_1 buf_1 size_1)) ->
+  ((p_galois'a_loop'I1 malloc_1 mptr_0 mchar_0 mint_0 malloc_0 mptr_1 mchar_1
+     mint_1 buf_1 size_1 i_0 buf_0 size_0)) ->
+  ((valid_rw malloc_1 ((shift buf_0 i_0)) 1))
+
+end
+

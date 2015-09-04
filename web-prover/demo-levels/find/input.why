@@ -1,0 +1,170 @@
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'find'               --- *)
+(* ---------------------------------------------------------- *)
+theory VCfind_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Post-condition (generated) in 'find'":
+  forall find_0 i_0 retres_0 size_1 size_0 x_1 x_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall a_1 a_0 : addr.
+  let a_2 = (shift a_0 find_0) in
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_sint32 find_0)) ->
+  ((is_sint32 i_0)) ->
+  ((is_sint32 retres_0)) ->
+  ((is_sint32 size_1)) ->
+  ((is_sint32 size_0)) ->
+  ((is_sint32 x_1)) ->
+  ((is_sint32 x_0)) ->
+  ((is_sint32 mint_1[(shift a_0 i_0)])) ->
+  ((p_galois'find'P malloc_1 mptr_1 mchar_1 mint_2 a_1 size_1 x_1)) ->
+  ((p_galois'find'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1 mchar_1
+     mint_2 a_1 size_1 x_1 retres_0 i_0 a_0 size_0 x_0)) ->
+  (if (i_0 < size_0)
+   then ((malloc_2 = malloc_0) /\ (mchar_2 = mchar_0) /\ (mint_3 = mint_0) /\
+         (mptr_2 = mptr_0) /\ (find_0 = i_0) /\ (x_0 = mint_3[a_2]) /\
+         ((valid_rd malloc_2 a_2 1)))
+   else (((-1) = find_0) /\ (malloc_2 = malloc_0) /\ (mchar_2 = mchar_0) /\
+         (mint_3 = mint_0) /\ (mptr_2 = mptr_0))) ->
+  ((p_galois'find'Q malloc_2 mptr_2 mchar_2 mint_3 malloc_1 mptr_1 mchar_1
+     mint_2 find_0 a_1 size_1 x_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCfind_loop_inv_galois_decorator_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall i_0 retres_0 size_1 size_0 x_1 x_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall a_1 a_0 : addr.
+  let a_2 = (shift a_0 i_0) in
+  let x_2 = mint_0[a_2] in
+  let x_3 = 1 + i_0 in
+  (i_0 < size_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_sint32 i_0)) ->
+  ((is_sint32 retres_0)) ->
+  ((is_sint32 size_1)) ->
+  ((is_sint32 size_0)) ->
+  ((is_sint32 x_1)) ->
+  ((is_sint32 x_0)) ->
+  (x_0 <> x_2) ->
+  ((is_sint32 x_3)) ->
+  ((is_sint32 x_2)) ->
+  ((valid_rd malloc_0 a_2 1)) ->
+  ((p_galois'find'P malloc_1 mptr_1 mchar_1 mint_1 a_1 size_1 x_1)) ->
+  ((p_galois'find'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1 mchar_1
+     mint_1 a_1 size_1 x_1 retres_0 i_0 a_0 size_0 x_0)) ->
+  ((p_galois'find'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1 mchar_1
+     mint_1 a_1 size_1 x_1 retres_0 x_3 a_0 size_0 x_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCfind_loop_inv_galois_decorator_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall retres_0 size_0 x_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall a_0 : addr.
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_sint32 retres_0)) ->
+  ((is_sint32 size_0)) ->
+  ((is_sint32 x_0)) ->
+  ((p_galois'find'P malloc_0 mptr_0 mchar_0 mint_0 a_0 size_0 x_0)) ->
+  ((p_galois'find'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_0 mptr_0 mchar_0
+     mint_0 a_0 size_0 x_0 retres_0 0 a_0 size_0 x_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file example-src/find.c, line 4) --- *)
+(* ---------------------------------------------------------- *)
+theory VCfind_assert_rte_mem_access
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic1.A_Galois_axiomatic1
+
+goal WP "expl:Assertion 'rte,mem_access' (file example-src/find.c, line 4)":
+  forall i_0 retres_0 size_1 size_0 x_1 x_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall a_1 a_0 : addr.
+  let a_2 = (shift a_0 i_0) in
+  (i_0 < size_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_sint32 i_0)) ->
+  ((is_sint32 retres_0)) ->
+  ((is_sint32 size_1)) ->
+  ((is_sint32 size_0)) ->
+  ((is_sint32 x_1)) ->
+  ((is_sint32 x_0)) ->
+  ((is_sint32 mint_1[a_2])) ->
+  ((p_galois'find'P malloc_1 mptr_1 mchar_1 mint_2 a_1 size_1 x_1)) ->
+  ((p_galois'find'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1 mchar_1
+     mint_2 a_1 size_1 x_1 retres_0 i_0 a_0 size_0 x_0)) ->
+  ((valid_rd malloc_0 a_2 1))
+
+end
+

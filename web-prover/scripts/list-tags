@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find shared/ -name 'tags' -exec ls {} \; | sort | uniq
+

@@ -1,0 +1,26 @@
+(* ---------------------------------------------------------- *)
+(* --- Axiomatic 'Galois_axiomatic15'                     --- *)
+(* ---------------------------------------------------------- *)
+theory A_Galois_axiomatic15
+
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+
+predicate p_galois_tutorial_P int int
+
+predicate p_galois_tutorial_I int int int
+predicate p_galois_tutorial_I1 int int int
+predicate p_galois_tutorial_I2 int int int
+predicate p_galois_tutorial_I3 int int int
+predicate p_galois_tutorial_I4 int int int
+
+predicate p_galois_tutorial_Q int int int
+
+end
+

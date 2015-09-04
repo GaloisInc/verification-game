@@ -1,0 +1,17 @@
+[kernel] preprocessing with "gcc -C -E -I. -I/home/diatchki/tools/strom-frama-c/share/frama-c/libc -nostdinc example-src/simple_project.c"
+[rte] annotating function a_function_call
+[rte] annotating function a_loop
+[rte] annotating function more_than_safety
+[rte] annotating function simple_access
+[rte] annotating function two_tasks
+[wp] Running WP plugin...
+[wp] Collecting axiomatic usage
+[wp] warning: Missing RTE guards
+[wp] 5 goals scheduled
+[wp] [Alt-Ergo] Goal typed_cast_more_than_safety_assert_rte_mem_access : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_more_than_safety_assert_galois_decorator : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_more_than_safety_post : Unknown (Qed:1ms)
+[wp] [Alt-Ergo] Goal typed_cast_more_than_safety_call_a_loop_pre : Unknown
+[wp] [Alt-Ergo] Goal typed_cast_more_than_safety_assert_galois_decorator_2 : Unknown (Qed:1ms)
+[wp] Proved goals:    0 / 5
+     Alt-Ergo:        0  (unknown: 5)

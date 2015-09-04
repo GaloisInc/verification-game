@@ -1,0 +1,13 @@
+#!/bin/bash
+
+shopt -s nullglob
+
+FST=1
+for i in levels/*/real_name.txt; do
+  if [ $FST -eq 1 ]; then FST=0; echo -n '{ '; else echo -n ', ' ; fi
+  HASH=$(basename $(dirname $i))
+  NAME=$(cat $i)
+  echo \"$HASH\": \"$NAME\"
+done
+echo '}'
+

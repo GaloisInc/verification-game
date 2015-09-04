@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+<title>Testing</title>
+<link rel="stylesheet" href="/static/css/common.css">
+<script src="/static/lib/snap.svg.js"></script>
+<script src="/static/lib/jquery.js"></script>
+<script src="/static/lib/jquery-ui.js"></script>
+<link rel="stylesheet" href="/static/lib/jquery-ui.css">
+<script src="/static/lib/jsPlumb.js"></script>
+<script src="/static/js/task1.js"></script>
+<link rel="stylesheet" href="/static/css/task.css">
+<script src="/static/js/browse.js"></script>
+<link rel="stylesheet" href="/static/css/browse.css">
+<script src="/static/js/expr.js"></script>
+<link rel="stylesheet" href="/static/css/expr.css">
+<link rel="stylesheet" href="/static/css/outer.css">
+<script src="/static/js/outer.js"></script>
+<script src="/static/js/world.js"></script>
+<script src="/static/js/metadata.js"></script>
+
+<style>
+.term-table {
+  border-collapse: collapse;
+  background-color: #fc0;
+  padding: 0;
+  z-index: 100;
+}
+
+.term-table>td {
+  padding: 0;
+  margin: 0;
+}
+
+.controls>td>div {
+  color: #ccc;
+  background-color: rgba(0,0,0,0.5);
+  padding: 2px 1em 2px 1em;
+  text-align: left;
+  font-family: monospace;
+  font-weight: bold;
+  cursor: pointer;
+}
+.controls>td>div:hover {
+  color: white;
+}
+
+.terminal {
+  font-family:      menlo, monospace;
+  background-color: rgba(0,0,0,0.8);
+  font-size:        18pt;
+  color:            #9f9;
+  margin:           0;
+}
+
+.interlaced {
+  background: url("/static/img/interlace.png") top left repeat,
+              rgba(255,255,255,0.5);
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+  opacity:  0.2;
+  z-index:  10;
+  pointer-events: none;
+}
+
+</style>
+<script>
+$(document).ready(function() {
+
+  function newTerminal(name, menu) {
+    var table     = $('<table/>').addClass('term-table');
+
+    var term_td   = $('<td/>').css('position', 'relative');
+    var terminal  = $('<textarea/>')
+                    .addClass('terminal')
+                    .attr('rows','24')
+                    .attr('cols','80');
+
+    var inter = $('<div/>').addClass('interlaced');
+    term_td.append(inter);
+
+    term_td.append(terminal);
+
+    var otherButtons       = [];
+    var terminal_open      = true;
+    var terminal_open_lab  = '- ' + name;
+    var terminal_close_lab = '+ ' + name;
+
+    var minMax_btn = $('<td/>').append($('<div/>').text(terminal_open_lab).click(function () {
+      if (terminal_open) {
+        terminal.slideUp(function () {
+        term_td.hide();
+        });
+      } else {
+        term_td.show();
+        terminal.slideDown();
+      }
+      terminal_open = !terminal_open;
+      minMax_btn.children().html(terminal_open ? terminal_open_lab : terminal_close_lab);
+    }));
+
+    var menuRow = $('<tr/>').addClass('controls');
+    menuRow.append(minMax_btn);
+    jQuery.each(menu, function (ix, item) {
+      var btn = $('<td/>')
+                .append($('<div/>')
+                .text(item.label)
+                          .click(function () { item.click(terminal); }));
+      otherButtons.push(btn);
+      menuRow.append(btn);
+    });
+
+    table.append(menuRow);
+    table.append($('<tr/>').append(term_td.attr('colspan', 1 + menu.length)));
+    return { dom: table, area: terminal };
+  }
+
+  var body = $('body');
+
+  var example_server = 'http://' + window.location.hostname + ":8001";
+
+
+  // Working note
+  var working = $('<div/>')
+                .css('width',     '9em')
+                .css('height',    '3ex')
+                .css('background-color', 'rgba(128,0,0,0.5)')
+                .css('border',     '2px solid white')
+                .css('color',     'white')
+                .css('font-size',  '18pt')
+                .css('text-align', 'center')
+                .css('position',  'fixed')
+                .css('right',      '1em')
+                .css('top',         '1em')
+                .css('cursor',    'wait')
+                .css('z-index',   '150')
+                .text('working...')
+                .hide();
+  body.append(working);
+
+
+  // The game
+  var game = $('<iframe/>')
+             .attr('src', '/static/browse.html')
+             .css('width', '1857px')
+             .css('height', '1099px')
+             .css('margin', '1em')
+             .css('margin-top', '3em')
+             .css('box-shadow', '0px 0px 5px 5px #888888');
+
+  // The console
+  var term = newTerminal('code',
+    [ { label: 'generate'
+      , click: function(ta) {
+          working.fadeIn();
+          jQuery.post( example_server + '/generate'
+                     , { 'code': ta.val() }
+                     , function (ans) {
+                         if (ans.status === 'ok')
+                          game.attr('src', game.attr('src'));
+                          else alert (ans.error);
+                         working.fadeOut();
+                        })
+        }
+      }
+    , { label: 'refresh'
+      , click: function() {
+          working.fadeIn();
+          jQuery.post ( example_server + '/refresh'
+                      , {}
+                      , function () {
+                          game.attr('src', game.attr('src'));
+                          working.fadeOut();
+                        }
+                      )
+        }
+      }
+    ]);
+
+  jQuery.get(example_server + '/source'
+            , {}
+            , function (dat) { term.area.val(dat); }
+            );
+
+  body.append(
+    term.dom.css('margin', '1em')
+            .css('position', 'absolute')
+            .css('top', '0')
+            .css('min-height', '1em')
+            .css('left', '0'));
+  body.append(game);
+
+
+});
+
+
+</script>
+</head>
+<body></body>
+</html>

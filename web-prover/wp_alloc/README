@@ -1,0 +1,3 @@
+To use the driver in this directory, run Frama-C like so:
+
+  frama-c -wp-driver alloc.driver -wp file.c

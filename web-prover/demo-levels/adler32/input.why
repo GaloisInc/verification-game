@@ -1,0 +1,4028 @@
+(* ---------------------------------------------------------- *)
+(* --- Post-condition (generated) in 'adler32'            --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_post
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+use import Cbits.Cbits
+
+goal WP "expl:Post-condition (generated) in 'adler32'":
+  forall adler_7 adler_6 adler_5 adler_4 adler_3 adler_2 adler_1 adler_0
+    adler32_0 len_2 len_1 len_0 n_3 n_2 n_1 n_0 retres_3 retres_2 retres_1
+    retres_0 sum2_7 sum2_6 sum2_5 sum2_4 sum2_3 sum2_2 sum2_1 sum2_0 : int.
+  forall malloc_3 malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_3 mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0
+    : map addr int.
+  forall mptr_3 mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_5 buf_4 buf_3 buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_5 0) in
+  let x_0 = (land 65535 adler_7) in
+  let x_1 = mint_3[a_0] in
+  let x_2 = (land 65535 ((lsr adler_7 16))) in
+  let x_3 = x_0 + x_1 + x_2 in
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_7)) ->
+  ((is_uint64 adler_6)) ->
+  ((is_uint64 adler_5)) ->
+  ((is_uint64 adler_4)) ->
+  ((is_uint64 adler_3)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler32_0)) ->
+  ((is_uint64 retres_3)) ->
+  ((is_uint64 retres_2)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_7)) ->
+  ((is_uint64 sum2_6)) ->
+  ((is_uint64 sum2_5)) ->
+  ((is_uint64 sum2_4)) ->
+  ((is_uint64 sum2_3)) ->
+  ((is_uint64 sum2_2)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_3)) ->
+  ((is_uint32 n_2)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_3[(shift buf_4 0)])) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_7 buf_5 len_2)) ->
+  (if (1 = len_2)
+   then ((malloc_3 = malloc_2) /\ (mchar_3 = mchar_2) /\ (mint_3 = mint_2) /\
+         (mptr_3 = mptr_2) /\
+         (if (65521 <= sum2_5) then (sum2_5 = (65521 + sum2_7))
+          else (sum2_7 = sum2_5)) /\ ((valid_rd malloc_3 a_0 1)) /\
+         (if (65521 <= (x_0 + x_1)) then ((65521 + sum2_5) = x_3)
+          else (sum2_5 = x_3)) /\
+         (adler32_0 = ((lor ((to_uint64 ((lsl sum2_7 16)))) (sum2_5 - x_2)))))
+   else (if (buf_5 = null)
+         then ((1 = adler32_0) /\ (malloc_3 = malloc_2) /\
+               (mchar_3 = mchar_2) /\ (mint_3 = mint_2) /\ (mptr_3 = mptr_2))
+         else (if (len_2 <= 15)
+               then ((if (65521 <= adler_4)
+                      then ((adler_5 = adler_4) /\
+                            (adler_5 = (65521 + adler_6)))
+                      else (adler_6 = adler_4)) /\
+                     (adler32_0
+                        = ((lor adler_6
+                           ((to_uint64 ((lsl ((mod sum2_4 65521)) 16))))))) /\
+                     ((p_galois'adler32'I1 malloc_3 mptr_3 mchar_3 mint_3
+                        malloc_2 mptr_2 mchar_2 mint_2 adler_7 buf_5 len_2
+                        retres_3 sum2_4 n_3 adler_4 buf_3 0)))
+               else ((len_0 <= 5551) /\
+                     (adler32_0
+                        = ((lor adler_3 ((to_uint64 ((lsl sum2_3 16))))))) /\
+                     ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0
+                        malloc_2 mptr_2 mchar_2 mint_2 adler_7 buf_5 len_2
+                        retres_0 sum2_0 n_0 adler_0 buf_0 len_0)) /\
+                     (if (0 = len_0)
+                      then ((malloc_3 = malloc_0) /\ (mchar_3 = mchar_0) /\
+                            (mint_3 = mint_0) /\ (mptr_3 = mptr_0) /\
+                            (adler_3 = adler_0) /\ (sum2_3 = sum2_0))
+                      else ((len_1 <= 15) /\
+                            (adler_3 = ((mod adler_2 65521))) /\
+                            (sum2_3 = ((mod sum2_2 65521))) /\
+                            ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1
+                               mint_1 malloc_2 mptr_2 mchar_2 mint_2 adler_7
+                               buf_5 len_2 retres_1 sum2_1 n_1 adler_1 buf_1
+                               len_1)) /\
+                            ((p_galois'adler32'I5 malloc_3 mptr_3 mchar_3
+                               mint_3 malloc_2 mptr_2 mchar_2 mint_2 adler_7
+                               buf_5 len_2 retres_2 sum2_2 n_2 adler_2 buf_2
+                               0)))))))) ->
+  ((p_galois'adler32'Q malloc_3 mptr_3 mchar_3 mint_3 malloc_2 mptr_2 mchar_2
+     mint_2 adler32_0 adler_7 buf_5 len_2))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2261) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2261)":
+  forall adler_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  let a_0 = (shift buf_0 0) in
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((p_galois'adler32'P malloc_0 mptr_0 mchar_0 mint_0 adler_0 buf_0 1)) ->
+  ((valid_rd malloc_0 a_0 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall adler_0 len_1 len_0 n_0 retres_0 sum2_1 sum2_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_1 buf_0 : addr.
+  let x_0 = mint_0[buf_1] in
+  let x_1 = len_0 - 1 in
+  let x_2 = - sum2_0 in
+  let x_3 = sum2_1 - sum2_0 in
+  let x_4 = sum2_1 - sum2_0 - x_0 in
+  (0 <> len_0) ->
+  (1 <> len_1) ->
+  (buf_0 <> null) ->
+  (len_1 <= 15) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 x_0)) ->
+  ((valid_rd malloc_0 buf_1 1)) ->
+  ((is_uint32 x_1)) ->
+  ((is_uint64 x_3)) ->
+  ((is_uint64 x_4)) ->
+  ((p_galois'adler32'P malloc_1 mptr_1 mchar_1 mint_1 adler_0 buf_0 len_1)) ->
+  ((p_galois'adler32'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 adler_0 buf_0 len_1 retres_0 sum2_0 n_0 x_4 buf_1 len_0)) ->
+  ((p_galois'adler32'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 adler_0 buf_0 len_1 retres_0 sum2_1 n_0 x_3
+     ((shift buf_1 1)) x_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import Cbits.Cbits
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall adler_0 len_0 n_0 retres_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  let x_0 = (land 65535 adler_0) in
+  let x_1 = (land 65535 ((lsr adler_0 16))) in
+  (1 <> len_0) ->
+  (buf_0 <> null) ->
+  (len_0 <= 15) ->
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint64 x_0)) ->
+  ((is_uint64 x_1)) ->
+  ((p_galois'adler32'P malloc_0 mptr_0 mchar_0 mint_0 adler_0 buf_0 len_0)) ->
+  ((p_galois'adler32'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_0 mptr_0
+     mchar_0 mint_0 adler_0 buf_0 len_0 retres_0 x_1 n_0 x_0 buf_0 len_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2288) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_2
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2288)":
+  forall adler_1 adler_0 len_1 len_0 n_0 retres_0 sum2_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_0 tmp_0 : addr.
+  (0 <> len_0) ->
+  (1 <> len_1) ->
+  (buf_0 <> null) ->
+  (len_1 <= 15) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[tmp_0])) ->
+  ((p_galois'adler32'P malloc_1 mptr_1 mchar_1 mint_2 adler_1 buf_0 len_1)) ->
+  ((p_galois'adler32'I1 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_2 adler_1 buf_0 len_1 retres_0 sum2_0 n_0 adler_0 tmp_0
+     len_0)) ->
+  ((valid_rd malloc_0 tmp_0 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_2_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let x_0 = (mod adler_1 65521) in
+  let x_1 = (mod sum2_1 65521) in
+  let a_0 = (shift buf_2 0) in
+  let x_2 = mint_1[a_0] in
+  let a_1 = (shift buf_2 1) in
+  let x_3 = mint_1[a_1] in
+  let a_2 = (shift buf_2 2) in
+  let x_4 = mint_1[a_2] in
+  let a_3 = (shift buf_2 3) in
+  let x_5 = mint_1[a_3] in
+  let a_4 = (shift buf_2 4) in
+  let x_6 = mint_1[a_4] in
+  let a_5 = (shift buf_2 5) in
+  let x_7 = mint_1[a_5] in
+  let a_6 = (shift buf_2 6) in
+  let x_8 = mint_1[a_6] in
+  let a_7 = (shift buf_2 7) in
+  let x_9 = mint_1[a_7] in
+  let a_8 = (shift buf_2 8) in
+  let x_10 = mint_1[a_8] in
+  let a_9 = (shift buf_2 9) in
+  let x_11 = mint_1[a_9] in
+  let a_10 = (shift buf_2 10) in
+  let x_12 = mint_1[a_10] in
+  let a_11 = (shift buf_2 11) in
+  let x_13 = mint_1[a_11] in
+  let a_12 = (shift buf_2 12) in
+  let x_14 = mint_1[a_12] in
+  let a_13 = (shift buf_2 13) in
+  let x_15 = mint_1[a_13] in
+  let a_14 = (shift buf_2 14) in
+  let x_16 = mint_1[a_14] in
+  let a_15 = (shift buf_2 15) in
+  let x_17 = mint_1[a_15] in
+  let x_18 = - x_17 in
+  let x_19 = - x_16 in
+  let x_20 = - x_15 in
+  let x_21 = - x_14 in
+  let x_22 = - x_13 in
+  let x_23 = - x_12 in
+  let x_24 = - x_11 in
+  let x_25 = - x_10 in
+  let x_26 = - x_9 in
+  let x_27 = - x_8 in
+  let x_28 = - x_7 in
+  let x_29 = - x_6 in
+  let x_30 = - x_5 in
+  let x_31 = - x_4 in
+  let x_32 = - x_3 in
+  let x_33 = adler_1 - x_2 - x_3 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10
+      - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17 in
+  let x_34 = sum2_1 + x_3 + (2 * x_4) + (3 * x_5) + (4 * x_6) + (5 * x_7)
+      + (6 * x_8) + (7 * x_9) + (8 * x_10) + (9 * x_11) + (10 * x_12)
+      + (11 * x_13) + (12 * x_14) + (13 * x_15) + (14 * x_16) + (15 * x_17)
+      - (16 * adler_1) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint64 x_0)) ->
+  ((is_uint64 x_1)) ->
+  ((is_uint64 (sum2_1 - adler_1))) ->
+  ((is_uint8 x_2)) ->
+  ((is_uint8 x_3)) ->
+  ((is_uint8 x_4)) ->
+  ((is_uint8 x_5)) ->
+  ((is_uint8 x_6)) ->
+  ((is_uint8 x_7)) ->
+  ((is_uint8 x_8)) ->
+  ((is_uint8 x_9)) ->
+  ((is_uint8 x_10)) ->
+  ((is_uint8 x_11)) ->
+  ((is_uint8 x_12)) ->
+  ((is_uint8 x_13)) ->
+  ((is_uint8 x_14)) ->
+  ((is_uint8 x_15)) ->
+  ((is_uint8 x_16)) ->
+  ((is_uint8 x_17)) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((valid_rd malloc_1 a_14 1)) ->
+  ((valid_rd malloc_1 a_15 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((is_uint64 (adler_1 - x_17))) ->
+  ((is_uint64 (sum2_1 + x_17 - (2 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_16 - x_17))) ->
+  ((is_uint64 (adler_1 - x_15 - x_16 - x_17))) ->
+  ((is_uint64 (sum2_1 + x_16 + (2 * x_17) - (3 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64 (sum2_1 + x_15 + (2 * x_16) + (3 * x_17) - (4 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_13 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_14 + (2 * x_15) + (3 * x_16) + (4 * x_17) - (5 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_13 + (2 * x_14) + (3 * x_15) + (4 * x_16) + (5 * x_17)
+      - (6 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_12 + (2 * x_13) + (3 * x_14) + (4 * x_15) + (5 * x_16)
+      + (6 * x_17) - (7 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_11 + (2 * x_12) + (3 * x_13) + (4 * x_14) + (5 * x_15)
+      + (6 * x_16) + (7 * x_17) - (8 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_10 + (2 * x_11) + (3 * x_12) + (4 * x_13) + (5 * x_14)
+      + (6 * x_15) + (7 * x_16) + (8 * x_17) - (9 * adler_1)))) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((is_uint64
+     (adler_1 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16
+      - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_9 + (2 * x_10) + (3 * x_11) + (4 * x_12) + (5 * x_13)
+      + (6 * x_14) + (7 * x_15) + (8 * x_16) + (9 * x_17) - (10 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15
+      - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_8 + (2 * x_9) + (3 * x_10) + (4 * x_11) + (5 * x_12)
+      + (6 * x_13) + (7 * x_14) + (8 * x_15) + (9 * x_16) + (10 * x_17)
+      - (11 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14
+      - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_7 + (2 * x_8) + (3 * x_9) + (4 * x_10) + (5 * x_11)
+      + (6 * x_12) + (7 * x_13) + (8 * x_14) + (9 * x_15) + (10 * x_16)
+      + (11 * x_17) - (12 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13
+      - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_6 + (2 * x_7) + (3 * x_8) + (4 * x_9) + (5 * x_10)
+      + (6 * x_11) + (7 * x_12) + (8 * x_13) + (9 * x_14) + (10 * x_15)
+      + (11 * x_16) + (12 * x_17) - (13 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13
+      - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_5 + (2 * x_6) + (3 * x_7) + (4 * x_8) + (5 * x_9)
+      + (6 * x_10) + (7 * x_11) + (8 * x_12) + (9 * x_13) + (10 * x_14)
+      + (11 * x_15) + (12 * x_16) + (13 * x_17) - (14 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_3 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12
+      - x_13 - x_14 - x_15 - x_16 - x_17))) ->
+  ((is_uint64
+     (sum2_1 + x_4 + (2 * x_5) + (3 * x_6) + (4 * x_7) + (5 * x_8)
+      + (6 * x_9) + (7 * x_10) + (8 * x_11) + (9 * x_12) + (10 * x_13)
+      + (11 * x_14) + (12 * x_15) + (13 * x_16) + (14 * x_17)
+      - (15 * adler_1)))) ->
+  ((is_uint64 x_33)) ->
+  ((is_uint64 x_34)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 x_34 1 x_33 buf_2 len_1)) ->
+  ((p_galois'adler32'I3 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 x_1 0 x_0 ((shift buf_2 16))
+     len_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_2_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import Cbits.Cbits
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall adler_0 len_0 n_0 retres_0 : int.
+  forall malloc_0 : map int int.
+  forall mchar_0 mint_0 : map addr int.
+  forall mptr_0 : map addr addr.
+  forall buf_0 : addr.
+  let x_0 = (land 65535 adler_0) in
+  let x_1 = (land 65535 ((lsr adler_0 16))) in
+  (1 <> len_0) ->
+  (buf_0 <> null) ->
+  (16 <= len_0) ->
+  ((framed mptr_0)) ->
+  ((linked malloc_0)) ->
+  ((sconst mchar_0)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint64 x_0)) ->
+  ((is_uint64 x_1)) ->
+  ((p_galois'adler32'P malloc_0 mptr_0 mchar_0 mint_0 adler_0 buf_0 len_0)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_0 mptr_0
+     mchar_0 mint_0 adler_0 buf_0 len_0 retres_0 x_1 n_0 x_0 buf_0 len_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_3_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let x_0 = 1 + n_1 in
+  let a_0 = (shift buf_2 0) in
+  let x_1 = mint_1[a_0] in
+  let a_1 = (shift buf_2 1) in
+  let x_2 = mint_1[a_1] in
+  let a_2 = (shift buf_2 2) in
+  let x_3 = mint_1[a_2] in
+  let a_3 = (shift buf_2 3) in
+  let x_4 = mint_1[a_3] in
+  let a_4 = (shift buf_2 4) in
+  let x_5 = mint_1[a_4] in
+  let a_5 = (shift buf_2 5) in
+  let x_6 = mint_1[a_5] in
+  let a_6 = (shift buf_2 6) in
+  let x_7 = mint_1[a_6] in
+  let a_7 = (shift buf_2 7) in
+  let x_8 = mint_1[a_7] in
+  let a_8 = (shift buf_2 8) in
+  let x_9 = mint_1[a_8] in
+  let a_9 = (shift buf_2 9) in
+  let x_10 = mint_1[a_9] in
+  let a_10 = (shift buf_2 10) in
+  let x_11 = mint_1[a_10] in
+  let a_11 = (shift buf_2 11) in
+  let x_12 = mint_1[a_11] in
+  let a_12 = (shift buf_2 12) in
+  let x_13 = mint_1[a_12] in
+  let a_13 = (shift buf_2 13) in
+  let x_14 = mint_1[a_13] in
+  let a_14 = (shift buf_2 14) in
+  let x_15 = mint_1[a_14] in
+  let a_15 = (shift buf_2 15) in
+  let x_16 = mint_1[a_15] in
+  let x_17 = - x_16 in
+  let x_18 = - x_15 in
+  let x_19 = - x_14 in
+  let x_20 = - x_13 in
+  let x_21 = - x_12 in
+  let x_22 = - x_11 in
+  let x_23 = - x_10 in
+  let x_24 = - x_9 in
+  let x_25 = - x_8 in
+  let x_26 = - x_7 in
+  let x_27 = - x_6 in
+  let x_28 = - x_5 in
+  let x_29 = - x_4 in
+  let x_30 = - x_3 in
+  let x_31 = - x_2 in
+  let x_32 = adler_1 - x_1 - x_2 - x_3 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9
+      - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 in
+  let x_33 = sum2_1 + x_2 + (2 * x_3) + (3 * x_4) + (4 * x_5) + (5 * x_6)
+      + (6 * x_7) + (7 * x_8) + (8 * x_9) + (9 * x_10) + (10 * x_11)
+      + (11 * x_12) + (12 * x_13) + (13 * x_14) + (14 * x_15) + (15 * x_16)
+      - (16 * adler_1) in
+  (0 <> n_1) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 x_0)) ->
+  ((is_uint64 (sum2_1 - adler_1))) ->
+  ((is_uint8 x_1)) ->
+  ((is_uint8 x_2)) ->
+  ((is_uint8 x_3)) ->
+  ((is_uint8 x_4)) ->
+  ((is_uint8 x_5)) ->
+  ((is_uint8 x_6)) ->
+  ((is_uint8 x_7)) ->
+  ((is_uint8 x_8)) ->
+  ((is_uint8 x_9)) ->
+  ((is_uint8 x_10)) ->
+  ((is_uint8 x_11)) ->
+  ((is_uint8 x_12)) ->
+  ((is_uint8 x_13)) ->
+  ((is_uint8 x_14)) ->
+  ((is_uint8 x_15)) ->
+  ((is_uint8 x_16)) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((valid_rd malloc_1 a_14 1)) ->
+  ((valid_rd malloc_1 a_15 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((is_uint64 (adler_1 - x_16))) ->
+  ((is_uint64 (sum2_1 + x_16 - (2 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_15 - x_16))) ->
+  ((is_uint64 (adler_1 - x_14 - x_15 - x_16))) ->
+  ((is_uint64 (sum2_1 + x_15 + (2 * x_16) - (3 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64 (sum2_1 + x_14 + (2 * x_15) + (3 * x_16) - (4 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_12 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_13 + (2 * x_14) + (3 * x_15) + (4 * x_16) - (5 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_12 + (2 * x_13) + (3 * x_14) + (4 * x_15) + (5 * x_16)
+      - (6 * adler_1)))) ->
+  ((is_uint64 (adler_1 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_11 + (2 * x_12) + (3 * x_13) + (4 * x_14) + (5 * x_15)
+      + (6 * x_16) - (7 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_10 + (2 * x_11) + (3 * x_12) + (4 * x_13) + (5 * x_14)
+      + (6 * x_15) + (7 * x_16) - (8 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_9 + (2 * x_10) + (3 * x_11) + (4 * x_12) + (5 * x_13)
+      + (6 * x_14) + (7 * x_15) + (8 * x_16) - (9 * adler_1)))) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((is_uint64
+     (adler_1 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15
+      - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_8 + (2 * x_9) + (3 * x_10) + (4 * x_11) + (5 * x_12)
+      + (6 * x_13) + (7 * x_14) + (8 * x_15) + (9 * x_16) - (10 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14
+      - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_7 + (2 * x_8) + (3 * x_9) + (4 * x_10) + (5 * x_11)
+      + (6 * x_12) + (7 * x_13) + (8 * x_14) + (9 * x_15) + (10 * x_16)
+      - (11 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13
+      - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_6 + (2 * x_7) + (3 * x_8) + (4 * x_9) + (5 * x_10)
+      + (6 * x_11) + (7 * x_12) + (8 * x_13) + (9 * x_14) + (10 * x_15)
+      + (11 * x_16) - (12 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13
+      - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_5 + (2 * x_6) + (3 * x_7) + (4 * x_8) + (5 * x_9)
+      + (6 * x_10) + (7 * x_11) + (8 * x_12) + (9 * x_13) + (10 * x_14)
+      + (11 * x_15) + (12 * x_16) - (13 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_3 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12
+      - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_4 + (2 * x_5) + (3 * x_6) + (4 * x_7) + (5 * x_8)
+      + (6 * x_9) + (7 * x_10) + (8 * x_11) + (9 * x_12) + (10 * x_13)
+      + (11 * x_14) + (12 * x_15) + (13 * x_16) - (14 * adler_1)))) ->
+  ((is_uint64
+     (adler_1 - x_2 - x_3 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11
+      - x_12 - x_13 - x_14 - x_15 - x_16))) ->
+  ((is_uint64
+     (sum2_1 + x_3 + (2 * x_4) + (3 * x_5) + (4 * x_6) + (5 * x_7)
+      + (6 * x_8) + (7 * x_9) + (8 * x_10) + (9 * x_11) + (10 * x_12)
+      + (11 * x_13) + (12 * x_14) + (13 * x_15) + (14 * x_16)
+      - (15 * adler_1)))) ->
+  ((is_uint64 x_32)) ->
+  ((is_uint64 x_33)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 x_33 x_0 x_32 buf_2 len_1)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1
+     ((shift buf_2 16)) len_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_3_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall adler_1 adler_0 len_1 len_0 n_0 retres_0 sum2_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_1 buf_0 : addr.
+  let x_0 = len_0 - 5552 in
+  (1 <> len_1) ->
+  (buf_0 <> null) ->
+  (16 <= len_1) ->
+  (5552 <= len_0) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 x_0)) ->
+  ((p_galois'adler32'P malloc_1 mptr_1 mchar_1 mint_1 adler_1 buf_0 len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 adler_1 buf_0 len_1 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I2 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 adler_1 buf_0 len_1 retres_0 sum2_0
+     ((to_uint32 ((div 5552 16)))) adler_0 buf_1 x_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2302) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_3
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2302)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[(shift buf_2 1)])) ->
+  ((is_uint8 mint_1[(shift buf_2 2)])) ->
+  ((is_uint8 mint_1[(shift buf_2 3)])) ->
+  ((is_uint8 mint_1[(shift buf_2 4)])) ->
+  ((is_uint8 mint_1[(shift buf_2 5)])) ->
+  ((is_uint8 mint_1[(shift buf_2 6)])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_0 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2304) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_4
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2304)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[(shift buf_2 2)])) ->
+  ((is_uint8 mint_1[(shift buf_2 3)])) ->
+  ((is_uint8 mint_1[(shift buf_2 4)])) ->
+  ((is_uint8 mint_1[(shift buf_2 5)])) ->
+  ((is_uint8 mint_1[(shift buf_2 6)])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_1 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2306) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_5
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2306)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[(shift buf_2 3)])) ->
+  ((is_uint8 mint_1[(shift buf_2 4)])) ->
+  ((is_uint8 mint_1[(shift buf_2 5)])) ->
+  ((is_uint8 mint_1[(shift buf_2 6)])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_2 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2308) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_6
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2308)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[(shift buf_2 4)])) ->
+  ((is_uint8 mint_1[(shift buf_2 5)])) ->
+  ((is_uint8 mint_1[(shift buf_2 6)])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_3 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2310) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_7
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2310)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[(shift buf_2 5)])) ->
+  ((is_uint8 mint_1[(shift buf_2 6)])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_4 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2312) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_8
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2312)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[(shift buf_2 6)])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_5 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2314) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_9
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2314)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[(shift buf_2 7)])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_6 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2316) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_10
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2316)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[(shift buf_2 8)])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_7 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2318) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_11
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2318)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[(shift buf_2 9)])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_8 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2320) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_12
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2320)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[(shift buf_2 10)])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_9 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2322) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_13
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2322)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[a_10])) ->
+  ((is_uint8 mint_1[(shift buf_2 11)])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_10 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2324) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_14
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2324)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[a_10])) ->
+  ((is_uint8 mint_1[a_11])) ->
+  ((is_uint8 mint_1[(shift buf_2 12)])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_11 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2326) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_15
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2326)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[a_10])) ->
+  ((is_uint8 mint_1[a_11])) ->
+  ((is_uint8 mint_1[a_12])) ->
+  ((is_uint8 mint_1[(shift buf_2 13)])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_12 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2328) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_16
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2328)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  let a_13 = (shift buf_2 13) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[a_10])) ->
+  ((is_uint8 mint_1[a_11])) ->
+  ((is_uint8 mint_1[a_12])) ->
+  ((is_uint8 mint_1[a_13])) ->
+  ((is_uint8 mint_1[(shift buf_2 14)])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_13 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2330) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_17
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2330)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  let a_13 = (shift buf_2 13) in
+  let a_14 = (shift buf_2 14) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[a_10])) ->
+  ((is_uint8 mint_1[a_11])) ->
+  ((is_uint8 mint_1[a_12])) ->
+  ((is_uint8 mint_1[a_13])) ->
+  ((is_uint8 mint_1[a_14])) ->
+  ((is_uint8 mint_1[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_14 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2332) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_18
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2332)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  let a_13 = (shift buf_2 13) in
+  let a_14 = (shift buf_2 14) in
+  let a_15 = (shift buf_2 15) in
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (5552 <= len_0) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_1[a_0])) ->
+  ((is_uint8 mint_1[a_1])) ->
+  ((is_uint8 mint_1[a_2])) ->
+  ((is_uint8 mint_1[a_3])) ->
+  ((is_uint8 mint_1[a_4])) ->
+  ((is_uint8 mint_1[a_5])) ->
+  ((is_uint8 mint_1[a_6])) ->
+  ((is_uint8 mint_1[a_7])) ->
+  ((is_uint8 mint_1[a_8])) ->
+  ((is_uint8 mint_1[a_9])) ->
+  ((is_uint8 mint_1[a_10])) ->
+  ((is_uint8 mint_1[a_11])) ->
+  ((is_uint8 mint_1[a_12])) ->
+  ((is_uint8 mint_1[a_13])) ->
+  ((is_uint8 mint_1[a_14])) ->
+  ((is_uint8 mint_1[a_15])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((valid_rd malloc_1 a_14 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I2 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((valid_rd malloc_1 a_15 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_4_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0 sum2_2
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let x_0 = len_1 - 16 in
+  let x_1 = - sum2_1 in
+  let x_2 = sum2_2 - sum2_1 in
+  let a_0 = (shift buf_2 0) in
+  let x_3 = mint_1[a_0] in
+  let a_1 = (shift buf_2 1) in
+  let x_4 = mint_1[a_1] in
+  let a_2 = (shift buf_2 2) in
+  let x_5 = mint_1[a_2] in
+  let a_3 = (shift buf_2 3) in
+  let x_6 = mint_1[a_3] in
+  let a_4 = (shift buf_2 4) in
+  let x_7 = mint_1[a_4] in
+  let a_5 = (shift buf_2 5) in
+  let x_8 = mint_1[a_5] in
+  let a_6 = (shift buf_2 6) in
+  let x_9 = mint_1[a_6] in
+  let a_7 = (shift buf_2 7) in
+  let x_10 = mint_1[a_7] in
+  let a_8 = (shift buf_2 8) in
+  let x_11 = mint_1[a_8] in
+  let a_9 = (shift buf_2 9) in
+  let x_12 = mint_1[a_9] in
+  let a_10 = (shift buf_2 10) in
+  let x_13 = mint_1[a_10] in
+  let a_11 = (shift buf_2 11) in
+  let x_14 = mint_1[a_11] in
+  let a_12 = (shift buf_2 12) in
+  let x_15 = mint_1[a_12] in
+  let a_13 = (shift buf_2 13) in
+  let x_16 = mint_1[a_13] in
+  let a_14 = (shift buf_2 14) in
+  let x_17 = mint_1[a_14] in
+  let a_15 = (shift buf_2 15) in
+  let x_18 = mint_1[a_15] in
+  let x_19 = - x_18 in
+  let x_20 = - x_17 in
+  let x_21 = - x_16 in
+  let x_22 = - x_15 in
+  let x_23 = - x_14 in
+  let x_24 = - x_13 in
+  let x_25 = - x_12 in
+  let x_26 = - x_11 in
+  let x_27 = - x_10 in
+  let x_28 = - x_9 in
+  let x_29 = - x_8 in
+  let x_30 = - x_7 in
+  let x_31 = - x_6 in
+  let x_32 = - x_5 in
+  let x_33 = - x_4 in
+  let x_34 = (16 * sum2_1) + x_4 + (2 * x_5) + (3 * x_6) + (4 * x_7)
+      + (5 * x_8) + (6 * x_9) + (7 * x_10) + (8 * x_11) + (9 * x_12)
+      + (10 * x_13) + (11 * x_14) + (12 * x_15) + (13 * x_16) + (14 * x_17)
+      + (15 * x_18) - (15 * sum2_2) in
+  let x_35 = sum2_2 - sum2_1 - x_3 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10
+      - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17 - x_18 in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_2)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint32 x_0)) ->
+  ((is_uint64 x_2)) ->
+  ((is_uint8 x_3)) ->
+  ((is_uint8 x_4)) ->
+  ((is_uint8 x_5)) ->
+  ((is_uint8 x_6)) ->
+  ((is_uint8 x_7)) ->
+  ((is_uint8 x_8)) ->
+  ((is_uint8 x_9)) ->
+  ((is_uint8 x_10)) ->
+  ((is_uint8 x_11)) ->
+  ((is_uint8 x_12)) ->
+  ((is_uint8 x_13)) ->
+  ((is_uint8 x_14)) ->
+  ((is_uint8 x_15)) ->
+  ((is_uint8 x_16)) ->
+  ((is_uint8 x_17)) ->
+  ((is_uint8 x_18)) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((valid_rd malloc_1 a_14 1)) ->
+  ((valid_rd malloc_1 a_15 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_1 buf_0 len_2)) ->
+  ((is_uint64 ((2 * sum2_1) + x_18 - sum2_2))) ->
+  ((is_uint64 (sum2_2 - sum2_1 - x_18))) ->
+  ((is_uint64 (sum2_2 - sum2_1 - x_17 - x_18))) ->
+  ((is_uint64 ((3 * sum2_1) + x_17 + (2 * x_18) - (2 * sum2_2)))) ->
+  ((is_uint64 (sum2_2 - sum2_1 - x_16 - x_17 - x_18))) ->
+  ((is_uint64 ((4 * sum2_1) + x_16 + (2 * x_17) + (3 * x_18) - (3 * sum2_2)))) ->
+  ((is_uint64 (sum2_2 - sum2_1 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((5 * sum2_1) + x_15 + (2 * x_16) + (3 * x_17) + (4 * x_18)
+      - (4 * sum2_2)))) ->
+  ((is_uint64 (sum2_2 - sum2_1 - x_14 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((6 * sum2_1) + x_14 + (2 * x_15) + (3 * x_16) + (4 * x_17) + (5 * x_18)
+      - (5 * sum2_2)))) ->
+  ((is_uint64 (sum2_2 - sum2_1 - x_13 - x_14 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((7 * sum2_1) + x_13 + (2 * x_14) + (3 * x_15) + (4 * x_16) + (5 * x_17)
+      + (6 * x_18) - (6 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((8 * sum2_1) + x_12 + (2 * x_13) + (3 * x_14) + (4 * x_15) + (5 * x_16)
+      + (6 * x_17) + (7 * x_18) - (7 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17
+      - x_18))) ->
+  ((is_uint64
+     ((9 * sum2_1) + x_11 + (2 * x_12) + (3 * x_13) + (4 * x_14) + (5 * x_15)
+      + (6 * x_16) + (7 * x_17) + (8 * x_18) - (8 * sum2_2)))) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_1 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16 - x_17
+      - x_18))) ->
+  ((is_uint64
+     ((10 * sum2_1) + x_10 + (2 * x_11) + (3 * x_12) + (4 * x_13)
+      + (5 * x_14) + (6 * x_15) + (7 * x_16) + (8 * x_17) + (9 * x_18)
+      - (9 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15 - x_16
+      - x_17 - x_18))) ->
+  ((is_uint64
+     ((11 * sum2_1) + x_9 + (2 * x_10) + (3 * x_11) + (4 * x_12) + (5 * x_13)
+      + (6 * x_14) + (7 * x_15) + (8 * x_16) + (9 * x_17) + (10 * x_18)
+      - (10 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14 - x_15
+      - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((12 * sum2_1) + x_8 + (2 * x_9) + (3 * x_10) + (4 * x_11) + (5 * x_12)
+      + (6 * x_13) + (7 * x_14) + (8 * x_15) + (9 * x_16) + (10 * x_17)
+      + (11 * x_18) - (11 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13 - x_14
+      - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((13 * sum2_1) + x_7 + (2 * x_8) + (3 * x_9) + (4 * x_10) + (5 * x_11)
+      + (6 * x_12) + (7 * x_13) + (8 * x_14) + (9 * x_15) + (10 * x_16)
+      + (11 * x_17) + (12 * x_18) - (12 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12 - x_13
+      - x_14 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((14 * sum2_1) + x_6 + (2 * x_7) + (3 * x_8) + (4 * x_9) + (5 * x_10)
+      + (6 * x_11) + (7 * x_12) + (8 * x_13) + (9 * x_14) + (10 * x_15)
+      + (11 * x_16) + (12 * x_17) + (13 * x_18) - (13 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11 - x_12
+      - x_13 - x_14 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64
+     ((15 * sum2_1) + x_5 + (2 * x_6) + (3 * x_7) + (4 * x_8) + (5 * x_9)
+      + (6 * x_10) + (7 * x_11) + (8 * x_12) + (9 * x_13) + (10 * x_14)
+      + (11 * x_15) + (12 * x_16) + (13 * x_17) + (14 * x_18)
+      - (14 * sum2_2)))) ->
+  ((is_uint64
+     (sum2_2 - sum2_1 - x_4 - x_5 - x_6 - x_7 - x_8 - x_9 - x_10 - x_11
+      - x_12 - x_13 - x_14 - x_15 - x_16 - x_17 - x_18))) ->
+  ((is_uint64 x_34)) ->
+  ((is_uint64 x_35)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_1 buf_0 len_2 retres_1 x_34 n_1 x_35 buf_2 len_1)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_1 buf_0 len_2 retres_1 sum2_2 n_1 x_2
+     ((shift buf_2 16)) x_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_4_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall adler_1 adler_0 len_1 len_0 n_0 retres_0 sum2_0 : int.
+  forall malloc_1 malloc_0 : map int int.
+  forall mchar_1 mchar_0 mint_1 mint_0 : map addr int.
+  forall mptr_1 mptr_0 : map addr addr.
+  forall buf_1 buf_0 : addr.
+  (0 <> len_0) ->
+  (1 <> len_1) ->
+  (buf_0 <> null) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_1)) ->
+  ((linked malloc_1)) ->
+  ((sconst mchar_1)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_0)) ->
+  ((p_galois'adler32'P malloc_1 mptr_1 mchar_1 mint_1 adler_1 buf_0 len_1)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 adler_1 buf_0 len_1 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_0 mptr_0 mchar_0 mint_0 malloc_1 mptr_1
+     mchar_1 mint_1 adler_1 buf_0 len_1 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2344) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_19
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2344)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[(shift buf_2 1)])) ->
+  ((is_uint8 mint_2[(shift buf_2 2)])) ->
+  ((is_uint8 mint_2[(shift buf_2 3)])) ->
+  ((is_uint8 mint_2[(shift buf_2 4)])) ->
+  ((is_uint8 mint_2[(shift buf_2 5)])) ->
+  ((is_uint8 mint_2[(shift buf_2 6)])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_0 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2346) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_20
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2346)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[(shift buf_2 2)])) ->
+  ((is_uint8 mint_2[(shift buf_2 3)])) ->
+  ((is_uint8 mint_2[(shift buf_2 4)])) ->
+  ((is_uint8 mint_2[(shift buf_2 5)])) ->
+  ((is_uint8 mint_2[(shift buf_2 6)])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_1 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2348) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_21
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2348)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[(shift buf_2 3)])) ->
+  ((is_uint8 mint_2[(shift buf_2 4)])) ->
+  ((is_uint8 mint_2[(shift buf_2 5)])) ->
+  ((is_uint8 mint_2[(shift buf_2 6)])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_2 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2350) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_22
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2350)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[(shift buf_2 4)])) ->
+  ((is_uint8 mint_2[(shift buf_2 5)])) ->
+  ((is_uint8 mint_2[(shift buf_2 6)])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_3 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2352) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_23
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2352)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[(shift buf_2 5)])) ->
+  ((is_uint8 mint_2[(shift buf_2 6)])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_4 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2354) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_24
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2354)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[(shift buf_2 6)])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_5 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2356) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_25
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2356)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[(shift buf_2 7)])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_6 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2358) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_26
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2358)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[(shift buf_2 8)])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_7 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2360) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_27
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2360)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[(shift buf_2 9)])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_8 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2362) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_28
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2362)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[(shift buf_2 10)])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_9 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2364) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_29
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2364)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[a_10])) ->
+  ((is_uint8 mint_2[(shift buf_2 11)])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_10 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2366) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_30
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2366)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[a_10])) ->
+  ((is_uint8 mint_2[a_11])) ->
+  ((is_uint8 mint_2[(shift buf_2 12)])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_11 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2368) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_31
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2368)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[a_10])) ->
+  ((is_uint8 mint_2[a_11])) ->
+  ((is_uint8 mint_2[a_12])) ->
+  ((is_uint8 mint_2[(shift buf_2 13)])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_12 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2370) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_32
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2370)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  let a_13 = (shift buf_2 13) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[a_10])) ->
+  ((is_uint8 mint_2[a_11])) ->
+  ((is_uint8 mint_2[a_12])) ->
+  ((is_uint8 mint_2[a_13])) ->
+  ((is_uint8 mint_2[(shift buf_2 14)])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_13 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2372) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_33
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2372)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  let a_13 = (shift buf_2 13) in
+  let a_14 = (shift buf_2 14) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[a_10])) ->
+  ((is_uint8 mint_2[a_11])) ->
+  ((is_uint8 mint_2[a_12])) ->
+  ((is_uint8 mint_2[a_13])) ->
+  ((is_uint8 mint_2[a_14])) ->
+  ((is_uint8 mint_2[(shift buf_2 15)])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_14 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2374) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_34
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2374)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  let a_0 = (shift buf_2 0) in
+  let a_1 = (shift buf_2 1) in
+  let a_2 = (shift buf_2 2) in
+  let a_3 = (shift buf_2 3) in
+  let a_4 = (shift buf_2 4) in
+  let a_5 = (shift buf_2 5) in
+  let a_6 = (shift buf_2 6) in
+  let a_7 = (shift buf_2 7) in
+  let a_8 = (shift buf_2 8) in
+  let a_9 = (shift buf_2 9) in
+  let a_10 = (shift buf_2 10) in
+  let a_11 = (shift buf_2 11) in
+  let a_12 = (shift buf_2 12) in
+  let a_13 = (shift buf_2 13) in
+  let a_14 = (shift buf_2 14) in
+  let a_15 = (shift buf_2 15) in
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (16 <= len_1) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_2[a_0])) ->
+  ((is_uint8 mint_2[a_1])) ->
+  ((is_uint8 mint_2[a_2])) ->
+  ((is_uint8 mint_2[a_3])) ->
+  ((is_uint8 mint_2[a_4])) ->
+  ((is_uint8 mint_2[a_5])) ->
+  ((is_uint8 mint_2[a_6])) ->
+  ((is_uint8 mint_2[a_7])) ->
+  ((is_uint8 mint_2[a_8])) ->
+  ((is_uint8 mint_2[a_9])) ->
+  ((is_uint8 mint_2[a_10])) ->
+  ((is_uint8 mint_2[a_11])) ->
+  ((is_uint8 mint_2[a_12])) ->
+  ((is_uint8 mint_2[a_13])) ->
+  ((is_uint8 mint_2[a_14])) ->
+  ((is_uint8 mint_2[a_15])) ->
+  ((valid_rd malloc_1 a_0 1)) ->
+  ((valid_rd malloc_1 a_1 1)) ->
+  ((valid_rd malloc_1 a_2 1)) ->
+  ((valid_rd malloc_1 a_3 1)) ->
+  ((valid_rd malloc_1 a_4 1)) ->
+  ((valid_rd malloc_1 a_5 1)) ->
+  ((valid_rd malloc_1 a_6 1)) ->
+  ((valid_rd malloc_1 a_7 1)) ->
+  ((valid_rd malloc_1 a_8 1)) ->
+  ((valid_rd malloc_1 a_9 1)) ->
+  ((valid_rd malloc_1 a_10 1)) ->
+  ((valid_rd malloc_1 a_11 1)) ->
+  ((valid_rd malloc_1 a_12 1)) ->
+  ((valid_rd malloc_1 a_13 1)) ->
+  ((valid_rd malloc_1 a_14 1)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_3 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_3 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((valid_rd malloc_1 a_15 1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Preservation of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_5_preserved
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Preservation of Invariant 'galois_decorator' (generated)":
+  forall adler_2 adler_1 adler_0 len_3 len_2 len_1 len_0 n_2 n_1 n_0 retres_2
+    retres_1 retres_0 sum2_3 sum2_2 sum2_1 sum2_0 : int.
+  forall malloc_3 malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_3 mchar_2 mchar_1 mchar_0 mint_3 mint_2 mint_1 mint_0
+    : map addr int.
+  forall mptr_3 mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_3 buf_2 buf_1 buf_0 : addr.
+  let x_0 = mint_2[buf_3] in
+  let x_1 = len_2 - 1 in
+  let x_2 = - sum2_2 in
+  let x_3 = sum2_3 - sum2_2 in
+  let x_4 = sum2_3 - sum2_2 - x_0 in
+  (0 <> len_2) ->
+  (0 <> len_0) ->
+  (1 <> len_3) ->
+  (buf_0 <> null) ->
+  (16 <= len_3) ->
+  (len_1 <= 15) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_3)) ->
+  ((linked malloc_3)) ->
+  ((sconst mchar_3)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_2)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_3)) ->
+  ((is_uint64 sum2_2)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_3)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_2)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 x_0)) ->
+  ((valid_rd malloc_2 buf_3 1)) ->
+  ((is_uint32 x_1)) ->
+  ((is_uint64 x_3)) ->
+  ((is_uint64 x_4)) ->
+  ((p_galois'adler32'P malloc_3 mptr_3 mchar_3 mint_3 adler_2 buf_0 len_3)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_3 mptr_3
+     mchar_3 mint_3 adler_2 buf_0 len_3 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_3 mptr_3
+     mchar_3 mint_3 adler_2 buf_0 len_3 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I5 malloc_2 mptr_2 mchar_2 mint_2 malloc_3 mptr_3
+     mchar_3 mint_3 adler_2 buf_0 len_3 retres_2 sum2_2 n_2 x_4 buf_3 len_2)) ->
+  ((p_galois'adler32'I5 malloc_2 mptr_2 mchar_2 mint_2 malloc_3 mptr_3
+     mchar_3 mint_3 adler_2 buf_0 len_3 retres_2 sum2_3 n_2 x_3
+     ((shift buf_3 1)) x_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Establishment of Invariant 'galois_decorator' (generated) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_loop_inv_galois_decorator_5_established
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Establishment of Invariant 'galois_decorator' (generated)":
+  forall adler_2 adler_1 adler_0 len_2 len_1 len_0 n_1 n_0 retres_1 retres_0
+    sum2_1 sum2_0 : int.
+  forall malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_2 mchar_1 mchar_0 mint_2 mint_1 mint_0 : map addr int.
+  forall mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 : addr.
+  (0 <> len_0) ->
+  (1 <> len_2) ->
+  (buf_0 <> null) ->
+  (16 <= len_2) ->
+  (len_1 <= 15) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_2)) ->
+  ((linked malloc_2)) ->
+  ((sconst mchar_2)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((p_galois'adler32'P malloc_2 mptr_2 mchar_2 mint_2 adler_2 buf_0 len_2)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I5 malloc_1 mptr_1 mchar_1 mint_1 malloc_2 mptr_2
+     mchar_2 mint_2 adler_2 buf_0 len_2 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1))
+
+end
+
+(* ---------------------------------------------------------- *)
+(* --- Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2393) --- *)
+(* ---------------------------------------------------------- *)
+theory VCadler32_assert_rte_mem_access_35
+  
+use import bool.Bool
+use import int.Int
+use import int.ComputerDivision
+use import real.RealInfix
+use import Qed.Qed
+use import int.Abs as IAbs
+use import map.Map
+use import Memory.Memory
+use import Cint.Cint
+use import A_Galois_axiomatic4.A_Galois_axiomatic4
+
+goal WP "expl:Assertion 'rte,mem_access' (file ../../proof/zlib/.galois/source.c, line 2393)":
+  forall adler_3 adler_2 adler_1 adler_0 len_3 len_2 len_1 len_0 n_2 n_1 n_0
+    retres_2 retres_1 retres_0 sum2_2 sum2_1 sum2_0 : int.
+  forall malloc_3 malloc_2 malloc_1 malloc_0 : map int int.
+  forall mchar_3 mchar_2 mchar_1 mchar_0 mint_4 mint_3 mint_2 mint_1 mint_0
+    : map addr int.
+  forall mptr_3 mptr_2 mptr_1 mptr_0 : map addr addr.
+  forall buf_2 buf_1 buf_0 tmp_1_0 : addr.
+  (0 <> len_2) ->
+  (0 <> len_0) ->
+  (1 <> len_3) ->
+  (buf_0 <> null) ->
+  (16 <= len_3) ->
+  (len_1 <= 15) ->
+  (len_0 <= 5551) ->
+  ((framed mptr_3)) ->
+  ((linked malloc_3)) ->
+  ((sconst mchar_3)) ->
+  ((is_uint64 adler_3)) ->
+  ((is_uint64 adler_2)) ->
+  ((is_uint64 adler_1)) ->
+  ((is_uint64 adler_0)) ->
+  ((is_uint64 retres_2)) ->
+  ((is_uint64 retres_1)) ->
+  ((is_uint64 retres_0)) ->
+  ((is_uint64 sum2_2)) ->
+  ((is_uint64 sum2_1)) ->
+  ((is_uint64 sum2_0)) ->
+  ((is_uint32 len_3)) ->
+  ((is_uint32 len_2)) ->
+  ((is_uint32 len_1)) ->
+  ((is_uint32 len_0)) ->
+  ((is_uint32 n_2)) ->
+  ((is_uint32 n_1)) ->
+  ((is_uint32 n_0)) ->
+  ((is_uint8 mint_3[tmp_1_0])) ->
+  ((p_galois'adler32'P malloc_3 mptr_3 mchar_3 mint_4 adler_3 buf_0 len_3)) ->
+  ((p_galois'adler32'I3 malloc_0 mptr_0 mchar_0 mint_0 malloc_3 mptr_3
+     mchar_3 mint_4 adler_3 buf_0 len_3 retres_0 sum2_0 n_0 adler_0 buf_1
+     len_0)) ->
+  ((p_galois'adler32'I4 malloc_1 mptr_1 mchar_1 mint_1 malloc_3 mptr_3
+     mchar_3 mint_4 adler_3 buf_0 len_3 retres_1 sum2_1 n_1 adler_1 buf_2
+     len_1)) ->
+  ((p_galois'adler32'I5 malloc_2 mptr_2 mchar_2 mint_2 malloc_3 mptr_3
+     mchar_3 mint_4 adler_3 buf_0 len_3 retres_2 sum2_2 n_2 adler_2 tmp_1_0
+     len_2)) ->
+  ((valid_rd malloc_2 tmp_1_0 1))
+
+end
+
